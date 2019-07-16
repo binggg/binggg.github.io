@@ -1,5 +1,7 @@
 # Peter Zhao(binggg)'s Blog
 
+[![Build Status](https://travis-ci.com/binggg/binggg.github.io.svg?branch=develop)](https://travis-ci.com/binggg/binggg.github.io)
+
 A [Gatsby](http://gatsbyjs.com/) blog powered by [Contentful](https://www.contentful.com). 
 
 ![The index page of the starter blog](https://rawgit.com/contentful-userland/gatsby-contentful-starter/master/screenshot.jpg "The index page of the starter blog")

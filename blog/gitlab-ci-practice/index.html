@@ -1,0 +1,249 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"/><meta http-equiv="x-ua-compatible" content="ie=edge"/><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/><link rel="preload" href="/gatsby-contentful-starter/component---src-layouts-index-js-08ee7e55993cdf4c75cc.js" as="script"/><link rel="preload" href="/gatsby-contentful-starter/component---src-templates-blog-post-js-54ed0a12f5ff671a4ad0.js" as="script"/><link rel="preload" href="/gatsby-contentful-starter/path---blog-gitlab-ci-practice-210190ffe06905c3d0f8.js" as="script"/><link rel="preload" href="/gatsby-contentful-starter/app-6a6137d1e4f479833e32.js" as="script"/><link rel="preload" href="/gatsby-contentful-starter/commons-ba4cb63d6a7a0250cd9f.js" as="script"/><title data-react-helmet="true">基于 Gitlab CI 搭建持续集成环境 | undefined</title><style id="gatsby-inlined-css">@font-face{font-family:Avenir;font-weight:400;font-style:normal;src:url("/avenir-400.woff2") format("woff2");font-display:swap}body{font-family:Avenir,Tahoma,Arial,Helvetica,sans-serif;font-size:1em;line-height:1.65;color:#373f49;background:#eee;margin:0}img{display:block;width:100%}h1,h2,h3{font-size:2em;font-weight:400}a{color:currentColor}.wrapper{width:calc(100% - 10vmin);margin:0 auto;padding:5vmin 0}.article-list{margin:0;padding:0;list-style:none;display:-ms-grid;display:grid;-ms-grid-columns:(minmax(200px,1fr))[auto-fit];grid-template-columns:repeat(auto-fit,minmax(200px,1fr));grid-gap:5vmin}.section-headline{padding:0 0 .4em;margin:0 0 5vmin;border-bottom:1px solid #ddd}.list-inline{margin:0;padding:0;list-style:none}.list-inline li{display:inline-block}.src-components----navigation-module---navigation---_yI7y{display:-ms-flexbox;display:flex;-ms-flex-pack:center;justify-content:center;list-style:none;padding:0;margin:0;height:20vh;max-height:100px;font-size:1.25em}.src-components----navigation-module---navigationItem---1plNx{display:-ms-inline-flexbox;display:inline-flex;-ms-flex-align:center;align-items:center;margin:0 1em}.src-components----navigation-module---navigationItem---1plNx a{color:currentColor}.src-components----hero-module---hero---S__gH{position:relative;background:#000;color:#fff;text-align:center}.src-components----hero-module---heroImage---DciWV{height:61.8vh;max-height:400px}.src-components----hero-module---heroDetails---3uv8x{position:absolute;background:rgba(0,0,0,.7);left:50%;bottom:0;-ms-transform:translate(-50%);transform:translate(-50%);font-size:14px;padding:0 .5em}@media(min-width:600px){.src-components----hero-module---heroDetails---3uv8x{font-size:16px}}@media(min-width:1000px){.src-components----hero-module---heroDetails---3uv8x{font-size:20px}}.src-components----hero-module---heroHeadline---jhgHQ{margin:0}.src-components----hero-module---heroTitle---2LulU{margin:0;font-size:1.125em;font-weight:700}.src-pages----blog-module---hero---TCejO{display:-ms-flexbox;display:flex;-ms-flex-pack:center;justify-content:center;-ms-flex-align:center;align-items:center;height:61.8vh;max-height:400px;background:#e1e1e1;font-size:2em;overflow:hidden}.src-components----article-preview-module---previewTitle---16pYm{font-size:1.5em}.src-components----article-preview-module---tag---27JAs{color:#a0a0a0;text-decoration:none;display:inline-block;padding:.33333rem .5rem;line-height:1;border-radius:2px;border:1px solid #a0a0a0;margin-right:.5em}</style></head><body><div id="___gatsby"><div style="max-width:1180px;margin:0 auto;" data-reactroot="" data-reactid="1" data-react-checksum="-208004455"><nav role="navigation" data-reactid="2"><ul class="src-components----navigation-module---navigation---_yI7y" data-reactid="3"><li class="src-components----navigation-module---navigationItem---1plNx" data-reactid="4"><a href="/gatsby-contentful-starter/" data-reactid="5">Home</a></li><li class="src-components----navigation-module---navigationItem---1plNx" data-reactid="6"><a href="/gatsby-contentful-starter/blog/" data-reactid="7">Blog</a></li></ul></nav><div style="background:#fff;" data-reactid="8"><!-- react-empty: 9 --><div class="src-components----hero-module---hero---S__gH" data-reactid="10"><div class=" gatsby-image-outer-wrapper" style="position:relative;" data-reactid="11"><div class="src-components----hero-module---heroImage---DciWV gatsby-image-wrapper" style="position:relative;overflow:hidden;" data-reactid="12"><div style="width:100%;padding-bottom:38.54838709677419%;" data-reactid="13"></div><img alt="基于 Gitlab CI 搭建持续集成环境" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAICAMAAADOQy/fAAAAV1BMVEX//////v7//fz98/L76Ob++Pf++fj99/b++Pj99vX87uz+/Pv++fn87ev+9/f98vD++vn98vH99PP99fT//f387ez87+787Or88O/75+X++/v87Ov+/PzN21jpAAAACXBIWXMAABcRAAAXEQHKJvM/AAAAB3RJTUUH4wcQBSsvZVdK2AAAAFpJREFUCB0FwYEBgiAAALApgUCYiVpm/X9nG8AAAGAk3IhpSjmnAmLlXmhxjo8lN4TnuOq9l63tS+pHaHiVFtr7rJ953cIWet6wu07CN+BXjwkQ6wAAwH4BAP4dhgOGqWUxSQAAAABJRU5ErkJggg==" style="position:absolute;top:0;left:0;transition:opacity 0.5s;width:100%;height:100%;object-fit:cover;object-position:center;opacity:1;transition-delay:0.25s;" data-reactid="14"/><noscript data-reactid="15"><img src="//images.ctfassets.net/9ys45gwh7pzh/4shwYI3POEGkw0Eg6kcyaQ/e1b7fb35857923f885b91aeb4844de70/64173-444f3b7a2f88eba4.png?w=1180&q=50&bg=rgb%3A000000" srcset="//images.ctfassets.net/9ys45gwh7pzh/4shwYI3POEGkw0Eg6kcyaQ/e1b7fb35857923f885b91aeb4844de70/64173-444f3b7a2f88eba4.png?w=295&h=114&q=50&bg=rgb%3A000000 295w,
+//images.ctfassets.net/9ys45gwh7pzh/4shwYI3POEGkw0Eg6kcyaQ/e1b7fb35857923f885b91aeb4844de70/64173-444f3b7a2f88eba4.png?w=590&h=227&q=50&bg=rgb%3A000000 590w,
+//images.ctfassets.net/9ys45gwh7pzh/4shwYI3POEGkw0Eg6kcyaQ/e1b7fb35857923f885b91aeb4844de70/64173-444f3b7a2f88eba4.png?w=1180&h=455&q=50&bg=rgb%3A000000 1180w,
+//images.ctfassets.net/9ys45gwh7pzh/4shwYI3POEGkw0Eg6kcyaQ/e1b7fb35857923f885b91aeb4844de70/64173-444f3b7a2f88eba4.png?w=1240&h=478&q=50&bg=rgb%3A000000 1240w" alt="基于 Gitlab CI 搭建持续集成环境" sizes="(max-width: 1180px) 100vw, 1180px" style="position:absolute;top:0;left:0;transition:opacity 0.5s;transition-delay:0.5s;opacity:1;width:100%;height:100%;object-fit:cover;object-position:center"/></noscript></div></div></div><div class="wrapper" data-reactid="16"><h1 class="section-headline" data-reactid="17">基于 Gitlab CI 搭建持续集成环境</h1><p style="display:block;" data-reactid="18">February 9th, 2017</p><div data-reactid="19"><h1>基于 Gitlab CI 搭建持续集成环境</h1>
+<p>本文简单介绍了<strong>持续集成</strong>的概念并着重介绍了如何<strong>基于 Gitlab CI 快速构建持续集成环境</strong>，主要介绍了 Gitlab CI 的<strong>基本功能</strong>和<strong>入门操作</strong>流程。</p>
+<blockquote>
+<p>本文提到的 Gitlab 版本为 8.x ，新版的 Gitlab 界面可能会有所不同</p>
+</blockquote>
+<p><a name="44etom"></a></p>
+<h2><a href="#44etom"></a>什么是持续集成？</h2>
+<p><img src="http://upload-images.jianshu.io/upload_images/64173-0f610cc3507dc987.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240#width="></p>
+<p>持续集成（Continuous Integration，简称 CI）指的是，频繁地（一天多次）将代码集成到主干。</p>
+<p><a name="woymie"></a></p>
+<h3><a href="#woymie"></a>持续集成的好处主要有两个:</h3>
+<p><a name="kznhcm"></a></p>
+<h3><a href="#kznhcm"></a>快速发现错误</h3>
+<p>每完成一点更新，就集成到主干，可以快速发现错误，定位错误也比较容易</p>
+<p><a name="f6izut"></a></p>
+<h3><a href="#f6izut"></a>防止分支大幅偏离主干</h3>
+<p>如果不是经常集成，主干又在不断更新，会导致以后集成的难度变大，甚至难以集成。</p>
+<p>持续集成的目的，就是让产品可以快速迭代，同时还能保持高质量。它的核心措施是，代码集成到主干之前，必须通过自动化测试。只要有一个测试用例失败，就不能集成。</p>
+<p><a name="ni6xoc"></a></p>
+<h2><a href="#ni6xoc"></a>持续交付、持续部署的概念</h2>
+<p>持续交付（Continuous delivery）指的是，频繁地将软件的新版本，交付给质量团队或者用户，以供评审。如果评审通过，代码就进入生产阶段。</p>
+<p>持续部署（continuous deployment）是持续交付的下一步，指的是代码通过评审以后，自动部署到生产环境。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/64173-b5921de034a8db7e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240#width="></p>
+<p><a name="my70nf"></a></p>
+<h2><a href="#my70nf"></a>持续集成的原则</h2>
+<p>业界普遍认同的持续集成的原则包括：</p>
+<ul>
+<li>
+<p>需要版本控制软件保障团队成员提交的代码不会导致集成失败。常用的版本控制软件有 git、svn 等；</p>
+</li>
+<li>
+<p>开发人员必须及时向版本控制库中提交代码，也必须经常性地从版本控制库中更新代码到本地；</p>
+</li>
+<li>
+<p>需要有专门的集成服务器来执行集成构建。根据项目的具体实际，集成构建可以被软件的修改来直接触发，也可以定时启动，如每半个小时构建一次；</p>
+</li>
+<li>
+<p>必须保证构建的成功。如果构建失败，修复构建过程中的错误是优先级最高的工作。一旦修复，需要手动启动一次构建。</p>
+</li>
+</ul>
+<p><a name="yd7pur"></a></p>
+<h2><a href="#yd7pur"></a>持续集成系统的组成</h2>
+<p>由此可见，一个完整的构建系统必须包括：</p>
+<ul>
+<li>
+<p>一个自动构建过程，包括自动编译、分发、部署和测试等。</p>
+</li>
+<li>
+<p>一个代码存储库，即需要版本控制软件来保障代码的可维护性，同时作为构建过程的素材库。</p>
+</li>
+<li>
+<p>一个持续集成服务器。</p>
+</li>
+</ul>
+<p><a name="1nswpg"></a></p>
+<h2><a href="#1nswpg"></a>GitLab CI 介绍</h2>
+<p><img src="http://upload-images.jianshu.io/upload_images/64173-444f3b7a2f88eba4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240#width="></p>
+<p>GitLab CI 是 GitLab 提供的持续集成服务，只要在你的仓库根目录 创建一个.gitlab-ci.yml 文件， 并为该项目指派一个 Runner，当有合并请求或者 push 的时候就会触发 build。</p>
+<p>这个.gitlab-ci.yml 文件定义 GitLab runner 要做哪些操作。 默认有 3 个[stages(阶段)]: build、test、deploy。</p>
+<p>当 build 完成后(返回非零值)，你会看到 push 的 commit 或者合并请求前面出现一个绿色的对号。 这个功能很方便的让你检查出来合并请求是否会导致 build 失败， 免的你去检查代码。</p>
+<p>大部分项目用 GitLab's CI 服务跑 build 测试， 开发者会很快得到反馈，知道自己是否写出了 BUG。</p>
+<p>所以简单的说，要让 CI 工作可总结为以下几点:</p>
+<ul>
+<li>
+<p>在仓库根目录创建一个名为.gitlab-ci.yml 的文件</p>
+</li>
+<li>
+<p>为该项目配置一个 Runner</p>
+</li>
+</ul>
+<p>完成上面的步骤后，每次 push 代码到 Git 仓库， Runner 就会自动开始 pipeline。</p>
+<p><a name="fis5wl"></a></p>
+<h2><a href="#fis5wl"></a>基于 Gitlab CI 快速搭建持续集成环境</h2>
+<p><a name="qhgqyf"></a></p>
+<h3><a href="#qhgqyf"></a>开启 Gitlab CI 功能</h3>
+<p><img src="http://upload-images.jianshu.io/upload_images/64173-eab9ab2727619f29.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240#width="></p>
+<p>在自己的 Gitlab 中打开 CI 界面，比如迅雷的 Gitlab，地址是 <a href="https://gitlab.xunlei.cn/ci/projects">https://gitlab.xunlei.cn/ci/projects</a>，找到自己项目后选择 “Add project To CI”</p>
+<p><a name="wm4ods"></a></p>
+<h3><a href="#wm4ods"></a>项目 Gitlab CI 配置</h3>
+<p><img src="http://upload-images.jianshu.io/upload_images/64173-ab24ef4c57d3b411.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240#width="></p>
+<p>可以对项目的构建进行详细配置，比如构建的时间表及需要 CI 进行持续集成的分支等，这里配置了 对 master 和 develop 分支进行持续集成。</p>
+<p><a name="hdf2kl"></a></p>
+<h3><a href="#hdf2kl"></a>配置一个 Runner</h3>
+<p>GitLab CI 中，runner 是一个隔离的虚拟机器，用来配合 Gitlab CI 进行构建。</p>
+<p><a name="1mfqgc"></a></p>
+<h4><a href="#1mfqgc"></a>安装 GitLab-Runner</h4>
+<p><a name="pp3cuq"></a></p>
+<h5><a href="#pp3cuq"></a>安装 gitlab-ci-multi-runner</h5>
+<p>环境：centos 7, 使用了清华大学的镜像</p>
+<p>新建 gitlab-ci-multi-runner.repo</p>
+<pre><code class="language-bash">touch /etc/yum.repos.d/gitlab-ci-multi-runner.repo
+</code></pre>
+<p>将以下内容写入文件</p>
+<pre><code>[gitlab-ci-multi-runner]
+name=gitlab-ci-multi-runner
+baseurl=http://mirrors.tuna.tsinghua.edu.cn/gitlab-ci-multi-runner/yum/el7
+repo_gpgcheck=0
+gpgcheck=0
+enabled=1
+gpgkey=https://packages.gitlab.com/gpg.key
+</code></pre>
+<p>执行</p>
+<pre><code class="language-bash">sudo yum makecache
+sudo yum install gitlab-ci-multi-runner
+</code></pre>
+<p><a name="50xlwi"></a></p>
+<h5><a href="#50xlwi"></a>其他系统安装</h5>
+<p><a href="https://docs.gitlab.com/runner/install/">https://docs.gitlab.com/runner/install/</a></p>
+<p><a name="xdurgi"></a></p>
+<h5><a href="#xdurgi"></a>Gitlab CI Multi Runner 国内镜像</h5>
+<p><a href="https://mirrors.tuna.tsinghua.edu.cn/help/gitlab-ci-multi-runner/">https://mirrors.tuna.tsinghua.edu.cn/help/gitlab-ci-multi-runner/</a></p>
+<p><a name="laabxf"></a></p>
+<h4><a href="#laabxf"></a>Runner 的区分</h4>
+<p><img src="http://upload-images.jianshu.io/upload_images/64173-f5d54d4508c8bf2a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240#width="></p>
+<ul>
+<li>
+<p>指定 Runner： 可以指定运行某一个 Gitlab CI 的项目</p>
+</li>
+<li>
+<p>共享 Runner：可以运行所有的 CI 项目</p>
+</li>
+</ul>
+<blockquote>
+<p>Gitlab Runner 和 Gitlab 不能安装在同一个机器</p>
+</blockquote>
+<p><a name="ockwey"></a></p>
+<h4><a href="#ockwey"></a>注册一个指定的 runner</h4>
+<blockquote>
+<p>注册共享的 Runner 需要 gitlab 的 admin 权限</p>
+</blockquote>
+<pre><code class="language-bash">sudo gitlab-ci-multi-runner register
+</code></pre>
+<ol>
+<li>
+<p>输入 Gitlab CI 地址, (e.g. <a href="https://gitlab.xunlei.cn/ci">https://gitlab.xunlei.cn/ci</a>)</p>
+</li>
+<li>
+<p>输入项目 CI token</p>
+</li>
+<li>
+<p>输入 Runner 描述（e.g. <a href="http://home.xl9.xunlei.com">home.xl9.xunlei.com</a> 测试 runner）</p>
+</li>
+<li>
+<p>输入 Runner 标签，可以多个，用逗号隔开（e.g. 10.10.34.91-dev）</p>
+</li>
+<li>
+<p>输入 Runner 执行的语言 (e.g. shell)</p>
+</li>
+</ol>
+<p>注册完成之后，GitLab-CI 立刻就会多出一条 Runner 记录</p>
+<p><a name="2qcoek"></a></p>
+<h4><a href="#2qcoek"></a>启动 runner</h4>
+<p>这里把批量运行 Runner 这个功能安装为一项服务</p>
+<pre><code class="language-bash"># Install runner as service and start it:
+
+cd ~
+gitlab-ci-multi-runner install
+gitlab-ci-multi-runner start
+</code></pre>
+<p><a name="gdvxxc"></a></p>
+<h3><a href="#gdvxxc"></a>创建<code>.gitlab-ci.yml</code></h3>
+<p><a name="vnv0gp"></a></p>
+<h4><a href="#vnv0gp"></a><code>.gitlab-ci.yml</code> 文件是什么</h4>
+<p><code>.gitlab-ci.yml</code> 用来配置 CI 用你的项目中做哪些操作，这个文件位于仓库的根目录。</p>
+<p>当有新内容 push 到仓库后，GitLab 会查找是否有.gitlab-ci.yml 文件，如果文件存在， Runners 将会根据该文件的内容开始 build 本次 commit。</p>
+<blockquote>
+<p><code>.gitlab-ci.yml</code> 使用 YAML 语法， 你需要格外注意缩进格式，要用空格来缩进，不能用 tabs 来缩进。</p>
+</blockquote>
+<p><a name="30rvuv"></a></p>
+<h4><a href="#30rvuv"></a>创建<code>.gitlab-ci.yml</code></h4>
+<pre><code class="language-yaml">stages:
+  - test
+  - deploy
+
+# 变量
+variables:
+  DEV_RSYNC_PATH: '/data/deploy/xunlei.com/misc.xl9.xunlei.com/d/'
+
+# 所有 stage 之前的操作
+before_script:
+  - npm set registry http://xnpm.sz.xunlei.cn
+  - npm install
+
+# 代码检查
+lint:
+  stage: test
+  script: npm run lint
+
+# 单元测试
+unit:
+  stage: test
+  script: npm run unit
+
+# 部署测试服务器
+deploy_dev:
+  stage: deploy
+  tags:
+    - 10.10.34.91-dev
+  only:
+    - develop
+  script:
+    - rsync -av --delete-after --exclude-from=/data/shell/home.xl9.xunlei_exclude.list . $DEV_RSYNC_PATH
+    - chmod -R 755 $DEV_RSYNC_PATH
+    - chown -R nobody:nobody $DEV_RSYNC_PATH
+    - find $DEV_RSYNC_PATH -type f -exec chmod 644 {} \;
+    - cd $DEV_RSYNC_PATH
+    - npm install
+</code></pre>
+<p><a name="zc9gww"></a></p>
+<h4><a href="#zc9gww"></a>推送构建配置文件</h4>
+<p>配置好<code>.gitlab-ci.yml</code>文件之后，只要把它加入 git 后然后推送到远程仓库，CI 就会开始自动化集成</p>
+<p><a name="eolxgd"></a></p>
+<h3><a href="#eolxgd"></a>查看可视化的构建过程</h3>
+<p>Gitlab CI 提供了可视化的构建过程的显示可以随时查看。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/64173-a5e4d7f9a357bfff.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240#width="></p>
+<p><a name="7g4ggi"></a></p>
+<h3><a href="#7g4ggi"></a>启用构建邮件通知</h3>
+<p>Gitlab CI 提高了一些 Service， 比如邮件通知，可以配置一系列接受邮件的地址和是否只有失败的时候才发送邮件。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/64173-3340515c0dce48ca.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240#width="></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/64173-f83e13188d00ab95.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240#width="></p>
+<p><a name="hlortb"></a></p>
+<h3><a href="#hlortb"></a>徽章</h3>
+<p>徽章，当 Pipelines 执行完成，会生成徽章，你可以将这些徽章加入到你的 <a href="http://README.md">README.md</a> 文件或者你的网站。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/64173-056af2b71ff5af9c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240#width="></p>
+<p><a name="iu7mkz"></a></p>
+<h2><a href="#iu7mkz"></a>结语</h2>
+<p>本文简单介绍了持续集成的概念并着重介绍了如何基于 Gitlab CI 快速构建持续集成环境，主要介绍了 Gitlab CI 的基本功能和入门操作流程。<br />希望在进一步的学习和应用中与大家分享 Gitlab CI 的其它高级的应用。</p>
+<p><a name="7qszpe"></a></p>
+<h2><a href="#7qszpe"></a>延伸阅读</h2>
+<ul>
+<li>
+<p><a href="https://doc.gitlab.cc/ce/ci/quick_start/README.html">https://doc.gitlab.cc/ce/ci/quick_start/README.html</a></p>
+</li>
+<li>
+<p><a href="http://www.jianshu.com/p/2b43151fb92e">http://www.jianshu.com/p/2b43151fb92e</a></p>
+</li>
+<li>
+<p><a href="https://scarletsky.github.io/2016/07/29/use-gitlab-ci-for-continuous-integration/">https://scarletsky.github.io/2016/07/29/use-gitlab-ci-for-continuous-integration/</a></p>
+</li>
+</ul>
+<p><a name="r7adso"></a></p>
+<h2><a href="#r7adso"></a>关于我</h2>
+<blockquote>
+<p>来自 <strong>迅雷前端</strong> 团队。在迅雷的业务开发之余，创办了内部组件仓库 XNPM ，参与了 @xunlei/vue-lazy-component 等几个迅雷前端开源项目的开发。个人开源项目有 mrn.js 等。我是一个热爱前端技术，喜欢造轮子，爱折腾的人，也是一个奉行“懒惰使人进步”的懒人工程师。</p>
+</blockquote>
+<p><img src="http://upload-images.jianshu.io/upload_images/64173-911068f632c162cf.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240#width="></p></div></div></div></div></div><script id="webpack-manifest">/*<![CDATA[*/window.webpackManifest={"231608221292675":"app-6a6137d1e4f479833e32.js","107818501498521":"component---src-templates-blog-post-js-54ed0a12f5ff671a4ad0.js","212839066777427":"component---src-pages-blog-js-80ab4094666ff15e2c6b.js","35783957827783":"component---src-pages-index-js-ee4f1676e0bab5c0e3a4.js","60335399758886":"path----557518bd178906f8d58a.js","73070887314501":"path---blog-vue-lazy-component-63a3a39ab733be5d2f50.js","13655742387299":"path---blog-gitlab-ci-practice-210190ffe06905c3d0f8.js","218115079507401":"path---blog-vue-app-performance-enhance-guide-d77cdc0df32d2dbc552f.js","49683490770531":"path---blog-2ae392220dcde487d781.js","142629428675168":"path---index-d1f82ae4c9b540657035.js","114276838955818":"component---src-layouts-index-js-08ee7e55993cdf4c75cc.js"}/*]]>*/</script><script>/*<![CDATA[*/["/gatsby-contentful-starter/commons-ba4cb63d6a7a0250cd9f.js","/gatsby-contentful-starter/app-6a6137d1e4f479833e32.js","/gatsby-contentful-starter/path---blog-gitlab-ci-practice-210190ffe06905c3d0f8.js","/gatsby-contentful-starter/component---src-templates-blog-post-js-54ed0a12f5ff671a4ad0.js","/gatsby-contentful-starter/component---src-layouts-index-js-08ee7e55993cdf4c75cc.js"].forEach(function(s){document.write('<script src="'+s+'" defer></'+'script>')})/*]]>*/</script></body></html>

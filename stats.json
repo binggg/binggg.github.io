@@ -1,0 +1,56 @@
+{
+  "assetsByChunkName": {
+    "path---blog-gitlab-ci-practice": [
+      "path---blog-gitlab-ci-practice-210190ffe06905c3d0f8.js",
+      "path---blog-gitlab-ci-practice-210190ffe06905c3d0f8.js.map"
+    ],
+    "component---src-pages-index-js": [
+      "component---src-pages-index-js-ee4f1676e0bab5c0e3a4.js",
+      "component---src-pages-index-js-ee4f1676e0bab5c0e3a4.js.map"
+    ],
+    "path---blog": [
+      "path---blog-2ae392220dcde487d781.js",
+      "path---blog-2ae392220dcde487d781.js.map"
+    ],
+    "path---": [
+      "path----557518bd178906f8d58a.js",
+      "path----557518bd178906f8d58a.js.map"
+    ],
+    "path---blog-vue-lazy-component": [
+      "path---blog-vue-lazy-component-63a3a39ab733be5d2f50.js",
+      "path---blog-vue-lazy-component-63a3a39ab733be5d2f50.js.map"
+    ],
+    "component---src-templates-blog-post-js": [
+      "component---src-templates-blog-post-js-54ed0a12f5ff671a4ad0.js",
+      "component---src-templates-blog-post-js-54ed0a12f5ff671a4ad0.js.map"
+    ],
+    "component---src-layouts-index-js": [
+      "component---src-layouts-index-js-08ee7e55993cdf4c75cc.js",
+      "component---src-layouts-index-js-08ee7e55993cdf4c75cc.js.map"
+    ],
+    "path---index": [
+      "path---index-d1f82ae4c9b540657035.js",
+      "path---index-d1f82ae4c9b540657035.js.map"
+    ],
+    "commons": [
+      "commons-ba4cb63d6a7a0250cd9f.js",
+      "build-js-styles.css",
+      "commons-ba4cb63d6a7a0250cd9f.js.map",
+      "build-js-styles.css.map"
+    ],
+    "component---src-pages-blog-js": [
+      "component---src-pages-blog-js-80ab4094666ff15e2c6b.js",
+      "component---src-pages-blog-js-80ab4094666ff15e2c6b.js.map"
+    ],
+    "path---blog-vue-app-performance-enhance-guide": [
+      "path---blog-vue-app-performance-enhance-guide-d77cdc0df32d2dbc552f.js",
+      "path---blog-vue-app-performance-enhance-guide-d77cdc0df32d2dbc552f.js.map"
+    ],
+    "app": [
+      "app-6a6137d1e4f479833e32.js",
+      "build-js-styles.css",
+      "app-6a6137d1e4f479833e32.js.map",
+      "build-js-styles.css.map"
+    ]
+  }
+}

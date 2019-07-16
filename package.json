@@ -26,7 +26,7 @@
   "main": "n/a",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/binggg/binggg.github.io.git"
+    "url": "git@github.com:binggg/binggg.github.io.git"
   },
   "scripts": {
     "dev": "gatsby develop",

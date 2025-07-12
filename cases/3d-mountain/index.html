@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D 山脉场景</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            overflow: hidden;
+        }
+        
+        #container {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+        }
+        
+        #controls {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            z-index: 100;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 20px;
+            border-radius: 10px;
+            color: white;
+            backdrop-filter: blur(10px);
+        }
+        
+        .control-group {
+            margin-bottom: 15px;
+        }
+        
+        .control-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-size: 14px;
+            color: #ccc;
+        }
+        
+        .slider {
+            width: 200px;
+            height: 5px;
+            border-radius: 5px;
+            background: #333;
+            outline: none;
+            -webkit-appearance: none;
+        }
+        
+        .slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            background: #4CAF50;
+            cursor: pointer;
+        }
+        
+        .button {
+            background: linear-gradient(45deg, #4CAF50, #45a049);
+            border: none;
+            color: white;
+            padding: 10px 15px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 12px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+        
+        .button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+        
+        .button.active {
+            background: linear-gradient(45deg, #ff6b6b, #ff5252);
+        }
+        
+        #info {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            color: white;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 15px;
+            border-radius: 10px;
+            font-size: 12px;
+            backdrop-filter: blur(5px);
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <div id="controls">
+            <div class="control-group">
+                <label>时间控制</label>
+                <input type="range" class="slider" id="timeSlider" min="0" max="24" value="12" step="0.1">
+                <span id="timeDisplay">12:00</span>
+            </div>
+            
+            <div class="control-group">
+                <label>视角高度</label>
+                <input type="range" class="slider" id="heightSlider" min="50" max="500" value="200" step="10">
+                <span id="heightDisplay">200m</span>
+            </div>
+            
+            <div class="control-group">
+                <button class="button" id="contourToggle">显示等高线</button>
+                <button class="button" id="autoRotate">自动旋转</button>
+                <button class="button" id="resetView">重置视角</button>
+            </div>
+            
+            <div class="control-group">
+                <label>地形细节</label>
+                <input type="range" class="slider" id="detailSlider" min="50" max="200" value="100" step="10">
+                <span id="detailDisplay">100</span>
+            </div>
+        </div>
+        
+        <div id="info">
+            <div>鼠标左键：旋转视角</div>
+            <div>鼠标右键：平移</div>
+            <div>滚轮：缩放</div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/simplex-noise@2.4.0/simplex-noise.js"></script>
+
+    <script>
+        class MountainScene {
+            constructor() {
+                this.scene = new THREE.Scene();
+                this.camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 10000);
+                this.renderer = new THREE.WebGLRenderer({ antialias: true });
+                this.controls = null;
+                this.terrain = null;
+                this.river = null;
+                this.cliffs = [];
+                this.contourLines = [];
+                this.showContours = false;
+                this.autoRotateEnabled = false;
+                this.timeOfDay = 12;
+                this.sunLight = null;
+                this.moonLight = null;
+                this.skyMaterial = null;
+                this.waterMaterial = null;
+                
+                this.init();
+                this.createTerrain();
+                this.createLighting();
+                this.createRiver();
+                this.createCliffs();
+                this.setupControls();
+                this.setupEventListeners();
+                this.animate();
+            }
+            
+            init() {
+                this.renderer.setSize(window.innerWidth, window.innerHeight);
+                this.renderer.shadowMap.enabled = true;
+                this.renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+                this.renderer.setClearColor(0x87CEEB);
+                document.getElementById('container').appendChild(this.renderer.domElement);
+                
+                // 设置更合适的初始相机位置
+                this.camera.position.set(300, 200, 300);
+                this.camera.lookAt(0, 100, 0);
+                
+                // 添加更轻的雾效果
+                this.scene.fog = new THREE.FogExp2(0x87CEEB, 0.0005);
+                
+                // 创建云层
+                this.createClouds();
+                
+                // 确保渲染器背景可见
+                this.renderer.setClearColor(0x87CEEB, 1.0);
+            }
+            
+            createTerrain() {
+                const size = 800;
+                const segments = Math.min(parseInt(document.getElementById('detailSlider').value) || 100, 150);
+                
+                const geometry = new THREE.PlaneGeometry(size, size, segments, segments);
+                geometry.rotateX(-Math.PI / 2);
+                
+                // 使用柏林噪声生成更自然的山脉地形
+                const simplex = new SimplexNoise();
+                const vertices = geometry.attributes.position.array;
+                
+                for (let i = 0; i < vertices.length; i += 3) {
+                    const x = vertices[i];
+                    const z = vertices[i + 2];
+                    
+                    // 创建基础地形 - 确保有可见的山脉
+                    let height = 0;
+                    
+                    // 主要山脉 - 确保有高度变化
+                    height += Math.sin(x * 0.01) * 100;
+                    height += Math.cos(z * 0.008) * 80;
+                    
+                    // 噪声地形
+                    height += simplex.noise2D(x * 0.005, z * 0.005) * 150;
+                    height += simplex.noise2D(x * 0.02, z * 0.02) * 50;
+                    height += simplex.noise2D(x * 0.05, z * 0.05) * 25;
+                    
+                    // 确保有高山
+                    const mountain1 = Math.max(0, 200 - Math.sqrt(Math.pow(x, 2) + Math.pow(z, 2)) * 0.3);
+                    const mountain2 = Math.max(0, 150 - Math.sqrt(Math.pow(x - 200, 2) + Math.pow(z - 150, 2)) * 0.4);
+                    
+                    height += mountain1 + mountain2;
+                    
+                    // 确保最小高度
+                    height = Math.max(height, 20);
+                    
+                    vertices[i + 1] = height;
+                }
+                
+                geometry.computeVertexNormals();
+                
+                // 创建渐变色材质
+                const colors = [];
+                for (let j = 0; j < vertices.length; j += 3) {
+                    const height = vertices[j + 1];
+                    
+                    let color = new THREE.Color();
+                    if (height < 30) {
+                        color.setRGB(0.3, 0.6, 0.2); // 草地
+                    } else if (height < 80) {
+                        color.setRGB(0.5, 0.5, 0.3); // 森林/岩石
+                    } else if (height < 150) {
+                        color.setRGB(0.6, 0.6, 0.6); // 岩石
+                    } else {
+                        color.setRGB(0.9, 0.9, 0.9); // 雪
+                    }
+                    
+                    colors.push(color.r, color.g, color.b);
+                }
+                
+                geometry.setAttribute('color', new THREE.Float32BufferAttribute(colors, 3));
+                
+                const material = new THREE.MeshPhongMaterial({
+                    vertexColors: true,
+                    side: THREE.DoubleSide,
+                    flatShading: true,
+                    shininess: 0
+                });
+                
+                if (this.terrain) {
+                    this.scene.remove(this.terrain);
+                }
+                
+                this.terrain = new THREE.Mesh(geometry, material);
+                this.terrain.receiveShadow = true;
+                this.terrain.castShadow = true;
+                this.scene.add(this.terrain);
+                
+                // 创建等高线
+                this.createContourLines(geometry);
+            }
+            
+            createContourLines(geometry) {
+                // 清除现有的等高线
+                this.contourLines.forEach(line => this.scene.remove(line));
+                this.contourLines = [];
+                
+                const heightLevels = [-20, 0, 20, 40, 60, 80, 100, 120, 140, 160, 180, 200];
+                const vertices = geometry.attributes.position.array;
+                
+                heightLevels.forEach(height => {
+                    const points = [];
+                    
+                    // 简化的等高线生成
+                    for (let i = 0; i < vertices.length; i += 9) {
+                        const x1 = vertices[i], y1 = vertices[i + 1], z1 = vertices[i + 2];
+                        const x2 = vertices[i + 3], y2 = vertices[i + 4], z2 = vertices[i + 5];
+                        const x3 = vertices[i + 6], y3 = vertices[i + 7], z3 = vertices[i + 8];
+                        
+                        if ((y1 <= height && y2 >= height) || (y1 >= height && y2 <= height)) {
+                            const t = (height - y1) / (y2 - y1);
+                            const x = x1 + t * (x2 - x1);
+                            const z = z1 + t * (z2 - z1);
+                            points.push(new THREE.Vector3(x, height + 0.5, z));
+                        }
+                    }
+                    
+                    if (points.length > 1) {
+                        const geometry = new THREE.BufferGeometry().setFromPoints(points);
+                        const material = new THREE.LineBasicMaterial({ 
+                            color: height === 0 ? 0x000000 : 0x333333,
+                            opacity: 0.6,
+                            transparent: true
+                        });
+                        const line = new THREE.Line(geometry, material);
+                        line.visible = this.showContours;
+                        this.contourLines.push(line);
+                        this.scene.add(line);
+                    }
+                });
+            }
+            
+            createLighting() {
+                // 更强的环境光确保地形可见
+                const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
+                this.scene.add(ambientLight);
+                
+                // 主方向光 - 从上方照亮地形
+                this.sunLight = new THREE.DirectionalLight(0xffffff, 0.8);
+                this.sunLight.position.set(100, 200, 100);
+                this.sunLight.castShadow = true;
+                this.sunLight.shadow.mapSize.width = 2048;
+                this.sunLight.shadow.mapSize.height = 2048;
+                this.sunLight.shadow.camera.near = 0.5;
+                this.sunLight.shadow.camera.far = 1000;
+                this.sunLight.shadow.camera.left = -400;
+                this.sunLight.shadow.camera.right = 400;
+                this.sunLight.shadow.camera.top = 400;
+                this.sunLight.shadow.camera.bottom = -400;
+                this.scene.add(this.sunLight);
+                
+                // 补光防止阴影太暗
+                const fillLight = new THREE.DirectionalLight(0x4169E1, 0.3);
+                fillLight.position.set(-100, 100, -100);
+                this.scene.add(fillLight);
+                
+                // 天空盒
+                const skyGeometry = new THREE.SphereGeometry(1500, 32, 32);
+                this.skyMaterial = new THREE.MeshBasicMaterial({
+                    color: 0x87CEEB,
+                    side: THREE.BackSide
+                });
+                const sky = new THREE.Mesh(skyGeometry, this.skyMaterial);
+                this.scene.add(sky);
+            }
+            
+            createRiver() {
+                const riverGeometry = new THREE.PlaneGeometry(1000, 30, 50, 1);
+                riverGeometry.rotateX(-Math.PI / 2);
+                
+                // 让河流弯曲
+                const vertices = riverGeometry.attributes.position.array;
+                for (let i = 0; i < vertices.length; i += 3) {
+                    const x = vertices[i];
+                    const z = vertices[i + 2];
+                    vertices[i] = x + Math.sin(z * 0.01) * 100;
+                    vertices[i + 1] = -5; // 河流高度
+                }
+                
+                this.waterMaterial = new THREE.MeshPhongMaterial({
+                    color: 0x006994,
+                    transparent: true,
+                    opacity: 0.7,
+                    shininess: 100
+                });
+                
+                this.river = new THREE.Mesh(riverGeometry, this.waterMaterial);
+                this.river.receiveShadow = true;
+                this.scene.add(this.river);
+            }
+            
+            createCliffs() {
+                // 创建自然悬崖 - 集成到地形中
+                if (this.terrain) {
+                    const geometry = this.terrain.geometry;
+                    const vertices = geometry.attributes.position.array;
+                    const simplex = new SimplexNoise();
+                    
+                    // 在特定位置添加陡峭的悬崖特征
+                    const cliffAreas = [
+                        { x: 200, z: -150, steepness: 2.5 },
+                        { x: -180, z: 100, steepness: 2.8 },
+                        { x: -100, z: -200, steepness: 2.3 }
+                    ];
+                    
+                    cliffAreas.forEach(cliff => {
+                        for (let i = 0; i < vertices.length; i += 3) {
+                            const x = vertices[i];
+                            const z = vertices[i + 2];
+                            
+                            const distance = Math.sqrt(Math.pow(x - cliff.x, 2) + Math.pow(z - cliff.z, 2));
+                            if (distance < 80) {
+                                const factor = Math.max(0, 1 - distance / 80);
+                                const noise = simplex.noise2D(x * 0.05, z * 0.05);
+                                vertices[i + 1] += vertices[i + 1] * factor * cliff.steepness * (1 + noise * 0.3);
+                            }
+                        }
+                    });
+                    
+                    geometry.attributes.position.needsUpdate = true;
+                    geometry.computeVertexNormals();
+                }
+            }
+            
+            setupControls() {
+                this.controls = new THREE.OrbitControls(this.camera, this.renderer.domElement);
+                this.controls.enableDamping = true;
+                this.controls.dampingFactor = 0.05;
+                this.controls.maxPolarAngle = Math.PI / 2.1;
+                this.controls.minDistance = 50;
+                this.controls.maxDistance = 1000;
+            }
+            
+            createClouds() {
+                // 创建多层云层
+                const cloudLayers = [];
+                
+                for (let layer = 0; layer < 3; layer++) {
+                    const cloudGeometry = new THREE.PlaneGeometry(2000, 2000, 20, 20);
+                    const cloudMaterial = new THREE.MeshLambertMaterial({
+                        color: 0xffffff,
+                        transparent: true,
+                        opacity: 0.6 - layer * 0.15,
+                        side: THREE.DoubleSide
+                    });
+                    
+                    const cloudMesh = new THREE.Mesh(cloudGeometry, cloudMaterial);
+                    cloudMesh.position.y = 250 + layer * 100;
+                    cloudMesh.rotation.x = -Math.PI / 2;
+                    cloudMesh.position.x = Math.random() * 200 - 100;
+                    cloudMesh.position.z = Math.random() * 200 - 100;
+                    
+                    // 添加云的起伏
+                    const vertices = cloudGeometry.attributes.position.array;
+                    const simplex = new SimplexNoise();
+                    for (let i = 0; i < vertices.length; i += 3) {
+                        vertices[i + 2] = simplex.noise2D(vertices[i] * 0.001, vertices[i + 1] * 0.001) * 30;
+                    }
+                    cloudGeometry.computeVertexNormals();
+                    
+                    cloudLayers.push(cloudMesh);
+                    this.scene.add(cloudMesh);
+                }
+                
+                this.cloudLayers = cloudLayers;
+            }
+            
+            setupEventListeners() {
+                // 时间滑块
+                const timeSlider = document.getElementById('timeSlider');
+                timeSlider.addEventListener('input', (e) => {
+                    this.timeOfDay = parseFloat(e.target.value);
+                    this.updateLighting();
+                });
+                
+                // 高度滑块
+                const heightSlider = document.getElementById('heightSlider');
+                heightSlider.addEventListener('input', (e) => {
+                    const height = parseFloat(e.target.value);
+                    this.camera.position.y = height;
+                    document.getElementById('heightDisplay').textContent = height + 'm';
+                });
+                
+                // 等高线切换
+                document.getElementById('contourToggle').addEventListener('click', () => {
+                    this.showContours = !this.showContours;
+                    this.contourLines.forEach(line => line.visible = this.showContours);
+                    document.getElementById('contourToggle').classList.toggle('active');
+                });
+                
+                // 自动旋转
+                document.getElementById('autoRotate').addEventListener('click', () => {
+                    this.autoRotateEnabled = !this.autoRotateEnabled;
+                    this.controls.autoRotate = this.autoRotateEnabled;
+                    document.getElementById('autoRotate').classList.toggle('active');
+                });
+                
+                // 重置视角
+                document.getElementById('resetView').addEventListener('click', () => {
+                    this.camera.position.set(300, 200, 300);
+                    this.controls.target.set(0, 0, 0);
+                    this.controls.update();
+                });
+                
+                // 细节滑块
+                const detailSlider = document.getElementById('detailSlider');
+                detailSlider.addEventListener('input', (e) => {
+                    const detail = parseFloat(e.target.value);
+                    document.getElementById('detailDisplay').textContent = detail;
+                    this.createTerrain();
+                });
+                
+                // 窗口大小调整
+                window.addEventListener('resize', () => {
+                    this.camera.aspect = window.innerWidth / window.innerHeight;
+                    this.camera.updateProjectionMatrix();
+                    this.renderer.setSize(window.innerWidth, window.innerHeight);
+                });
+            }
+            
+            updateLighting() {
+                const hour = this.timeOfDay;
+                const timeDisplay = document.getElementById('timeDisplay');
+                const hours = Math.floor(hour);
+                const minutes = Math.floor((hour - hours) * 60);
+                timeDisplay.textContent = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}`;
+                
+                // 计算太阳和月亮的位置
+                const sunAngle = (hour - 6) * Math.PI / 12;
+                const moonAngle = (hour + 6) * Math.PI / 12;
+                
+                // 太阳位置
+                this.sunLight.position.x = Math.cos(sunAngle) * 300;
+                this.sunLight.position.y = Math.sin(sunAngle) * 300 + 50;
+                this.sunLight.position.z = 100;
+                
+                // 月亮位置
+                this.moonLight.position.x = Math.cos(moonAngle) * 300;
+                this.moonLight.position.y = Math.sin(moonAngle) * 300 + 50;
+                this.moonLight.position.z = -100;
+                
+                // 光照强度
+                const sunIntensity = Math.max(0, Math.sin(sunAngle));
+                const moonIntensity = Math.max(0, Math.sin(moonAngle)) * 0.3;
+                
+                this.sunLight.intensity = sunIntensity;
+                this.moonLight.intensity = moonIntensity;
+                
+                // 天空颜色
+                let skyColor;
+                if (hour >= 5 && hour < 7) {
+                    // 日出
+                    const t = (hour - 5) / 2;
+                    skyColor = new THREE.Color().lerpColors(
+                        new THREE.Color(0x1a1a2e),
+                        new THREE.Color(0xff7e5f),
+                        t
+                    );
+                } else if (hour >= 7 && hour < 17) {
+                    // 白天
+                    skyColor = new THREE.Color(0x87CEEB);
+                } else if (hour >= 17 && hour < 19) {
+                    // 日落
+                    const t = (hour - 17) / 2;
+                    skyColor = new THREE.Color().lerpColors(
+                        new THREE.Color(0x87CEEB),
+                        new THREE.Color(0xff7e5f),
+                        t
+                    );
+                } else {
+                    // 夜晚
+                    skyColor = new THREE.Color(0x1a1a2e);
+                }
+                
+                this.skyMaterial.color = skyColor;
+                this.scene.fog.color = skyColor;
+                
+                // 水的颜色
+                if (this.waterMaterial) {
+                    if (hour >= 6 && hour < 18) {
+                        this.waterMaterial.color.setHex(0x006994);
+                    } else {
+                        this.waterMaterial.color.setHex(0x003d5c);
+                    }
+                }
+            }
+            
+            animate() {
+                requestAnimationFrame(() => this.animate());
+                
+                if (this.river) {
+                    this.river.rotation.z += 0.001;
+                }
+                
+                // 云层动画
+                if (this.cloudLayers) {
+                    this.cloudLayers.forEach((cloud, index) => {
+                        cloud.position.x += 0.1 * (index + 1) * 0.1;
+                        cloud.position.z += 0.05 * (index + 1) * 0.1;
+                        
+                        // 循环云层位置
+                        if (cloud.position.x > 300) cloud.position.x = -300;
+                        if (cloud.position.z > 300) cloud.position.z = -300;
+                    });
+                }
+                
+                this.controls.update();
+                this.renderer.render(this.scene, this.camera);
+            }
+        }
+        
+        // 启动场景
+        const scene = new MountainScene();
+    </script>
+</body>
+</html>

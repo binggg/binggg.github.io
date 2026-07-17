@@ -1,0 +1,19 @@
+# Booker Zhao
+
+> Software Engineer, AI Enthusiast, Father of Two — 15 years in AI full-stack development, creator of CloudBase AI ToolKit & Framework.
+
+## Blog
+
+- [Blog Home](https://binggg.github.io/blog)
+- [Sitemap](https://binggg.github.io/sitemap.xml)
+
+## Projects
+
+- [CloudBase AI ToolKit](https://github.com/binggg/CloudBase-AI-ToolKit): AI Agent bridge with CloudBase — 927 stars.
+- [CloudBase Framework](https://github.com/binggg/cloudbase-framework): Cloud-native all-in-one deployment tool — 2k stars.
+- [Material React Native](https://github.com/binggg/material-react-native): Material Design component library for React Native — 1.7k stars.
+
+## Social
+
+- GitHub: https://github.com/binggg
+- X: https://x.com/being99

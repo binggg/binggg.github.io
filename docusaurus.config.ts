@@ -52,6 +52,8 @@ const config: Config = {
     ],
   ],
 
+  themes: ['@docusaurus/theme-mermaid'],
+
   themeConfig: {
     image: 'img/docusaurus.png',
     colorMode: {

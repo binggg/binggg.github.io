@@ -4,22 +4,34 @@ import Heading from '@theme/Heading';
 
 const projects = [
   {
-    title: 'CloudBase AI ToolKit',
-    description: 'AI Agent 与云开发的桥梁，让 LLM 能力无缝接入云开发基础设施。',
-    url: 'https://github.com/binggg/CloudBase-AI-ToolKit',
-    stars: '927',
+    title: 'CloudBase-MCP',
+    description: 'CloudBase MCP — Connect CloudBase to your AI Agent. 从 AI prompt 到上线应用。',
+    url: 'https://github.com/TencentCloudBase/CloudBase-MCP',
+    stars: '1.1k',
   },
   {
     title: 'CloudBase Framework',
-    description: '云原生一体化部署工具，支持全栈应用一键部署。',
-    url: 'https://github.com/binggg/cloudbase-framework',
+    description: '腾讯云开发云原生一体化部署工具，一键部署，不限框架语言。',
+    url: 'https://github.com/Tencent/cloudbase-framework',
     stars: '2k',
   },
   {
-    title: 'Material React Native',
-    description: 'React Native Material Design 组件库，提供高质量的跨平台 UI 组件。',
-    url: 'https://github.com/binggg/material-react-native',
+    title: 'Material React Native (MRN)',
+    description: 'A Material Design style React Native component library.',
+    url: 'https://github.com/binggg/mrn',
     stars: '1.7k',
+  },
+  {
+    title: 'CloudBase AI ToolKit',
+    description: 'AI Agent 与云开发的桥梁，让 LLM 能力无缝接入云开发基础设施。',
+    url: 'https://github.com/TencentCloudBase/CloudBase-AI-ToolKit',
+    stars: '927',
+  },
+  {
+    title: 'Awesome CloudBase Examples',
+    description: '腾讯云开发案例合集，涵盖全栈、AI、小程序等多种场景。',
+    url: 'https://github.com/TencentCloudBase/awesome-cloudbase-examples',
+    stars: '410',
   },
 ];
 

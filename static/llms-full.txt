@@ -1,11 +1,11 @@
 # Booker Zhao
 
-> Software Engineer, AI Enthusiast, Father of Two — 15 years in AI full-stack development, creator of CloudBase AI ToolKit & Framework.
+> Software Engineer, AI Enthusiast, Father of Two — AI full-stack developer, creator of CloudBase-MCP & CloudBase Framework.
 
 ## Bio
 
 - **Location**: Shenzhen, China
-- **Experience**: 15 years AI full-stack engineering
+- **Experience**: 15+ years AI full-stack engineering
 - **Expertise**: AI Agent, CloudBase (Tencent Cloud), Serverless, Frontend (React/TypeScript), Open Source
 - **Family**: Father of two
 - **Interests**: Fitness, coding, open source, content creation
@@ -22,17 +22,25 @@ Sitemap: https://binggg.github.io/sitemap.xml
 
 ## Projects
 
-### CloudBase AI ToolKit (927⭐)
-AI Agent 与云开发的桥梁，让 LLM 能力无缝接入云开发基础设施。
-- GitHub: https://github.com/binggg/CloudBase-AI-ToolKit
+### CloudBase-MCP (1.1k⭐)
+CloudBase MCP — Connect CloudBase to your AI Agent. Go from AI prompt to live app.
+- GitHub: https://github.com/TencentCloudBase/CloudBase-MCP
 
 ### CloudBase Framework (2k⭐)
-云原生一体化部署工具，支持全栈应用一键部署到腾讯云开发平台。
-- GitHub: https://github.com/binggg/cloudbase-framework
+腾讯云开发云原生一体化部署工具，一键部署、不限框架语言、云端一体化开发，基于Serverless 架构。
+- GitHub: https://github.com/Tencent/cloudbase-framework
 
-### Material React Native (1.7k⭐)
-React Native Material Design 组件库，提供高质量跨平台 UI 组件。
-- GitHub: https://github.com/binggg/material-react-native
+### Material React Native / MRN (1.7k⭐)
+Material Design style React Native component library.
+- GitHub: https://github.com/binggg/mrn
+
+### CloudBase AI ToolKit (927⭐)
+AI Agent 与云开发的桥梁，让 LLM 能力无缝接入云开发基础设施。
+- GitHub: https://github.com/TencentCloudBase/CloudBase-AI-ToolKit
+
+### Awesome CloudBase Examples (410⭐)
+腾讯云开发案例合集，涵盖全栈、AI、小程序等多种场景。
+- GitHub: https://github.com/TencentCloudBase/awesome-cloudbase-examples
 
 ## Social
 

@@ -1,0 +1,131 @@
+{
+  "homepage.hero.tagline": {
+    "message": "Hello, I'm Booker · Shenzhen / Tokyo / Berlin"
+  },
+  "homepage.hero.line1": {
+    "message": "I build quiet"
+  },
+  "homepage.hero.line2": {
+    "message": "tools for thinkers"
+  },
+  "homepage.hero.line3": {
+    "message": "sometimes I write about it"
+  },
+  "homepage.bio": {
+    "message": "15yrs AI full-stack engineer. CloudBase AI ToolKit author. Father of two. From Shenzhen."
+  },
+  "homepage.recent": {
+    "message": "Currently turning CloudBase AI into MCP tools and building a fully local AI workflow."
+  },
+  "homepage.writing.title": {
+    "message": "Long-form thoughts"
+  },
+  "homepage.writing.desc": {
+    "message": "I don't write often, but when I do, each piece has weight. About AI, engineering, open source."
+  },
+  "homepage.writing.link": {
+    "message": "Browse all essays →"
+  },
+  "homepage.projects.subtitle": {
+    "message": "Selected work — 2022 / 2025"
+  },
+  "homepage.projects.title": {
+    "message": "Things I've built"
+  },
+  "homepage.projects.link": {
+    "message": "All projects →"
+  },
+  "homepage.cta.line1": {
+    "message": "I don't update often"
+  },
+  "homepage.cta.line2": {
+    "message": "But when I do, it's worth reading"
+  },
+  "homepage.cta.read": {
+    "message": "Read the latest →"
+  },
+  "homepage.cta.about": {
+    "message": "About me →"
+  },
+  "projects.page.eyebrow": {
+    "message": "Projects · 2022—2025"
+  },
+  "projects.page.title": {
+    "message": "Things I've made."
+  },
+  "projects.page.desc": {
+    "message": "Open source projects, product experiments, and side projects I maintain — at work and beyond."
+  },
+  "projects.filter.type": {
+    "message": "Type"
+  },
+  "projects.filter.all": {
+    "message": "All"
+  },
+  "projects.filter.oss": {
+    "message": "Open Source"
+  },
+  "projects.filter.personal": {
+    "message": "Personal"
+  },
+  "projects.footer.title": {
+    "message": "More on GitHub →"
+  },
+  "projects.footer.desc": {
+    "message": "All open source projects at github.com/binggg."
+  },
+  "about.page.eyebrow": {
+    "message": "About"
+  },
+  "about.page.title1": {
+    "message": "I'm "
+  },
+  "about.page.title2": {
+    "message": "15yrs AI full-stack engineer,"
+  },
+  "about.page.title3": {
+    "message": "sometimes I write code."
+  },
+  "about.bio.p1": {
+    "message": "I work at Tencent CloudBase team on AI ToolKit and MCP ecosystem. I like making small things that get used over and over."
+  },
+  "about.bio.p2": {
+    "message": "Outside work, I maintain open source projects at github.com/binggg. I'm interested in AI Agents, Serverless architecture, and developer tools."
+  },
+  "about.bio.p3": {
+    "message": "Father of two. I believe good code and good health both come from long-term consistency. Shenzhen is my home."
+  },
+  "about.bio.contact": {
+    "message": "Want to talk? About a project, CloudBase, or just an idea — reach out."
+  },
+  "about.location": {
+    "message": "Location"
+  },
+  "about.working": {
+    "message": "Working with"
+  },
+  "about.social": {
+    "message": "Social"
+  },
+  "about.reading": {
+    "message": "Reading"
+  },
+  "about.timeline.eyebrow": {
+    "message": "A short timeline"
+  },
+  "about.timeline.title": {
+    "message": "Recent years."
+  },
+  "about.timeline.note": {
+    "message": "Not a full resume — just some moments worth remembering."
+  },
+  "about.cta.line": {
+    "message": "If you made it this far, we should probably talk."
+  },
+  "about.cta.message": {
+    "message": "Send a message →"
+  },
+  "about.cta.read": {
+    "message": "Read writing →"
+  }
+}

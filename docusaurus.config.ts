@@ -60,13 +60,14 @@ const config: Config = {
       respectPrefersColorScheme: true,
     },
     navbar: {
-      title: 'Booker Zhao',
+      title: 'Booker',
       logo: {
         alt: 'Booker Zhao',
         src: 'img/logo.svg',
+        style: { display: 'none' },
       },
       items: [
-        { to: '/blog', label: 'Blog', position: 'left' },
+        { to: '/blog', label: 'Writing', position: 'left' },
         { to: '/projects', label: 'Projects', position: 'left' },
         {
           href: 'https://github.com/binggg',
@@ -88,35 +89,22 @@ const config: Config = {
       style: 'dark',
       links: [
         {
-          title: 'Content',
+          title: 'Site',
           items: [
-            { label: 'Blog', to: '/blog' },
+            { label: 'Writing', to: '/blog' },
             { label: 'Projects', to: '/projects' },
+            { label: 'About', to: '/about' },
           ],
         },
         {
-          title: 'Community',
+          title: 'Elsewhere',
           items: [
             { label: 'GitHub', href: 'https://github.com/binggg' },
             { label: 'X', href: 'https://x.com/being99' },
           ],
         },
-        {
-          title: 'More',
-          items: [
-            {
-              html: '<a href="/llms.txt" target="_blank" rel="noopener noreferrer">llms.txt</a>',
-            },
-            {
-              html: '<a href="/llms-full.txt" target="_blank" rel="noopener noreferrer">llms-full.txt</a>',
-            },
-            {
-              html: '<a href="/sitemap.xml" target="_blank" rel="noopener noreferrer">Sitemap</a>',
-            },
-          ],
-        },
       ],
-      copyright: `Copyright © ${new Date().getFullYear()} Booker Zhao. Built with Docusaurus.`,
+      copyright: `© ${new Date().getFullYear()} Booker Zhao. Made with care.`,
     },
     prism: {
       theme: prismThemes.github,

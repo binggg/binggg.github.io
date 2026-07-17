@@ -1,7 +1,7 @@
 ---
 title: Open Plugins：AI 编程助手的插件标准
 description: Vercel Labs 维护的开放标准——一个插件，七种工具，一次编写到处运行。从协议规范到 CloudBase MCP 改造实战，一文讲透。
-tags: [AI, 开源, 全栈, CloudBase]
+tags: [ai, 开源, 全栈, cloudbase]
 authors: booker
 date: 2026-07-18
 image: ./img/cover.png
@@ -17,6 +17,8 @@ image: ./img/cover.png
 它是 Vercel Labs 维护的一个开放标准，能把 Skills、Agents、Hooks、MCP 服务器、LSP 服务器这些东西统统打包成一个标准化的插件目录，在七种不同的 AI 编程工具之间即装即用。
 
 这篇文章不打算泛泛而谈，我会把这个协议的来龙去脉、技术细节和实际用法一次性讲清楚。
+
+{/* truncate */}
 
 ---
 

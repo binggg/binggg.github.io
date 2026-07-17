@@ -1,19 +1,24 @@
-facebook:
-  label: Facebook
-  permalink: /facebook
-  description: Facebook tag description
+ai:
+  label: AI
+  permalink: /ai
+  description: AI 相关
 
-hello:
-  label: Hello
-  permalink: /hello
-  description: Hello tag description
+cloudbase:
+  label: CloudBase
+  permalink: /cloudbase
+  description: 腾讯云开发
 
-docusaurus:
-  label: Docusaurus
-  permalink: /docusaurus
-  description: Docusaurus tag description
+前端:
+  label: 前端
+  permalink: /frontend
+  description: 前端开发
 
-hola:
-  label: Hola
-  permalink: /hola
-  description: Hola tag description
+开源:
+  label: 开源
+  permalink: /opensource
+  description: 开源项目
+
+全栈:
+  label: 全栈
+  permalink: /fullstack
+  description: 全栈开发

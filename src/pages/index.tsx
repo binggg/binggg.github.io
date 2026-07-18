@@ -36,7 +36,7 @@ export default function Home(): ReactNode {
       <section className="relative overflow-hidden">
         <div className="mx-auto" style={{ maxWidth: '1400px', padding: '4rem 1.5rem 5rem' }}>
           <Reveal>
-            <div className="flex items-center gap-3 mb-10 md:mb-16 text-xs uppercase tracking-[0.25em]" style={{ color: 'var(--ink-500)' }}>
+            <div className="flex items-center gap-3 mb-10 md:mb-16 text-xs uppercase tracking-wide" style={{ color: 'var(--ink-500)' }}>
               <span className="inline-block w-2 h-2 rounded-full" style={{ backgroundColor: 'var(--accent)' }} />
               <span>{translate({ id: 'homepage.hero.tagline', message: '15年 AI 全栈工程师 · CloudBase AI ToolKit 作者' })}</span>
             </div>
@@ -84,7 +84,7 @@ export default function Home(): ReactNode {
         <div className="grid md:grid-cols-12 gap-10 md:gap-20">
           <div className="md:col-span-4 md:sticky md:top-32 self-start">
             <Reveal>
-              <p className="text-xs uppercase tracking-[0.25em] mb-3" style={{ color: 'var(--ink-500)' }}>
+              <p className="text-xs uppercase tracking-wide mb-3" style={{ color: 'var(--ink-500)' }}>
                 <span className="inline-block w-8 h-px align-middle mr-3" style={{ backgroundColor: 'var(--ink-400)' }} />
                 {translate({ id: 'homepage.writing.eyebrow', message: 'Writing' })}
               </p>
@@ -106,7 +106,7 @@ export default function Home(): ReactNode {
                 className="writing-card"
               >
                 <article>
-                  <div className="flex items-center gap-3 text-xs uppercase tracking-[0.2em] mb-4" style={{ color: 'var(--ink-500)' }}>
+                  <div className="flex items-center gap-3 text-xs uppercase tracking-wider mb-4" style={{ color: 'var(--ink-500)' }}>
                     <span style={{ color: 'var(--accent)' }}>●</span>
                     <span>{translate({ id: 'homepage.writing.card.tag', message: 'Engineering' })}</span>
                     <span style={{ color: 'var(--ink-300)' }}>·</span>
@@ -134,7 +134,7 @@ export default function Home(): ReactNode {
       <section className="mx-auto" style={{ maxWidth: '1400px', padding: '5rem 1.5rem', borderTop: '1px solid var(--ifm-hr-border-color)' }}>
         <div className="flex items-end justify-between mb-12 md:mb-20">
           <Reveal>
-            <p className="text-xs uppercase tracking-[0.25em] mb-3" style={{ color: 'var(--ink-500)' }}>
+            <p className="text-xs uppercase tracking-wide mb-3" style={{ color: 'var(--ink-500)' }}>
               <span className="inline-block w-8 h-px align-middle mr-3" style={{ backgroundColor: 'var(--ink-400)' }} />
               {translate({ id: 'homepage.projects.subtitle', message: 'Selected work — 2022 / 2025' })}
             </p>

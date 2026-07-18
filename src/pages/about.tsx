@@ -54,7 +54,7 @@ export default function About(): ReactNode {
         <div className="grid md:grid-cols-12 gap-10" style={{ marginTop: '5rem' }}>
           <div className="md:col-span-5 md:col-start-1">
             <Reveal>
-              <div className="aspect-[3/4] grain relative overflow-hidden" style={{ backgroundColor: 'var(--ink-200)' }}>
+              <div className="aspect-portrait grain relative overflow-hidden" style={{ backgroundColor: 'var(--ink-200)' }}>
                 <div className="absolute inset-0 flex items-center justify-center">
                   <span className="font-display italic" style={{ color: 'var(--ink-300)', fontSize: '14rem', lineHeight: 1 }}>B.</span>
                 </div>
@@ -91,15 +91,15 @@ export default function About(): ReactNode {
               <Reveal delay={200}>
                 <div className="grid grid-cols-2 gap-6 text-sm" style={{ borderTop: '1px solid var(--ifm-hr-border-color)', paddingTop: '2rem', marginTop: '1rem' }}>
                   <div>
-                    <p className="text-xs uppercase tracking-[0.25em] mb-2" style={{ color: 'var(--ink-400)' }}>{translate({ id: 'about.location', message: 'Location' })}</p>
+                    <p className="text-xs uppercase tracking-wide mb-2" style={{ color: 'var(--ink-400)' }}>{translate({ id: 'about.location', message: 'Location' })}</p>
                     <p style={{ color: 'var(--ink-700)' }}>Shenzhen, China</p>
                   </div>
                   <div>
-                    <p className="text-xs uppercase tracking-[0.25em] mb-2" style={{ color: 'var(--ink-400)' }}>{translate({ id: 'about.working', message: 'Working with' })}</p>
+                    <p className="text-xs uppercase tracking-wide mb-2" style={{ color: 'var(--ink-400)' }}>{translate({ id: 'about.working', message: 'Working with' })}</p>
                     <p style={{ color: 'var(--ink-700)' }}>TypeScript · Rust · CloudBase · AI</p>
                   </div>
                   <div>
-                    <p className="text-xs uppercase tracking-[0.25em] mb-2" style={{ color: 'var(--ink-400)' }}>{translate({ id: 'about.social', message: 'Social' })}</p>
+                    <p className="text-xs uppercase tracking-wide mb-2" style={{ color: 'var(--ink-400)' }}>{translate({ id: 'about.social', message: 'Social' })}</p>
                     <p style={{ color: 'var(--ink-700)' }}>
                       <a href="https://x.com/being99" className="link-underline" style={{ color: 'var(--ink-700)' }}>X</a>
                       {' · '}
@@ -107,7 +107,7 @@ export default function About(): ReactNode {
                     </p>
                   </div>
                   <div>
-                    <p className="text-xs uppercase tracking-[0.25em] mb-2" style={{ color: 'var(--ink-400)' }}>{translate({ id: 'about.reading', message: 'Reading' })}</p>
+                    <p className="text-xs uppercase tracking-wide mb-2" style={{ color: 'var(--ink-400)' }}>{translate({ id: 'about.reading', message: 'Reading' })}</p>
                     <p style={{ color: 'var(--ink-700)', fontStyle: 'italic' }}>《System Design Interview》— A. Xu</p>
                   </div>
                 </div>

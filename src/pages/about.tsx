@@ -55,7 +55,7 @@ export default function About(): ReactNode {
             <br />
             {translate({ id: 'about.page.title2', message: '15年 AI 全栈工程师，' })}
             <br />
-            <span style={{ color: 'var(--ink-500)' }}>{translate({ id: 'about.page.title3', message: '偶尔写写代码。' })}</span>
+            <span style={{ color: 'var(--ink-500)' }}>{translate({ id: 'about.page.title3', message: '写代码这件事，没停过。' })}</span>
           </Heading>
         </Reveal>
 

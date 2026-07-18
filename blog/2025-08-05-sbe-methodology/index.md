@@ -12,7 +12,7 @@ tags: [ai, 全栈]
 
 原来，Kiro 的 Spec 工作流背后，是 SBE（Specification by Example）方法论的完美实践。**今天就来揭秘这套方法论，解决你的 AI 编程返工问题。**
 
-<!--truncate-->
+{/* truncate */}
 
 ## 你的 AI 编程为什么总是返工？
 

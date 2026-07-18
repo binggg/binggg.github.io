@@ -18,7 +18,7 @@ const projects = [
     name: 'CloudBase Framework',
     tagline: '腾讯云开发云原生一体化部署工具，一键部署，不限框架语言。',
     url: 'https://github.com/Tencent/cloudbase-framework',
-    year: '2022',
+    year: '2020',
     role: 'Core Contributor',
     stack: ['TypeScript', 'Node.js', 'Serverless'],
   },
@@ -26,7 +26,7 @@ const projects = [
     name: 'MRN',
     tagline: 'A Material Design style React Native component library with 1.7k stars.',
     url: 'https://github.com/binggg/mrn',
-    year: '2022',
+    year: '2015',
     role: 'Creator',
     stack: ['TypeScript', 'React Native', 'Material Design'],
   },
@@ -89,7 +89,7 @@ export default function Projects(): ReactNode {
             <div className="md:col-span-4">
               <p className="font-display text-2xl italic">{translate({ id: 'projects.footer.title', message: 'More on GitHub →' })}</p>
               <p className="mt-2 text-sm" style={{ color: 'var(--ink-500)' }}>
-                {translate({ id: 'projects.footer.desc', message: '所有开源项目都在 github.com/binggg。' })}
+                {translate({ id: 'projects.footer.desc', message: '所有开源项目都在 github.com/binggg。也曾用 xunleif2e 写过一些 Vue 组件。' })}
               </p>
             </div>
             <div className="md:col-span-8 flex flex-wrap gap-x-8 gap-y-3 text-sm">

@@ -27,7 +27,7 @@
     "message": "Browse all essays →"
   },
   "homepage.projects.subtitle": {
-    "message": "Selected work — 2022 / 2025"
+    "message": "Selected work — 2015 / 2025"
   },
   "homepage.projects.title": {
     "message": "Things I've built"
@@ -57,7 +57,7 @@
     "message": "More on GitHub →"
   },
   "projects.footer.desc": {
-    "message": "All open source projects at github.com/binggg."
+    "message": "All open source projects at github.com/binggg. Also wrote some Vue components as xunleif2e."
   },
   "about.page.title1": {
     "message": "I'm "
@@ -93,10 +93,10 @@
     "message": "Reading"
   },
   "about.timeline.title": {
-    "message": "Recent years."
+    "message": "Key moments."
   },
   "about.timeline.note": {
-    "message": "Not a full resume — just some moments worth remembering."
+    "message": "Not a full resume — just some milestones."
   },
   "about.cta.line": {
     "message": "If you made it this far, we should probably talk."

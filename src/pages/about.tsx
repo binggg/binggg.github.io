@@ -14,25 +14,33 @@ function Star() {
 }
 
 const timeline: { year: string; items: ReactNode[] }[] = [
+  { year: '2026', items: [
+    'AI Maker Summit / QECon / AI+研发数字峰会 讲师',
+    'CloudBase MCP 发布，连接 18+ AI IDE',
+    '个人博客 binggg.github.io 上线',
+  ]},
   { year: '2025', items: [
-    'CloudBase-MCP 发布，AI Agent 与云开发正式打通。',
-    '开始认真地把 prompt 当作 DSL 来设计。',
+    '科技生态圈峰会 & AI+研发数字峰会 分享 AI Agent 实践',
+    'CloudBase-MCP 发布，AI Agent 与云开发打通',
+    'Kiro Spec 工作流复刻攻略在掘金 4k+ 阅读',
   ]},
-  { year: '2024', items: [
-    <>CloudBase AI ToolKit 发布 (927<Star />)。</>,
-    '钻研 LLM 与云原生的结合方案。',
+  { year: '2023', items: [
+    '微搭低代码实战公开课直播',
+    '负责微搭低代码平台应用组件和 Runtime',
   ]},
-  { year: '2022', items: [
-    'MRN (Material React Native) 达到 1.7k stars。',
-    'CloudBase Framework 达到 2k stars。',
-  ]},
-  { year: '2021', items: [
-    '开始用 Obsidian 记笔记，构建第二大脑。',
-    '深入 CloudBase 生态，开发多个开源项目。',
+  { year: '2020', items: [
+    'CloudBase Framework 项目启动并开源（2k⭐），任项目负责人',
+    '腾讯「小程序·云开发」技术峰会 / 前端早早聊 / Techo Youth 讲师',
+    'InfoQ 全文实录报道',
   ]},
   { year: '2019', items: [
-    'Material React Native 第一个版本发布。',
-    '开始在 GitHub 上活跃开源。',
+    '9 月加入腾讯云开发（CloudBase）团队',
+  ]},
+  { year: '2016—2018', items: [
+    '2016 入职迅雷，从资深工程师做到前端团队 TeamLeader',
+    '创办内部组件库 XNPM，建设标准组件体系',
+    '主导迅雷客户端从 Bolt 到 Electron 的架构迁移',
+    '折腾 Strapi / SSR / MRN (1.7k⭐)',
   ]},
 ]
 
@@ -67,19 +75,24 @@ export default function About(): ReactNode {
             <div style={{ fontSize: '1.0625rem', lineHeight: '1.85', color: 'var(--ink-700)' }} className="space-y-6">
               <Reveal>
                 <p>
-                  {translate({ id: 'about.bio.p1', message: '目前在腾讯云开发（CloudBase）团队工作，负责 AI ToolKit 和 MCP 生态建设。我喜欢做那种「被反复使用的小东西」。' })}
+                  {translate({ id: 'about.bio.p1', message: '目前在腾讯云开发（CloudBase）团队工作，负责 AI ToolKit 和 MCP 生态建设。2016 年从迅雷起步，做过前端工程化（XNPM 内部组件库）、客户端架构迁移（Bolt → Electron），折腾过 Strapi CMS 和后端渲染。2019 年加入腾讯至今，从 CloudBase Framework 做到 AI MCP。' })}
                 </p>
               </Reveal>
               <Reveal delay={50}>
                 <p>
-                  {translate({ id: 'about.bio.p2', message: '在工作之外，维护着 github.com/binggg 上的一些开源项目。对 AI Agent、Serverless 架构、开发者工具比较感兴趣。' })}
-                  {' '}
-                  <a href="https://github.com/binggg" className="link-underline" style={{ color: 'var(--ink-800)' }}>github.com/binggg</a>。
+                  {translate({ id: 'about.bio.p2', message: '从造 Vue 组件、做 React Native 开源，到定义 AI 编程工具的部署标准——过去十年，我的工作主题从"让前端开发更快"变成了"让 AI 开发上线"。但底层一直没变：我喜欢做那种被反复使用的小东西。' })}
                 </p>
               </Reveal>
               <Reveal delay={100}>
                 <p>
-                  {translate({ id: 'about.bio.p3', message: '两个孩子的爸爸。好代码和好身体一样靠长期积累。深圳是我的家。' })}
+                  {translate({ id: 'about.bio.p3', message: '工作之外维护着 github.com/binggg 上的一些开源项目，偶尔在掘金、InfoQ 或各类技术大会上分享。对 AI Agent、Serverless 架构、开发者工具比较感兴趣。' })}
+                  {' '}
+                  <a href="https://github.com/binggg" className="link-underline" style={{ color: 'var(--ink-800)' }}>github.com/binggg</a>。
+                </p>
+              </Reveal>
+              <Reveal delay={150}>
+                <p>
+                  {translate({ id: 'about.bio.p4', message: '两个孩子的爸爸。好代码和好身体一样靠长期积累。深圳是我的家。' })}
                 </p>
               </Reveal>
               <Reveal delay={150}>
@@ -104,6 +117,8 @@ export default function About(): ReactNode {
                       <a href="https://x.com/being99" className="link-underline" style={{ color: 'var(--ink-700)' }}>X</a>
                       {' · '}
                       <a href="https://github.com/binggg" className="link-underline" style={{ color: 'var(--ink-700)' }}>GitHub</a>
+                      {' · '}
+                      <a href="https://juejin.cn/user/1609340751972270" className="link-underline" style={{ color: 'var(--ink-700)' }}>掘金</a>
                     </p>
                   </div>
                   <div>
@@ -122,7 +137,7 @@ export default function About(): ReactNode {
         <div style={{ maxWidth: '1400px', padding: '5rem 1.5rem' }}>
           <Reveal>
             <Heading as="h2" style={{ fontSize: 'clamp(1.75rem, 3.5vw, 2.75rem)', letterSpacing: '-0.025em', fontWeight: 500, marginBottom: '4rem' }}>
-              {translate({ id: 'about.timeline.title', message: '最近几年。' })}
+              {translate({ id: 'about.timeline.title', message: '不止是写代码。' })}
             </Heading>
           </Reveal>
 
@@ -130,7 +145,7 @@ export default function About(): ReactNode {
             <div className="md:col-span-3">
               <Reveal>
                 <p className="font-display italic leading-relaxed text-lg" style={{ color: 'var(--ink-500)' }}>
-                  {translate({ id: 'about.timeline.note', message: '这不是一个完整的简历，只是一些值得记住的时间点。' })}
+                  {translate({ id: 'about.timeline.note', message: '迅雷 → 腾讯，这十年做了很多事。挑一些记下来。' })}
                 </p>
               </Reveal>
             </div>

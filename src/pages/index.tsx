@@ -16,13 +16,13 @@ const featuredProjects = [
     name: 'CloudBase Framework',
     tagline: '腾讯云开发云原生一体化部署工具，一键部署，不限框架语言。',
     url: 'https://github.com/Tencent/cloudbase-framework',
-    year: '2022',
+    year: '2020',
   },
   {
     name: 'MRN',
     tagline: 'A Material Design style React Native component library with 1.7k stars.',
     url: 'https://github.com/binggg/mrn',
-    year: '2022',
+    year: '2015',
   },
 ]
 
@@ -136,7 +136,7 @@ export default function Home(): ReactNode {
           <Reveal>
             <p className="text-xs uppercase tracking-wide mb-3" style={{ color: 'var(--ink-500)' }}>
               <span className="inline-block w-8 h-px align-middle mr-3" style={{ backgroundColor: 'var(--ink-400)' }} />
-              {translate({ id: 'homepage.projects.subtitle', message: 'Selected work — 2022 / 2025' })}
+              {translate({ id: 'homepage.projects.subtitle', message: 'Selected work — 2015 / 2025' })}
             </p>
             <Heading as="h2" style={{ fontSize: 'clamp(1.75rem, 3.5vw, 2.75rem)', letterSpacing: '-0.025em', fontWeight: 500 }}>
               {translate({ id: 'homepage.projects.title', message: "Things I've built" })}<span style={{ color: 'var(--accent)' }}>.</span>

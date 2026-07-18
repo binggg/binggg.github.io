@@ -1,13 +1,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..600&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap');
 
 :root {
-  --ifm-color-primary: #c2410c;
-  --ifm-color-primary-dark: #ae3a0b;
-  --ifm-color-primary-darker: #9a340a;
-  --ifm-color-primary-darkest: #7d2a08;
-  --ifm-color-primary-light: #d64e17;
-  --ifm-color-primary-lighter: #e55d25;
-  --ifm-color-primary-lightest: #ea783f;
+  --ifm-color-primary: #0e7c7b;
+  --ifm-color-primary-dark: #0b6362;
+  --ifm-color-primary-darker: #084a49;
+  --ifm-color-primary-darkest: #063534;
+  --ifm-color-primary-light: #139592;
+  --ifm-color-primary-lighter: #19aeaa;
+  --ifm-color-primary-lightest: #2ac7c2;
 
   --ifm-background-color: #f5f3ee;
   --ifm-background-surface-color: #f5f3ee;
@@ -31,16 +31,16 @@
   --ifm-pre-padding: 1.25rem 1.5rem;
   --ifm-pre-border-radius: 4px;
 
-  --ifm-link-color: #c2410c;
-  --ifm-link-hover-color: #c2410c;
+  --ifm-link-color: #0e7c7b;
+  --ifm-link-hover-color: #0e7c7b;
   --ifm-link-decoration: none;
   --ifm-navbar-link-hover-color: #1f1e1b;
   --ifm-navbar-link-color: #6f6c63;
-  --ifm-menu-color-active: #c2410c;
+  --ifm-menu-color-active: #0e7c7b;
 
   --ifm-toc-border-color: #c9c7bf;
   --ifm-hr-border-color: #c9c7bf;
-  --ifm-breadcrumb-color-active: #c2410c;
+  --ifm-breadcrumb-color-active: #0e7c7b;
   --ifm-card-background-color: transparent;
 
   --ifm-global-shadow-lw: none;
@@ -61,19 +61,19 @@
   --ink-700: #34332e;
   --ink-800: #1f1e1b;
   --ink-900: #0e0e0c;
-  --accent: #c2410c;
+  --accent: #0e7c7b;
   --paper: #f5f3ee;
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 [data-theme='dark'] {
-  --ifm-color-primary: #ea783f;
-  --ifm-color-primary-dark: #e55d25;
-  --ifm-color-primary-darker: #d64e17;
-  --ifm-color-primary-darkest: #ae3a0b;
-  --ifm-color-primary-light: #ef8f5c;
-  --ifm-color-primary-lighter: #f3a579;
-  --ifm-color-primary-lightest: #f7bb96;
+  --ifm-color-primary: #2ac7c2;
+  --ifm-color-primary-dark: #19aeaa;
+  --ifm-color-primary-darker: #139592;
+  --ifm-color-primary-darkest: #0b6362;
+  --ifm-color-primary-light: #4dd5d1;
+  --ifm-color-primary-lighter: #70dfdb;
+  --ifm-color-primary-lightest: #93e9e6;
 
   --ifm-background-color: #0e0e0c;
   --ifm-background-surface-color: #1f1e1b;
@@ -85,7 +85,7 @@
 
   --ifm-navbar-link-color: #9a978c;
   --ifm-navbar-link-hover-color: #e7e6e2;
-  --ifm-menu-color-active: #ea783f;
+  --ifm-menu-color-active: #2ac7c2;
   --ifm-toc-border-color: #34332e;
   --ifm-hr-border-color: #34332e;
   --ifm-pre-background: #0e0e0c;
@@ -183,7 +183,7 @@ h1, h2, h3, h4, h5, h6 {
   margin-left: 4px;
   animation: blink 1s steps(1) infinite;
   font-weight: 300;
-  color: #c2410c;
+  color: #0e7c7b;
 }
 
 /* Marquee */
@@ -454,7 +454,7 @@ a {
   border-color: #34332e;
 }
 [data-theme='dark'] .pagination-nav__link:hover {
-  border-color: #ea783f;
+  border-color: var(--ifm-color-primary);
 }
 
 /* ==================== HOVER STATES ==================== */

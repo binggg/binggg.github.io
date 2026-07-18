@@ -11,21 +11,18 @@ const featuredProjects = [
     tagline: 'Connect CloudBase to your AI Agent. 从 AI prompt 到上线应用。',
     url: 'https://github.com/TencentCloudBase/CloudBase-MCP',
     year: '2025',
-    index: 1,
   },
   {
     name: 'CloudBase Framework',
     tagline: '腾讯云开发云原生一体化部署工具，一键部署，不限框架语言。',
     url: 'https://github.com/Tencent/cloudbase-framework',
     year: '2022',
-    index: 2,
   },
   {
     name: 'MRN',
     tagline: 'A Material Design style React Native component library with 1.7k stars.',
     url: 'https://github.com/binggg/mrn',
     year: '2022',
-    index: 3,
   },
 ]
 
@@ -41,7 +38,7 @@ export default function Home(): ReactNode {
           <Reveal>
             <div className="flex items-center gap-3 mb-10 md:mb-16 text-xs uppercase tracking-[0.25em]" style={{ color: 'var(--ink-500)' }}>
               <span className="inline-block w-2 h-2 rounded-full" style={{ backgroundColor: 'var(--accent)' }} />
-              <span>{translate({ id: 'homepage.hero.tagline', message: "Hello, I'm Booker · Shenzhen / Tokyo / Berlin" })}</span>
+              <span>{translate({ id: 'homepage.hero.tagline', message: '15年 AI 全栈工程师 · CloudBase AI ToolKit 作者' })}</span>
             </div>
           </Reveal>
 
@@ -89,7 +86,7 @@ export default function Home(): ReactNode {
             <Reveal>
               <p className="text-xs uppercase tracking-[0.25em] mb-3" style={{ color: 'var(--ink-500)' }}>
                 <span className="inline-block w-8 h-px align-middle mr-3" style={{ backgroundColor: 'var(--ink-400)' }} />
-                Writing
+                {translate({ id: 'homepage.writing.eyebrow', message: 'Writing' })}
               </p>
               <Heading as="h2" style={{ fontSize: 'clamp(1.75rem, 3.5vw, 2.75rem)', letterSpacing: '-0.025em', fontWeight: 500 }}>
                 {translate({ id: 'homepage.writing.title', message: 'Long-form thoughts' })}<span style={{ color: 'var(--accent)' }}>.</span>
@@ -111,17 +108,17 @@ export default function Home(): ReactNode {
                 <article>
                   <div className="flex items-center gap-3 text-xs uppercase tracking-[0.2em] mb-4" style={{ color: 'var(--ink-500)' }}>
                     <span style={{ color: 'var(--accent)' }}>●</span>
-                    <span>Engineering</span>
+                    <span>{translate({ id: 'homepage.writing.card.tag', message: 'Engineering' })}</span>
                     <span style={{ color: 'var(--ink-300)' }}>·</span>
-                    <span className="tabular">2026-07-18</span>
+                    <span className="tabular">{translate({ id: 'homepage.writing.card.date', message: '2026-07-18' })}</span>
                     <span style={{ color: 'var(--ink-300)' }}>·</span>
-                    <span>30 min read</span>
+                    <span>{translate({ id: 'homepage.writing.card.readtime', message: '30 min read' })}</span>
                   </div>
                   <h3 className="font-display" style={{ fontSize: 'clamp(1.5rem, 3vw, 2.25rem)', letterSpacing: '-0.025em', fontWeight: 500, marginBottom: '0.75rem', color: 'var(--ifm-heading-color)' }}>
-                    Open Plugins：AI 编程助手的插件标准
+                    {translate({ id: 'homepage.writing.card.title', message: 'Open Plugins：AI 编程助手的插件标准' })}
                   </h3>
                   <p className="leading-relaxed" style={{ color: 'var(--ink-600)', maxWidth: '36rem' }}>
-                    Vercel Labs 维护的开放标准——一个插件，七种工具，一次编写到处运行。从协议规范到 CloudBase MCP 改造实战，一文讲透。
+                    {translate({ id: 'homepage.writing.card.desc', message: 'Vercel Labs 维护的开放标准——一个插件，七种工具，一次编写到处运行。从协议规范到 CloudBase MCP 改造实战，一文讲透。' })}
                   </p>
                   <div className="mt-6 flex items-center gap-3 text-sm" style={{ color: 'var(--ink-500)' }}>
                     <span className="link-underline" style={{ color: 'var(--ink-800)' }}>Read essay →</span>
@@ -163,7 +160,7 @@ export default function Home(): ReactNode {
               >
                 <div className="grid md:grid-cols-12 gap-4 items-center px-8 md:px-16 py-8 md:py-14" style={{ borderTop: i > 0 ? '1px solid var(--ifm-hr-border-color)' : 'none' }}>
                   <span className="md:col-span-1 tabular text-sm pgi">
-                    {String(p.index).padStart(2, '0')}
+                    {String(i + 1).padStart(2, '0')}
                   </span>
                   <h3 className="md:col-span-4 font-display" style={{ fontSize: 'clamp(1.25rem, 2.5vw, 2rem)', letterSpacing: '-0.025em', fontWeight: 500 }}>
                     {p.name}

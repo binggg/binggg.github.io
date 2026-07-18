@@ -16,7 +16,6 @@ function Star() {
 const timeline: { year: string; items: ReactNode[] }[] = [
   { year: '2025', items: [
     'CloudBase-MCP 发布，AI Agent 与云开发正式打通。',
-    'AI-Workspace 开源，个人 AI 工作台操作系统。',
     '开始认真地把 prompt 当作 DSL 来设计。',
   ]},
   { year: '2024', items: [

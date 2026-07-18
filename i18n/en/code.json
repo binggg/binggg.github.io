@@ -1,6 +1,6 @@
 {
   "homepage.hero.tagline": {
-    "message": "Hello, I'm Booker · Shenzhen / Tokyo / Berlin"
+    "message": "15yrs AI full-stack engineer · CloudBase AI ToolKit author"
   },
   "homepage.hero.line1": {
     "message": "I build quiet"
@@ -47,35 +47,17 @@
   "homepage.cta.about": {
     "message": "About me →"
   },
-  "projects.page.eyebrow": {
-    "message": "Projects · 2022—2025"
-  },
   "projects.page.title": {
     "message": "Things I've made."
   },
   "projects.page.desc": {
     "message": "Open source projects, product experiments, and side projects I maintain — at work and beyond."
   },
-  "projects.filter.type": {
-    "message": "Type"
-  },
-  "projects.filter.all": {
-    "message": "All"
-  },
-  "projects.filter.oss": {
-    "message": "Open Source"
-  },
-  "projects.filter.personal": {
-    "message": "Personal"
-  },
   "projects.footer.title": {
     "message": "More on GitHub →"
   },
   "projects.footer.desc": {
     "message": "All open source projects at github.com/binggg."
-  },
-  "about.page.eyebrow": {
-    "message": "About"
   },
   "about.page.title1": {
     "message": "I'm "
@@ -110,9 +92,6 @@
   "about.reading": {
     "message": "Reading"
   },
-  "about.timeline.eyebrow": {
-    "message": "A short timeline"
-  },
   "about.timeline.title": {
     "message": "Recent years."
   },
@@ -127,5 +106,23 @@
   },
   "about.cta.read": {
     "message": "Read writing →"
+  },
+  "homepage.writing.eyebrow": {
+    "message": "Writing"
+  },
+  "homepage.writing.card.tag": {
+    "message": "Engineering"
+  },
+  "homepage.writing.card.date": {
+    "message": "2026-07-18"
+  },
+  "homepage.writing.card.readtime": {
+    "message": "30 min read"
+  },
+  "homepage.writing.card.title": {
+    "message": "Open Plugins: The Plugin Standard for AI Coding Assistants"
+  },
+  "homepage.writing.card.desc": {
+    "message": "An open standard maintained by Vercel Labs — one plugin, seven tools, write once run anywhere. From protocol spec to CloudBase MCP migration, all in one article."
   }
 }

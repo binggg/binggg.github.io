@@ -69,8 +69,6 @@
 
 | 文件 | 用途 | URL |
 |---|---|---|
-| 文件 | 用途 | URL |
-|---|---|---|
 | `llms.txt` | 内容索引，插件自动生成 | `https://binggg.github.io/llms.txt` |
 | `llms-full.txt` | 全部文章聚合，插件自动生成 | `https://binggg.github.io/llms-full.txt` |
 | `static/robots.txt` | 声明所有 crawler 允许抓取 | `https://binggg.github.io/robots.txt` |
@@ -82,6 +80,14 @@
 - `llms.txt` 和 `llms-full.txt` 由 `docusaurus-plugin-llms` 在 `npm run build` 时自动生成，**无需手动维护**
 - 已配置 `includeBlog: true`，自动扫描所有博客文章
 - 如果新增的博客文章不需要被索引，在 frontmatter 加 `llms: false` 即可排除
+
+### i18n 图片同步（自动，无手工操作）
+
+`prebuild` 阶段 `scripts/sync-i18n-images.sh` 自动将 `blog/*/images/` 同步到 `i18n/en/` 对应目录。新增英文博文时只需要写翻译文件，图片自动跟随。
+
+- **机制**: `npm run build` → npm 自动触发 `prebuild` → 脚本扫描 blog 目录 → cp 缺失的 images
+- **条件**: 英文目录 `i18n/en/.../{slug}` 存在，但 `images/` 不存在时才拷贝。已同步过的不会重复操作
+- **零维护**: 无需手动 cp，无需记住"下次要同步图片"
 
 ### 参考来源
 

@@ -101,6 +101,9 @@
   "about.cta.line": {
     "message": "If you made it this far, we should probably talk."
   },
+  "about.bio.p4": {
+    "message": "Father of two. Good code and good health both come from consistency. Shenzhen is my home."
+  },
   "about.cta.message": {
     "message": "Send a message →"
   },
@@ -124,5 +127,62 @@
   },
   "homepage.writing.card.desc": {
     "message": "An open standard maintained by Vercel Labs — one plugin, seven tools, write once run anywhere. From protocol spec to CloudBase MCP migration, all in one article."
+  },
+  "about.timeline.2026.0": {
+    "message": "Speaker at AI Maker Summit / QECon / AI+研发数字峰会"
+  },
+  "about.timeline.2026.1": {
+    "message": "CloudBase MCP released, connecting 18+ AI IDEs"
+  },
+  "about.timeline.2026.2": {
+    "message": "Personal blog binggg.github.io launched"
+  },
+  "about.timeline.2025.0": {
+    "message": "Shared AI Agent practices at tech ecosystem summit"
+  },
+  "about.timeline.2025.1": {
+    "message": "CloudBase-MCP released — AI Agent meets CloudBase"
+  },
+  "about.timeline.2025.2": {
+    "message": "Kiro Spec workflow article hit 4k+ reads on 掘金 (Juejin)"
+  },
+  "about.timeline.2023.0": {
+    "message": "Gave a live session on micro-ful low-code debugging"
+  },
+  "about.timeline.2023.1": {
+    "message": "Owned micro-ful low-code platform components & Runtime"
+  },
+  "about.timeline.2020.0": {
+    "message": "CloudBase Framework launched & open-sourced (2k⭐), project lead"
+  },
+  "about.timeline.2020.1": {
+    "message": "Speaker at Tencent Mini Program Cloud Summit / 前端早早聊 / Techo Youth"
+  },
+  "about.timeline.2020.2": {
+    "message": "Featured on InfoQ full transcript"
+  },
+  "about.timeline.2019.0": {
+    "message": "Joined Tencent CloudBase (Cloud Development) team"
+  },
+  "about.timeline.2016.0": {
+    "message": "Joined Xunlei as senior frontend engineer, grew to frontend team TL"
+  },
+  "about.timeline.2016.1": {
+    "message": "Founded XNPM, built component library system"
+  },
+  "about.timeline.2016.2": {
+    "message": "Led architecture migration from Bolt to Electron for Xunlei client"
+  },
+  "about.timeline.2016.3": {
+    "message": "Explored Strapi / SSR / MRN (1.7k⭐)"
+  },
+  "project.cb-mcp.tagline": {
+    "message": "Connect CloudBase to your AI Agent. From AI prompt to deployed app."
+  },
+  "project.cb-framework.tagline": {
+    "message": "Tencent CloudBase cloud-native deployment tool. One-click deploy, any framework."
+  },
+  "project.mrn.tagline": {
+    "message": "A Material Design style React Native component library with 1.7k stars."
   }
 }

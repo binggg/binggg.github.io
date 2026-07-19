@@ -8,7 +8,7 @@ import Reveal from '../components/Reveal'
 const projects = [
   {
     name: 'CloudBase-MCP',
-    tagline: 'Connect CloudBase to your AI Agent. 从 AI prompt 到上线应用。',
+    tagline: translate({ id: 'project.cb-mcp.tagline', message: 'Connect CloudBase to your AI Agent. 从 AI prompt 到上线应用。' }),
     url: 'https://github.com/TencentCloudBase/CloudBase-MCP',
     year: '2025',
     role: 'Creator',
@@ -16,7 +16,7 @@ const projects = [
   },
   {
     name: 'CloudBase Framework',
-    tagline: '腾讯云开发云原生一体化部署工具，一键部署，不限框架语言。',
+    tagline: translate({ id: 'project.cb-framework.tagline', message: '腾讯云开发云原生一体化部署工具，一键部署，不限框架语言。' }),
     url: 'https://github.com/Tencent/cloudbase-framework',
     year: '2020',
     role: 'Core Contributor',
@@ -24,7 +24,7 @@ const projects = [
   },
   {
     name: 'MRN',
-    tagline: 'A Material Design style React Native component library with 1.7k stars.',
+    tagline: translate({ id: 'project.mrn.tagline', message: 'A Material Design style React Native component library with 1.7k stars.' }),
     url: 'https://github.com/binggg/mrn',
     year: '2015',
     role: 'Creator',

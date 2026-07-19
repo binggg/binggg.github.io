@@ -15,32 +15,32 @@ function Star() {
 
 const timeline: { year: string; items: ReactNode[] }[] = [
   { year: '2026', items: [
-    'AI Maker Summit / QECon / AI+研发数字峰会 讲师',
-    'CloudBase MCP 发布，连接 18+ AI IDE',
-    '个人博客 binggg.github.io 上线',
+    translate({ id: 'about.timeline.2026.0', message: 'AI Maker Summit / QECon / AI+研发数字峰会 讲师' }),
+    translate({ id: 'about.timeline.2026.1', message: 'CloudBase MCP 发布，连接 18+ AI IDE' }),
+    translate({ id: 'about.timeline.2026.2', message: '个人博客 binggg.github.io 上线' }),
   ]},
   { year: '2025', items: [
-    '科技生态圈峰会 & AI+研发数字峰会 分享 AI Agent 实践',
-    'CloudBase-MCP 发布，AI Agent 与云开发打通',
-    'Kiro Spec 工作流复刻攻略在掘金 4k+ 阅读',
+    translate({ id: 'about.timeline.2025.0', message: '科技生态圈峰会 & AI+研发数字峰会 分享 AI Agent 实践' }),
+    translate({ id: 'about.timeline.2025.1', message: 'CloudBase-MCP 发布，AI Agent 与云开发打通' }),
+    translate({ id: 'about.timeline.2025.2', message: 'Kiro Spec 工作流复刻攻略在掘金 4k+ 阅读' }),
   ]},
   { year: '2023', items: [
-    '微搭低代码实战公开课直播',
-    '负责微搭低代码平台应用组件和 Runtime',
+    translate({ id: 'about.timeline.2023.0', message: '微搭低代码实战公开课直播' }),
+    translate({ id: 'about.timeline.2023.1', message: '负责微搭低代码平台应用组件和 Runtime' }),
   ]},
   { year: '2020', items: [
-    'CloudBase Framework 项目启动并开源（2k⭐），任项目负责人',
-    '腾讯「小程序·云开发」技术峰会 / 前端早早聊 / Techo Youth 讲师',
-    'InfoQ 全文实录报道',
+    translate({ id: 'about.timeline.2020.0', message: 'CloudBase Framework 项目启动并开源（2k⭐），任项目负责人' }),
+    translate({ id: 'about.timeline.2020.1', message: '腾讯「小程序·云开发」技术峰会 / 前端早早聊 / Techo Youth 讲师' }),
+    translate({ id: 'about.timeline.2020.2', message: 'InfoQ 全文实录报道' }),
   ]},
   { year: '2019', items: [
-    '9 月加入腾讯云开发（CloudBase）团队',
+    translate({ id: 'about.timeline.2019.0', message: '9 月加入腾讯云开发（CloudBase）团队' }),
   ]},
   { year: '2016—2018', items: [
-    '2016 入职迅雷，从资深工程师做到前端团队 TeamLeader',
-    '创办内部组件库 XNPM，建设标准组件体系',
-    '主导迅雷客户端从 Bolt 到 Electron 的架构迁移',
-    '折腾 Strapi / SSR / MRN (1.7k⭐)',
+    translate({ id: 'about.timeline.2016.0', message: '2016 入职迅雷，从资深工程师做到前端团队 TeamLeader' }),
+    translate({ id: 'about.timeline.2016.1', message: '创办内部组件库 XNPM，建设标准组件体系' }),
+    translate({ id: 'about.timeline.2016.2', message: '主导迅雷客户端从 Bolt 到 Electron 的架构迁移' }),
+    translate({ id: 'about.timeline.2016.3', message: '折腾 Strapi / SSR / MRN (1.7k⭐)' }),
   ]},
 ]
 

@@ -89,6 +89,22 @@
 - **条件**: 英文目录 `i18n/en/.../{slug}` 存在，但 `images/` 不存在时才拷贝。已同步过的不会重复操作
 - **零维护**: 无需手动 cp，无需记住"下次要同步图片"
 
+### i18n 翻译检查（自动提醒，不阻断）
+
+写中文博文并 push 后，CI 构建时会自动检查英文翻译是否缺失：
+
+```
+⚙️ prebuild → scripts/check-i18n-blog.sh
+  ├── 扫描 blog/*/ 下所有中文博客
+  ├── 比对 i18n/en/docusaurus-plugin-content-blog/ 是否存在对应英文版
+  ├── 缺失 → 打印 ⚠️ 警告（含标题 + 路径）
+  └── 不缺失 → ✅ All good
+```
+
+- **不阻断构建** — 中文博文先发出去，翻译可以后面补
+- **CI 日志可见** — 你每次 push 后瞄一眼 Actions 就能看到有没有遗漏
+- **零维护** — 无需配置，脚本自动跟 blog 目录同步
+
 ### 参考来源
 
 Vercel 的 Agent Resources 体系：[vercel.com/docs/agent-resources](https://vercel.com/docs/agent-resources)，三层框架：

@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "docusaurus": "docusaurus",
-    "prebuild": "bash scripts/sync-i18n-images.sh",
+    "prebuild": "bash scripts/sync-i18n-images.sh && bash scripts/check-i18n-blog.sh",
     "start": "docusaurus start",
     "build": "docusaurus build",
     "swizzle": "docusaurus swizzle",

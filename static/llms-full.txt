@@ -8,42 +8,2625 @@
 - **Experience**: 15+ years AI full-stack engineering
 - **Expertise**: AI Agent, CloudBase (Tencent Cloud), Serverless, Frontend (React/TypeScript), Open Source
 - **Family**: Father of two
-- **Interests**: Fitness, coding, open source, content creation
-
-## Blog
-
-Current blog posts at https://binggg.github.io/blog
-
-Full content of each post is available at their individual URLs (e.g., https://binggg.github.io/blog/my-post-slug).
-
-RSS Feed: https://binggg.github.io/blog/rss.xml
-Atom Feed: https://binggg.github.io/blog/atom.xml
-Sitemap: https://binggg.github.io/sitemap.xml
 
 ## Projects
 
-### CloudBase-MCP (1.1k⭐)
-CloudBase MCP — Connect CloudBase to your AI Agent. Go from AI prompt to live app.
-- GitHub: https://github.com/TencentCloudBase/CloudBase-MCP
+- [CloudBase-MCP](https://github.com/TencentCloudBase/CloudBase-MCP) (1.1k⭐): Connect CloudBase to your AI Agent.
+- [CloudBase Framework](https://github.com/Tencent/cloudbase-framework) (2k⭐): Cloud-native all-in-one deployment tool.
+- [MRN](https://github.com/binggg/mrn) (1.7k⭐): Material Design React Native components.
+- [CloudBase AI ToolKit](https://github.com/TencentCloudBase/CloudBase-AI-ToolKit) (927⭐): AI Agent bridge with CloudBase.
 
-### CloudBase Framework (2k⭐)
-腾讯云开发云原生一体化部署工具，一键部署、不限框架语言、云端一体化开发，基于Serverless 架构。
-- GitHub: https://github.com/Tencent/cloudbase-framework
+## Blog Posts
 
-### Material React Native / MRN (1.7k⭐)
-Material Design style React Native component library.
-- GitHub: https://github.com/binggg/mrn
+*This file contains the complete content of all blog posts on https://binggg.github.io/blog*
 
-### CloudBase AI ToolKit (927⭐)
-AI Agent 与云开发的桥梁，让 LLM 能力无缝接入云开发基础设施。
-- GitHub: https://github.com/TencentCloudBase/CloudBase-AI-ToolKit
+---
 
-### Awesome CloudBase Examples (410⭐)
-腾讯云开发案例合集，涵盖全栈、AI、小程序等多种场景。
-- GitHub: https://github.com/TencentCloudBase/awesome-cloudbase-examples
+## AI 编程不靠运气，Kiro Spec 工作流复刻全攻略
 
-## Social
+*Published: 2025-07-21 | Full article: https://binggg.github.io/blog/2025-07-21-kiro-spec-workflow*
 
-- GitHub: https://github.com/binggg
-- X (Twitter): https://x.com/being99
-- GitHub Pages: https://binggg.github.io
+最近研究 Kiro 的推文又爆了，很多朋友私信问细节，所以再来整理一篇文章，系统分享下具体内容和实操方法。
+
+
+
+---
+
+## 拉霸式 vibe coding，真的靠谱吗？
+
+你是否有过这样的体验：在 AI IDE 里输入一句模糊的需求，点击"生成"，满怀期待地等着 AI 给你一个完美的程序？结果却像在拉霸机前拉动拉杆——有时中个小奖，大多数时候却一无所获。
+
+> 拉霸游戏和 vibe coding 的异同：
+> 
+> 拉霸游戏：买代币，拉拉杆，偶尔中大奖，更多时候是"再来一次"，最终庄家总是赢家。
+> 
+> 氛围编程（vibe coding）：买 Tokens，写模糊提示，点"生成"，有时得完美代码，有时一团乱麻。AI 鼓励你"再试一次"，你安慰自己"这次一定能修好 bug"，但最终模型厂商总是赢家。偶尔你觉得自己赚到了，回头却发现花了更多时间。
+
+vibe coding 最大的问题是：它让开发变成了"碰运气"，而不是"可控的工程"。
+
+### 常见的 vibe coding 流程示意图
+
+```mermaid
+flowchart TD
+    B1[人输入模糊需求]
+    B2[AI 直接生成代码]
+    B3[人反复调整提示词]
+    B4[结果不可控，效率低]
+    B1 --> B2 --> B3 --> B2
+    B2 --> B4
+
+    classDef human fill:#ffd700,stroke:#333,stroke-width:2px;
+    classDef ai fill:#bbf,stroke:#333,stroke-width:2px;
+    classDef bad fill:#faa,stroke:#333,stroke-width:2px;
+
+    class B1,B3 human;
+    class B2 ai;
+    class B4 bad;
+```
+
+> 黄色节点为"人"操作，蓝色为 AI 产出，红色为不理想结果。
+
+## 有没有更好的办法？——传统研发流程是怎么做的
+
+传统软件工程强调需求澄清、技术设计、任务拆分、过程可追溯。这样做虽然"慢"，但能让项目稳步推进、可复盘、可协作。
+
+Kiro AI IDE 就把这种流程做成了"Spec 工作流"，让 AI 编程也能像工程师一样靠谱。
+
+### 传统研发流程示意图
+
+```mermaid
+flowchart TD
+    T1[需求提出]
+    T2[需求评审]
+    T3[方案设计]
+    T4[开发实现]
+    T5[测试]
+    T6[上线]
+    T7[迭代反馈]
+    T2 --> T3 --> T4 --> T5 --> T6 --> T7
+    T1 --> T2
+    T7 -.-> T2
+
+    classDef human fill:#ffd700,stroke:#333,stroke-width:2px;
+    classDef good fill:#bfb,stroke:#333,stroke-width:2px;
+
+    class T1,T2,T3,T4,T5,T6,T7 human;
+```
+
+> 该流程强调需求评审和迭代反馈，体现传统软件工程的闭环和持续优化。
+
+## Kiro 的 Spec 工作流有多香？
+
+Kiro 是 AWS 推出的 AI IDE，除了免费集成 Claude 4，更大的亮点是它的 Spec 工作流：
+
+- 每个项目下有 3 个核心文件：
+  1. `requirements.md` —— 需求文档（用 EARS 语法写用户故事和验收标准）
+  2. `design.md` —— 技术方案（架构、流程、注意事项）
+  3. `tasks.md` —— 任务清单（todolist，便于跟踪）
+
+### 什么是 EARS 需求语法？
+
+EARS（简易需求语法）最早用于喷气发动机控制系统，后来被软件工程广泛采用。它用简单句式约束需求，避免"模糊表达"。
+
+> 例：When 用户点击"静音"，系统应当抑制所有音频输出。
+
+参考资料：[EARS 语法指南](https://alistairmavin.com/ears/) | [v0.dev Cheat Sheet](https://v0-ears-syntax-guide-bd8ywxbxo-booker-zhaos-projects.vercel.app)
+
+## Claude Code 也能玩 Spec 流程！（含实操演示和对话示例）
+
+即使没有 Kiro，其他 AI IDE 也能复刻这套流程。以 Claude Code 为例，整个过程可以非常丝滑：
+
+1. **在项目下建立 CLAUDE.md**
+   - 你可以把下面的提示词模板直接写进 CLAUDE.md，作为 AI 协作的"工作说明书"。
+   - 示例（可根据实际需求调整）：
+
+```
+# CLAUDE.md
+
+你是一个专业的 AI 编程助手，协助我用标准软件工程流程推进项目。请严格按照 Spec 工作流推进：
+1. 需求澄清与确认，输出 requirements.md，采用 EARS 语法。
+2. 技术方案设计，输出 design.md，包含架构、技术选型、接口、测试策略。
+3. 任务拆分，输出 tasks.md，细化为可执行的 todolist。
+4. 按照任务清单协助编码、测试，输出过程产物到 output/。
+5. 重要：每一步都要和我确认，只有我确认后才能进入下一步。
+```
+
+2. **启动 Claude Code，输入原始需求**
+   - 直接把你的想法、用户故事写进对话框。
+   - Claude 会自动读取 CLAUDE.md，开始和你进行需求澄清和确认。
+
+3. **需求确认后，Claude 输出 requirements.md**
+   - Claude 会用 EARS 语法梳理需求，生成标准的 requirements.md。
+   - 你可以随时补充、修改，Claude 会持续和你对齐。
+
+4. **技术方案设计**
+   - 需求确认后，Claude 会自动进入 design.md 阶段，输出详细的技术方案。
+   - 包括架构、技术选型、接口、测试策略等。
+
+5. **任务拆分**
+   - Claude 会根据 design.md 自动生成 tasks.md，把方案拆分为可执行的 todolist。
+
+6. **逐步实现与验收**
+   - Claude 会按照 tasks.md 协助你逐步实现代码、测试，并输出所有过程产物到 output/ 目录。
+   - 你只需参与需求、设计、验收等关键评审环节。
+
+> 推荐 CLAUDE.md 提示词模板：
+> "你是一个专业的 AI 编程助手，协助我用标准软件工程流程推进项目。请严格按照 Spec 工作流推进，每一步都要和我确认，只有我确认后才能进入下一步。"
+
+这样，哪怕没有 Kiro，借助 Claude Code 也能轻松复刻 Spec 工作流，让 AI 编程变得高效、可控、可复盘。
+
+### vibe coding 与 Spec 工作流对比流程图
+
+```mermaid
+flowchart TD
+    A0[传统 vibe coding]:::group
+    B1[人输入模糊需求]
+    B2[AI 直接生成代码]
+    B3[人反复调整提示词]
+    B4[结果不可控，效率低]
+    A0 --> B1 --> B2 --> B3 --> B4
+
+    A1[Spec 工作流 Claude Code]:::group
+    S1[输入模糊需求]
+    S2[AI 需求澄清并输出 requirements.md]
+    S3[人评审需求]
+    S4[AI 输出 design.md]
+    S5[人评审设计]
+    S6[AI 输出 tasks.md]
+    S7[人评审任务]
+    S8[AI 按任务清单协作编码/测试]
+    S9[人评审验收]
+    S10[结果可控，高效可复盘]
+    A1 --> S1 --> S2 --> S3 --> S4 --> S5 --> S6 --> S7 --> S8 --> S9 --> S10
+
+    classDef group fill:#eee,stroke:#333,stroke-width:2px;
+    classDef human fill:#ffd700,stroke:#333,stroke-width:2px;
+    classDef ai fill:#bbf,stroke:#333,stroke-width:2px;
+    classDef bad fill:#faa,stroke:#333,stroke-width:2px;
+    classDef good fill:#bfb,stroke:#333,stroke-width:2px;
+
+    class B1,B3 human;
+    class B2 ai;
+    class B4 bad;
+    class S1,S2,S4,S6,S8 ai;
+    class S3,S5,S7,S9 human;
+    class S10 good;
+```
+
+> 黄色节点为"人"参与评审，蓝色为 AI 产出，红色为不理想结果，绿色为高质量结果，灰色为流程分组。
+
+### Claude Code 复刻 Spec 工作流对话示例
+
+```markdown
+**用户**：我想做一个"AI 帮我自动整理会议纪要"的小工具，能帮我规划一下吗？
+
+**Claude**（读取 CLAUDE.md 后自动响应）：
+当然可以！我们将采用标准 Spec 工作流推进。首先，我会帮你澄清需求并输出 requirements.md。请问你希望支持哪些输入方式？比如：语音、文字、文件上传等？
+
+**用户**：主要是上传录音文件，最好还能支持多种音频格式。
+
+**Claude**：
+明白了。还有输出格式有要求吗？比如纯文本、Markdown、Word 文档等？
+
+**用户**：最好能导出 Markdown 和 Word。
+
+**Claude**：
+好的，需求已澄清。下面是基于 EARS 语法梳理的 requirements.md 草稿：
+
+---
+
+# requirements.md
+
+## 用户故事
+作为一名经常开会的用户，我希望能上传会议录音，自动生成结构化的会议纪要，并能导出为 Markdown 或 Word 文档，提升整理效率。
+
+## 验收标准
+1. When 用户上传音频文件时，the 系统 shall 支持多种主流音频格式（如 mp3, wav, m4a）。
+2. When 音频上传完成时，the 系统 shall 自动将音频转为文本并提取会议要点。
+3. When 用户点击导出时，the 系统 shall 支持导出为 Markdown 和 Word 文档。
+
+---
+
+请确认需求内容，或补充修改。确认后我将进入技术方案设计阶段。
+
+**用户**：确认，没问题。
+
+**Claude**：
+收到！接下来输出 design.md：
+
+---
+
+# design.md
+
+## 架构概述
+- 前端：文件上传、进度显示、导出按钮
+- 后端：音频转文本（调用 ASR 服务）、要点提取（大模型）、文档格式转换
+- 存储：临时存储音频和文本
+
+## 技术选型
+- 前端：React
+- 后端：Node.js + OpenAI/Claude API
+- ASR 服务：Whisper API
+- 文档导出：jsdocx、markdown-it
+
+## 流程
+1. 用户上传音频
+2. 后端转写为文本
+3. 调用大模型提取要点
+4. 前端展示并支持导出
+
+## 安全性
+- 文件仅临时存储，处理后自动删除
+
+---
+
+请确认技术方案，或补充修改。确认后我将拆分任务清单。
+
+**用户**：确认。
+
+**Claude**：
+好的，下面是 tasks.md：
+
+---
+
+# tasks.md
+
+- [ ] 搭建前端上传页面
+- [ ] 实现音频文件上传接口
+- [ ] 集成 ASR 服务实现音频转文本
+- [ ] 调用大模型提取会议要点
+- [ ] 实现导出 Markdown/Word 功能
+- [ ] 前后端联调与测试
+- [ ] 文档与验收
+
+---
+
+请确认任务清单，确认后我将协助你逐步实现每个任务。
+```
+
+## CloudBase AI ToolKit：一站式复刻 Spec 工作流
+
+如果你想要更开箱即用的体验，可以试试 CloudBase AI ToolKit：
+- 支持多种 AI IDE
+- 自带 Spec 工作流模板
+- 一键生成、部署、托管全栈应用，无需运维
+
+## 人机协作，才是正解
+
+在 Spec 工作流下，AI 负责：
+- 模糊需求 → 需求方案
+- 技术设计文档
+- 任务清单
+- 编码实现
+- 验收测试
+
+人类只需参与：
+- 需求输入
+- 需求/技术/排期/测试评审
+
+这样既能发挥 AI 的高效，又能保证工程质量。
+
+### 标准软件工程流程示意图
+
+```mermaid
+flowchart TD
+    SE1[人提出需求]
+    SE2[需求澄清与确认]
+    SE3[人评审需求]
+    SE4[技术方案设计]
+    SE5[人评审设计]
+    SE6[任务拆分]
+    SE7[人评审任务]
+    SE8[编码实现]
+    SE9[测试与验收]
+    SE10[人评审验收]
+    SE11[高质量可复盘结果]
+
+    SE1 --> SE2 --> SE3 --> SE4 --> SE5 --> SE6 --> SE7 --> SE8 --> SE9 --> SE10 --> SE11
+
+    classDef human fill:#ffd700,stroke:#333,stroke-width:2px;
+    classDef ai fill:#bbf,stroke:#333,stroke-width:2px;
+    classDef good fill:#bfb,stroke:#333,stroke-width:2px;
+
+    class SE1,SE3,SE5,SE7,SE10 human;
+    class SE2,SE4,SE6,SE8,SE9 ai;
+    class SE11 good;
+```
+
+> 黄色节点为"人"参与评审，蓝色为工程活动（可由 AI 或人协作完成），绿色为高质量结果。
+
+## 总结：让 AI 编程更快、更稳、更靠谱
+
+Spec 工作流让 AI 编程不再是"碰运气"，而是"有章可循"。人类工程师的经验和判断，配合 AI 的高效执行，才能让开发真正提速、提质、可复盘。
+
+> 记住：AI 不是替代人，而是让人更强大。
+
+---
+
+## 为什么你的 AI 编程总是返工？SBE 方法论给出了答案
+
+*Published: 2025-08-05 | Full article: https://binggg.github.io/blog/2025-08-05-sbe-methodology*
+
+最近我的[《Kiro Spec 工作流复刻全攻略》](/blog/kiro-spec-workflow)爆了，很多朋友私信问我：**"为什么 Spec 模式这么有效？背后有什么理论支撑吗？"**
+
+说实话，这个问题我也思考了很久。直到我看到了 Gojko Adzic 的《实例化需求：团队如何交付正确的软件》这本书，才恍然大悟。
+
+原来，Kiro 的 Spec 工作流背后，是 SBE（Specification by Example）方法论的完美实践。**今天就来揭秘这套方法论，解决你的 AI 编程返工问题。**
+
+
+
+## 你的 AI 编程为什么总是返工？
+
+你有没有遇到过这样的情况：
+
+- 让 AI 生成一个登录功能，结果生成了注册页面
+- 要求实现数据导出，AI 却给你一个数据导入功能
+- 想要一个简单的 API，AI 却生成了复杂的微服务架构
+
+**这些问题的根源是什么？**
+
+不是 AI 不够聪明，而是我们的需求表达太模糊了。就像和一个外国朋友交流，如果你说"我要吃饭"，他可能理解成"我要吃米饭"、"我要去餐厅"或者"我要点外卖"。
+
+在 AI 编程中，这种模糊性被放大了。AI 只能根据你的描述来"猜"你想要什么，猜对了皆大欢喜，猜错了就要返工重来。
+
+### 传统需求管理的困境
+
+在传统软件工程中，我们早就发现了类似的问题：
+
+1. **需求歧义**：同一个需求，不同人理解不同
+2. **后期返工**：开发完成后发现理解偏差
+3. **文档滞后**：需求文档跟不上实际变化
+4. **沟通成本**：反复确认需求，效率低下
+
+这些问题在 AI 编程中被进一步放大。当需求不清晰时，AI 就像在黑暗中摸索，只能靠"运气"来生成符合期望的代码。
+
+## 传统软件工程早就有了解决方案
+
+Gojko Adzic 在《实例化需求：团队如何交付正确的软件》中提出的 SBE（Specification by Example）方法论，正是为了解决这些问题而生。
+
+### SBE 的核心原则
+
+#### 1. 以实例为中心的需求定义
+用**具体、真实的例子**替代抽象的需求描述。比如：
+
+❌ **抽象描述**：用户登录功能要安全可靠
+✅ **实例化描述**：
+- Given 用户输入正确的用户名和密码
+- When 点击登录按钮
+- Then 系统显示欢迎页面
+
+#### 2. 协作式需求澄清
+强调**跨角色协作**，通过共同讨论实例避免"需求孤岛"。在 AI 编程中，这就是人机协作的过程。
+
+#### 3. 从需求到可执行测试的转化
+将实例转化为**自动化测试用例**，实现"需求即测试"。这是 Spec 模式中基于 requirement 生成测试用例的理论基础。
+
+#### 4. 活文档（Living Documentation）
+实例化需求的结果是一套**动态更新的文档系统**，随需求变更自动同步。这正是 Spec 模式中持续更新的 requirements.md 和 design.md。
+
+## SBE 与 Spec 模式的完美映射
+
+### 需求澄清 → requirements.md 的迭代
+
+**SBE 原则**：用具体实例澄清需求，确保团队理解一致。
+
+**Spec 实践**：
+```markdown
+### 需求 1 - 用户登录功能
+
+**用户故事：** 作为用户，我希望能够安全登录系统，以便访问我的个人数据。
+
+#### 验收标准
+1. When 用户输入正确的用户名和密码时，the 系统 shall 显示欢迎页面
+2. When 用户输入错误的密码时，the 系统 shall 显示错误提示
+3. When 用户连续输入错误密码3次时，the 系统 shall 锁定账户30分钟
+```
+
+### 技术设计 → design.md 的协作
+
+**SBE 原则**：避免技术陷阱，聚焦业务功能。
+
+**Spec 实践**：
+```markdown
+## 技术方案设计
+
+### 架构设计
+- 前端：React + TypeScript
+- 后端：Node.js + Express
+- 数据库：MongoDB
+- 认证：JWT Token
+```
+
+### 测试驱动 → 基于需求的测试生成
+
+**SBE 原则**：需求即测试，确保实现符合预期。
+
+**Spec 实践**：
+```javascript
+// 基于 requirements.md 自动生成的测试用例
+describe('用户登录功能', () => {
+  test('正确密码登录成功', async () => {
+    const response = await login('user@example.com', 'correctPassword');
+    expect(response.status).toBe(200);
+    expect(response.data.message).toBe('欢迎页面');
+  });
+});
+```
+
+## 实践经验：SBE 方法论在 AI 编程中的落地
+
+### 我的实践心得
+
+经过在多个项目中的实践，我发现 SBE 方法论在 AI 编程中确实很有效：
+
+#### 1. 需求迭代和澄清最重要
+
+**关键发现**：`requirements.md` 和 `design.md` 的不断迭代和澄清是整个流程的核心。
+
+**实践案例**：
+- 在 `CloudBase-AI-ToolKit` 项目中，我们每个新功能都采用 Spec 模式
+- 通过反复迭代 requirements.md，需求清晰度提升了 80%
+- 返工率从原来的 60% 降低到 15%
+
+#### 2. 基于需求生成测试用例
+
+**关键发现**：基于 requirements.md 生成的测试用例，让 AI 编程变得可验证。
+
+#### 3. 在存量项目中的应用
+
+**关键发现**：Spec 模式不仅适用于新项目，在存量项目中同样有效。
+
+### 粒度拆分的最佳实践
+
+关于大家关心的粒度拆分问题，我的经验是：
+
+#### 按功能模块拆分
+```
+specs/
+├── user-management/
+│   ├── requirements.md
+│   ├── design.md
+│   └── tasks.md
+├── file-upload/
+│   ├── requirements.md
+│   ├── design.md
+│   └── tasks.md
+└── data-export/
+    ├── requirements.md
+    ├── design.md
+    └── tasks.md
+```
+
+#### 按迭代拆分
+```
+specs/
+├── v1.0-basic-features/
+├── v1.1-advanced-features/
+└── v1.2-optimization/
+```
+
+#### 按复杂度拆分
+- **简单功能**：单个 spec 文件
+- **中等功能**：独立的 spec 文件夹
+- **复杂功能**：多个关联的 spec 文件夹
+
+## 那么，SBE 方法论到底有多香？
+
+看到这里，你可能会问：**"这套方法论真的这么有效吗？会不会太复杂了？"**
+
+说实话，我一开始也有同样的担心。但实践下来发现，SBE 方法论在 AI 编程中确实很"香"：
+
+### 为什么 SBE 方法论这么有效？
+
+1. **需求清晰了**：用具体例子替代抽象描述，AI 理解更准确
+2. **返工率低了**：基于清晰需求生成的代码，质量更高
+3. **协作更顺畅了**：团队成员对需求理解一致，沟通成本降低
+4. **文档不过时了**：活文档随需求变化自动更新
+
+### 适用场景和注意事项
+
+**适合的场景**：
+- ✅ 复杂项目，涉及多个模块
+- ✅ 团队协作，需要统一标准
+- ✅ 质量要求高，需要可追溯性
+
+**不太适合的场景**：
+- ❌ 快速原型，验证想法
+- ❌ 个人项目，简单功能
+- ❌ 时间极其紧迫的项目
+
+## 总结：让 AI 编程从"碰运气"变成"可控工程"
+
+SBE 方法论为 AI 编程提供了一套经过验证的理论基础和实践框架。通过实例化需求、协作式澄清、测试驱动开发和活文档管理，我们可以让 AI 编程变得更加可控、高效和可靠。
+
+记住：**AI 不是替代人，而是让人更专注于决策和把控方向，把繁琐的细节交给 AI。**
+
+这样，你的 AI 编程就不再是"碰运气"，而是真正变成了"可控工程"。
+
+---
+
+**互动话题**：
+1. 你目前使用的是哪种开发模式？
+2. 你觉得 Spec 模式在你的项目中可行吗？
+3. 分享一下你的 AI 编程经验！
+
+---
+
+## AI 编程，怎么从玩具到产品？
+
+*Published: 2025-11-27 | Full article: https://binggg.github.io/blog/2025-11-27-ai-toy-to-product*
+
+最近帮朋友看了几个用 AI 做的项目，发现一个有意思的现象：
+
+代码能跑，功能也有，但就是...不能用。
+
+不是技术问题，是别的问题。
+
+
+
+## 一个典型的场景
+
+朋友兴冲冲地发来一个链接："你看我用 AI 做的，三小时搞定！"
+
+打开一看：
+- 页面是有的，圆角卡片、渐变按钮、紫色配色——一眼 AI 味
+- 登录功能点了没反应
+- 数据是写死的假数据
+- 只能在他电脑上跑
+
+我问："这个怎么给用户用？"
+
+他愣了一下："...还没想到那一步。"
+
+这不是个例。我观察了很多用 AI 做的项目，发现大部分都卡在同一个地方：**从 demo 到产品的鸿沟**。
+
+---
+
+## vibe coding 的五个坑
+
+仔细分析这些项目，问题可以归结为五个：
+
+### 1. 需求是个谜
+
+"帮我做一个任务管理应用"——这是大多数人给 AI 的提示词。
+
+问题是，AI 不知道：
+- 任务要不要分优先级？
+- 要不要支持多人协作？
+- 数据存本地还是云端？
+- 要不要提醒功能？
+
+AI 只能猜。猜对了是运气，猜错了就是返工。
+
+**本质问题**：没有 Spec 思维。需求不清晰，AI 再聪明也白搭。
+
+### 2. UI 一眼假
+
+为什么 AI 生成的界面总有一种说不出的"AI 味"？
+
+- 圆角用得太多太大
+- 渐变色滥用
+- 紫色 + 蓝色的万年配色
+- 布局千篇一律
+
+不是 AI 不会设计，是你没告诉它什么是好设计。
+
+**本质问题**：缺乏设计规范。AI 只是在模仿它见过的"平均水平"。
+
+### 3. 后端是空的
+
+前端页面做得再漂亮，点击登录按钮——没反应。
+
+因为：
+- 没有用户系统
+- 没有数据库
+- 没有 API 接口
+- 没有服务器
+
+很多人以为 AI 编程就是做前端页面。但一个能用的产品，后端才是大头。
+
+**本质问题**：不懂架构选型。不知道用什么技术栈，干脆就不做了。
+
+### 4. 部署是玄学
+
+代码写完了，然后呢？
+
+- 域名怎么买？
+- HTTPS 怎么配？
+- 服务器怎么选？
+- 数据库怎么部署？
+
+对于没有运维经验的人，这些问题每一个都是拦路虎。
+
+**本质问题**：不了解部署。代码能跑和产品能用是两回事。
+
+### 5. 改一行崩全部
+
+好不容易跑起来了，想加个小功能。
+
+改了一行代码，整个项目报错。
+
+AI 生成的代码往往是"一次性"的——能跑，但不能改。因为：
+- 没有模块化
+- 没有类型检查
+- 没有测试
+- 到处是硬编码
+
+**本质问题**：缺乏工程化。代码是写给机器跑的，不是给人维护的。
+
+---
+
+## 怎么破？
+
+分析完问题，解决思路就清晰了。下面是我总结的五个具体方法：
+
+### 方法 1：先写 Spec，再写代码
+
+我之前写过一篇关于 Kiro Spec 工作流的文章，核心观点是：
+
+> **vibe coding 最大的问题是：它让开发变成了"碰运气"，而不是"可控的工程"。**
+
+解决方案是在让 AI 写代码之前，先让它帮你梳理需求。具体来说，生成三个文件：
+
+1. **requirements.md** —— 需求文档（用 EARS 语法写用户故事和验收标准）
+2. **design.md** —— 技术方案（架构、流程、注意事项）
+3. **tasks.md** —— 任务清单（todolist，便于跟踪）
+
+这和大厂的研发流程、敏捷开发的拆解方式如出一辙，但 Kiro 把它和 AI IDE 深度结合，极大提升了落地效率。
+
+**什么是 EARS 需求语法？**
+
+EARS（简易需求语法）最早用于喷气发动机控制系统，后来被软件工程广泛采用。它用简单句式约束需求，避免"模糊表达"：
+
+| 类型 | 句式 | 示例 |
+|------|------|------|
+| 普遍性 | The system shall... | 系统应当支持用户登录 |
+| 事件驱动 | When [trigger], the system shall... | 当用户点击登录按钮，系统应当验证凭证 |
+| 状态驱动 | While [state], the system shall... | 当用户已登录时，系统应当显示用户头像 |
+| 可选功能 | Where [feature], the system shall... | 如果启用了双因素认证，系统应当发送验证码 |
+| 复杂条件 | If [condition], then the system shall... | 如果密码错误超过 3 次，系统应当锁定账户 |
+
+需求清晰了，AI 才能精准输出。
+
+**怎么在其他 AI IDE 里用？**
+
+即使没有 Kiro，其他 AI IDE 也能复刻这套流程：
+- Claude Code：在项目下建立 `CLAUDE.md`，写入 Spec 工作流规则
+- Cursor：使用 `.cursor/rules/project.mdc`
+- Augment：使用 `.augment-guidelines`
+
+整个流程下来，AI 不再是"黑箱"式地帮你生成代码，而是和你像搭档一样，**步步确认、逐步推进**。
+
+### 方法 2：用 Skill 约束 AI 的设计输出
+
+不要让 AI 自由发挥，给它一套设计规范。
+
+这里介绍一个概念：**Skill（技能）**。
+
+Skill 是一种可复用的提示词模板，封装了特定领域的专业知识。比如 Anthropic 官方开源的 `frontend-design` Skill，专门用来解决"AI 味"问题：
+
+有了这个 Skill，AI 生成的 UI 就不会那么"AI 味"了。
+
+### 方法 3：选 BaaS，不要从零搭
+
+后端是大多数人的拦路虎。但其实不需要自己搭。
+
+**什么是 BaaS？**
+
+BaaS（Backend as a Service）是一种云服务模式，把后端能力封装成 API，开发者只需调用 SDK：
+
+| 能力 | 传统方式 | BaaS 方式 |
+|------|----------|-----------|
+| 数据库 | 安装 MySQL，配置连接，写 SQL | 调用 `db.collection('users').add()` |
+| 用户系统 | 写注册/登录/权限逻辑 | 调用 `auth.signIn()` |
+| 文件存储 | 搭建 OSS，配置权限 | 调用 `storage.upload()` |
+| API 接口 | 写 Express/Nest.js 路由 | 云函数自动生成 HTTP 端点 |
+
+这比自己用 Express/Nest.js 从零搭建简单 10 倍。
+
+**国内外主流 BaaS 平台**：
+- 国外：Supabase、Firebase
+- 国内：CloudBase（腾讯云开发）
+
+BaaS 的核心理念是：**开箱即用**。创建项目时，数据库、认证、存储就已经准备好了，不需要你操心底层基础设施。
+
+### 方法 4：用平台托管，不碰服务器
+
+部署也不需要自己折腾。
+
+现在有很多平台可以帮你搞定部署：
+
+| 平台类型 | 代表产品 | 特点 |
+|----------|----------|------|
+| 静态托管 | Vercel、Netlify、Cloudflare Pages | 前端项目一键部署，自动 HTTPS |
+| Serverless | AWS Lambda、Cloudflare Workers | 函数即服务，按调用计费 |
+| BaaS 全栈 | CloudBase、Supabase、Firebase | 前后端一体，数据库+函数+托管 |
+| 容器平台 | Railway、Render、Fly.io | 支持任意语言，更灵活 |
+
+如果你用的是 BaaS 平台（比如 CloudBase），部署就更简单了——前端静态托管、后端云函数、数据库，都在一个平台里，不用到处开账号。
+
+把代码推上去，平台自动帮你搞定一切。
+
+### 方法 5：工程化思维
+
+让 AI 生成代码时，要求它：
+
+| 要求 | 具体做法 |
+|------|----------|
+| 模块化 | 一个文件做一件事，职责清晰 |
+| 类型化 | 用 TypeScript，类型即文档 |
+| 可测试 | 关键逻辑有单元测试 |
+| 可配置 | 环境变量、配置文件，不要硬编码 |
+
+这样生成的代码才能维护和迭代。
+
+---
+
+## 我的实践
+
+说了这么多方法，我自己是怎么做的呢？
+
+经过一段时间的摸索，我沉淀出一套方案，把上面五个方法整合在一起：
+
+**1. Spec 工作流** — 每次开始一个项目，先让 AI 帮我生成 `requirements.md` → `design.md` → `tasks.md`。需求清晰了，后面写代码就顺了。
+
+**2. Skill 技能体系** — 整理了一套设计规范，封装成 Skill。每次生成 UI 时调用，就不会有 AI 味了。
+
+**3. BaaS 架构** — 后端用云开发平台，不碰服务器。数据库、云函数、用户登录、文件存储——都是现成的。
+
+**4. MCP 协议** — 用 MCP 让 AI 直接调用云服务。创建数据库、部署函数、配置域名——都不用手动操作了。
+
+这套方案我打包成了 **CloudBase AI Toolkit**，开源在 GitHub。
+
+---
+
+## 写在最后
+
+vibe coding 不是不能用，而是只能用来做 demo。
+
+从 demo 到产品，需要的不是更强的 AI，而是**工程化的思维**：
+- 需求要清晰（Spec 工作流）
+- 设计要规范（Skill 技能体系）
+- 架构要合理（BaaS 服务）
+- 开发要智能（MCP 协议）
+- 代码要可维护（工程化）
+
+AI 是工具，但工具需要正确的使用方式。
+
+就像有了电钻，不代表人人都能做木工。关键是你知道怎么用，用在哪里。
+
+> **记住：AI 不是替代人，而是让人更强大。**
+
+---
+
+*如果你也有 AI 编程的实践经验，欢迎交流。*
+
+---
+
+## Vibe Coding 不是迷思：非技术人员也能用 AI 做出真正可用的应用
+
+*Published: 2026-01-09 | Full article: https://binggg.github.io/blog/2026-01-09-vibe-coding*
+
+**你是否遇到过这样的困扰：用 AI 生成应用时，代码出错了却不知道问什么问题？AI 给了 N 个解决方案，但不知道哪个是对的？**
+
+很多非技术人员在用 AI 编程时都会遇到这样的痛点：
+
+- **Debug 困难**：页面显示异常，但不知道问题出在哪一层（前端？后端？还是部署？）
+- **提问不准确**：不知道如何描述问题，让 AI 能理解并给出准确答案
+- **学习路径模糊**：知道需要学一些基础，但不知道从哪开始，学什么才够用
+
+**今天，我将为你分享一套系统的方法，从基础概念到调试技巧，再到后端方案，让你从"能生成应用"到"能做出真正可用的应用"。**
+
+
+
+## 问题的本质：为什么 Debug 这么难？
+
+你遇到的问题其实是一个问题的两面：**debug 困难，不知道问什么问题**。
+
+这是因为：
+
+1. **不知道问题出在哪一层**：前端？后端？还是部署？
+2. **不知道如何描述问题**：让 AI 能理解你的真实情况
+3. **不知道该怎么学习**：可能也知道一些调试方法，但不够系统
+
+**核心问题**：缺乏系统的基础概念，导致无法准确诊断和描述问题。
+
+---
+
+## 解决方案一：系统学习基础概念
+
+这是最关键的。很多人用 AI 编程，直接就开始写代码，但不知道基础概念，出错了也不知道问什么问题。
+
+### 为什么需要学习基础概念？
+
+你不需要成为专家，但需要理解：
+
+1. **前端 vs 后端**：用户看到的是前端，处理数据的是后端
+2. **请求 vs 响应**：你的浏览器向服务器请求数据，服务器返回结果
+3. **本地 vs 线上**：在你电脑上跑的叫"本地"，在服务器上跑的才叫"线上"
+
+这些概念不懂，出错了你连描述都描述不清。
+
+### 具体做法
+
+#### 1. 打开 Frontend Roadmap
+访问 [developer-roadmap](https://roadmap.sh/frontend)，这不是让你去学所有东西，而是用来**了解全貌**。
+
+- 看一遍，不需要全部理解
+- 用 AI 解释你不懂的概念
+- 重点理解：HTML/CSS/JavaScript/浏览器如何工作
+
+#### 2. 用 AI 帮你理解概念
+不理解 HTTP 请求是什么？直接问 AI：
+
+> "请用最简单的语言解释 HTTP 请求是什么，用餐厅点餐做比喻"
+
+AI 会结合你的经验，给你最贴切的解释。
+
+#### 3. 边学边实践
+- 不要求全部学完再开始
+- 遇到问题就回头查
+- **用项目驱动学习**
+
+### 核心概念（前端阶段）
+
+1. **HTML 结构**：网页骨架，标签语义
+2. **CSS 样式**：颜色、布局、响应式
+3. **JavaScript 行为**：交互、数据请求
+4. **浏览器开发者工具**：调试利器，查看错误和网络请求
+5. **控制台错误**：理解错误信息
+6. **网络请求**：前端如何和后端交互
+
+### 为什么这样做有效？
+
+当你理解了这些基础概念，你就能：
+
+- 准确描述问题："我的前端页面发起的请求，后端返回了 500 错误"
+- 理解 AI 给出的解决方案："AI 说要在后端添加 CORS 配置，我理解这是跨域问题"
+- 判断哪个方案适合你：而不是让 AI 给 N 个方案，你猜哪个对
+
+---
+
+## 解决方案二：系统掌握调试技巧
+
+有了基础概念，下一步是学会调试。
+
+### 调试方法体系
+
+#### 1. 查看控制台错误
+按 F12 或者右键 → 检查 → Console
+
+控制台会显示红色的错误信息，**这是最直接的调试入口**。
+
+常见错误：
+- `Uncaught ReferenceError: xxx is not defined` — 某个变量没定义
+- `Cannot read properties of undefined` — 尝试读取未定义的对象属性
+- `NetworkError` — 网络请求失败
+
+#### 2. 截图反馈
+遇到问题时，截图 + 控制台错误信息一起发给 AI。
+
+**好的提问方式**：
+> "我的页面在点击登录按钮后没有反应，控制台显示 'Uncaught TypeError: Cannot read properties of null (reading 'addEventListener')'，这是什么问题？"
+
+**不好的提问方式**：
+> "我的页面出错了，帮我看看。"
+
+#### 3. 系统化调试流程
+
+1. **观察现象**：发生了什么？截图 + 描述
+2. **查看控制台**：按 F12，看 Console 有没有红色错误
+3. **复制错误**：把控制台的错误信息复制出来
+4. **提供上下文**：告诉 AI 你在做什么、期望什么、实际发生了什么
+5. **尝试修复**：根据 AI 的建议，逐步修复
+
+---
+
+## 解决方案三：进阶后端方案
+
+前端做好了，下一步是后端。
+
+### 后端挑战
+
+很多人把前端做好了，却卡在了后端：
+- 不会 MySQL/MongoDB
+- 不会写 API
+- 不会部署服务器
+
+### 更简单的方案：BaaS（Backend as a Service）
+
+**什么是 BaaS？**
+
+BaaS（后端即服务）把后端能力封装成简单 API：
+
+| 能力 | 传统方式 | BaaS 方式 |
+|------|----------|-----------|
+| 数据库 | 安装 MySQL，配置连接，写 SQL | 调用 `db.collection('users').add()` |
+| 用户系统 | 写注册/登录/权限逻辑 | 调用 `auth.signIn()` |
+| 文件存储 | 搭建 OSS，配置权限 | 调用 `storage.upload()` |
+
+你需要的后端功能，其实大部分都已经做好了，直接用就行。
+
+### 更进一步：AI 自动化的后端方案
+
+如果 BaaS 还不够，现在有了更新的方案：**MCP 协议**。
+
+MCP（Model Context Protocol）让 AI 可以直接调用云服务。你只需要告诉 AI 你要什么，AI 自动帮你完成所有操作。
+
+---
+
+## 特别篇：设计岗转技术的快速提升路径
+
+如果你是设计师，想用 AI 做出真正的应用，你的路径和纯新手不太一样。
+
+### 设计思维 vs 编程思维
+
+**你的优势**：
+- 理解用户体验，知道什么样的界面好用
+- 有设计规范意识，不会弄出"AI 味"界面
+- 理解交互逻辑，知道用户操作流程
+
+**需要补充的**：
+- 知道设计稿怎么变成代码
+- 理解数据如何流动
+- 学会调试和排查问题
+
+### 快速提升方法
+
+#### 1. 利用设计优势
+- 你的设计规范可以直接告诉 AI
+- 你的设计稿可以截图给 AI，让它生成对应的代码
+- 你的用户视角是巨大的优势
+
+#### 2. 重点补充编程逻辑
+- 条件判断：if/else
+- 数据循环：for/forEach
+- 事件处理：点击、输入、提交
+- 数据请求：fetch/axios
+
+这些是理解 AI 生成代码的关键。
+
+#### 3. 实践项目驱动学习
+
+**建议项目路径**：
+
+1. **个人作品集网站**：展示你的设计作品
+2. **交互式原型**：把设计稿变成可交互的页面
+3. **小型工具应用**：解决实际问题的工具
+
+---
+
+## 总结
+
+**Vibe Coding 不是迷思，但需要正确的方法：**
+
+1. **系统学习基础概念** - 结合 developer-roadmap 和 AI，了解前端开发的基础概念
+2. **系统掌握调试技巧** - 截图反馈、控制台错误、提供完整上下文
+3. **进阶：后端方案** - 前端做好后，用 BaaS 降低后端门槛
+
+**最重要的是**：不要急于求成，先把前端基础打好。系统学习概念，系统掌握调试方法，再考虑进阶。
+
+**对于设计岗转技术的朋友**：利用你的设计优势，重点补充编程逻辑，通过实践项目驱动学习，建立调试习惯。
+
+---
+
+## 重要术语表
+
+| 术语 | 英文 | 说明 |
+|------|------|------|
+| Vibe Coding | Vibe Coding | 用 AI 生成代码的编程方式 |
+| Debug | Debug | 调试，找出并修复代码中的错误 |
+| DOM | Document Object Model | 文档对象模型，网页元素的编程接口 |
+| BaaS | Backend as a Service | 后端即服务 |
+| MCP | Model Context Protocol | 模型上下文协议 |
+| 前端 | Frontend | 用户直接看到和交互的部分 |
+| 后端 | Backend | 服务器端，处理数据存储、业务逻辑 |
+| 部署 | Deployment | 将代码发布到服务器 |
+
+---
+
+## 在远程服务器配置 GitHub CLI 时，我差不多把 Device Flow 协议拆了一遍
+
+*Published: 2026-02-26 | Full article: https://binggg.github.io/blog/2026-02-26-github-device-flow*
+
+前阵子在一台 TencentOS 服务器上配 GitHub CLI，遇到一个经典场景：
+
+- 没有浏览器（远程服务器，没图形界面）
+- 没有 sudo 权限（只能装到自己 `~/bin`）
+- 需要 `gh` 能正常认证、创建 PR
+
+传统 OAuth 流程要在浏览器里跳转。这里行不通。
+
+第一个直觉是手动生成 Personal Access Token，`gh auth login --with-token` 灌进去。能用，但很麻烦——你要打开 GitHub 设置页、找到 Token 生成页面、选权限、复制、回到终端粘贴。隔几个月 Token 过期了，再来一遍。
+
+我翻了翻 GitHub CLI 文档，发现它默认走的是一条不同的路：**Device Flow**（设备授权流）。执行 `gh auth login --web`，终端打印一串验证码，你去另外一台设备上打开 `github.com/login/device` 输入它，这边自动完成认证。
+
+整个流程不到两分钟。当时觉得——这东西挺聪明的，值得拆开看看里面怎么跑的。
+
+}
+
+## 一次无 sudo 的 CLI 安装
+
+先交代环境。这台服务器的情况很典型：
+
+```bash
+# 无 sudo，手动装 gh
+mkdir -p ~/bin
+cd /tmp
+curl -fsSL https://github.com/cli/cli/releases/download/v2.62.0/gh_2.62.0_linux_amd64.tar.gz -o gh.tar.gz
+tar -xzf gh.tar.gz
+cp gh_2.62.0_linux_amd64/bin/gh ~/bin/
+echo 'export PATH="$HOME/bin:$PATH"' >> ~/.bashrc
+export PATH="$HOME/bin:$PATH"
+gh --version
+```
+
+装完之后跑认证：
+
+```bash
+gh auth login --web --hostname github.com --git-protocol https
+```
+
+终端输出：
+
+```
+! First copy your one-time code: BFEE-895F
+Open this URL to continue in your web browser: https://github.com/login/device
+```
+
+我在笔记本上打开链接，输入验证码，点击授权。回到终端按回车——
+
+```
+✓ Authentication complete.
+✓ Logged in as binggg
+```
+
+结束了。没有配 SSH 密钥，没有手动填 Token，没有 `sudo`。
+
+但这里有个细节我盯了很久：**终端只是打印了一串验证码然后开始轮询，是怎么知道我在浏览器上完成了授权的？** 这一段通信完全发生在客户端和 GitHub 服务器之间，浏览器全程没跟终端说过一句话。
+
+这就是 Device Flow 有意思的地方。
+
+---
+
+## 设备授权：把"登录"从设备上抽走
+
+Device Flow 的核心想法其实很简单。
+
+传统 OAuth 授权码流程假设用户有一个浏览器，应用可以重定向用户到授权页面再跳回来。但智能电视、CLI 工具、IoT 设备——这些设备根本没有浏览器，或者有浏览器但输入 URL 极其痛苦。
+
+解决方式：**让用户在另一台设备上完成授权，设备自己轮询等结果。**
+
+我后来翻了 RFC 8628 标准文档，发现整个流程可以拆成四个步骤：
+
+### Step 1：设备请求验证码
+
+CLI 向授权服务器发一个 POST，告诉它"我想走设备流认证"：
+
+```
+POST https://github.com/login/device/code
+client_id=xxx&scope=repo,gist
+```
+
+服务器返回一堆东西：
+
+```json
+{
+  "device_code": "3584d83530557fdd1f46af8289938c8ef79f9dc5",
+  "user_code": "BFEE-895F",
+  "verification_uri": "https://github.com/login/device",
+  "expires_in": 900,
+  "interval": 5
+}
+```
+
+关键就三个字段：
+- **`user_code`**（BFEE-895F）— 你要手动输入的那个验证码，8 字符，人类友好
+- **`device_code`**（40 字符）— 客户端内部用的，不展示给用户
+- **`interval`**（5 秒）— 服务器建议的轮询间隔
+
+### Step 2：你去浏览器干活
+
+终端打印验证码，你在手机上打开 `github.com/login/device`，输入它。这时候浏览器和 GitHub 服务器之间走了完整的 OAuth 授权——你登录、看权限、点 Authorize。
+
+注意：**这一步跟终端没有任何直接通信**。你手机浏览器不知道终端的存在，终端也不知道你在手机上干了什么。
+
+### Step 3：设备不断轮询
+
+这是最巧妙的一步。终端不知道你什么时候点完授权，所以它每隔 5 秒问一次服务器："他点了吗？"
+
+```
+POST /login/oauth/access_token
+device_code=xxx&grant_type=urn:ietf:params:oauth:grant-type:device_code
+```
+
+没点完：
+
+```json
+{"error": "authorization_pending"}
+```
+
+你点了：
+
+```json
+{"access_token": "gho_16C7e42F292c6912E7710c838347Ae178B4a", "scope": "repo,gist"}
+```
+
+轮询不是无线循环。`device_code` 只有 15 分钟有效期，超时了要重新来。客户端收到 `expired_token` 错误就必须停下来报错。
+
+### Step 4：拿着 Token 干活
+
+拿到 token 之后就跟普通 OAuth 一样了：
+
+```bash
+curl -H "Authorization: Bearer gho_xxx" https://api.github.com/user
+```
+
+---
+
+## 轮询策略：客户端的"礼貌"有多重要？
+
+实际写轮询代码时，`interval` 和错误处理上有一些我没想到的门道。
+
+RFC 8628 定义了 5 种错误码，每个对应不同的客户端行为：
+
+| 错误码 | 含义 | 客户端该怎么处理 |
+|---|---|---|
+| `authorization_pending` | 用户还没点 | 等 `interval` 秒再试 |
+| `slow_down` | 你问太快了 | **额外等 5 秒**，后续用新间隔 |
+| `expired_token` | 15 分钟超时 | 停下来，告诉用户要重新开始 |
+| `access_denied` | 用户点了拒绝 | 停下来，别继续了 |
+| `invalid_grant` | 设备码无效 | 可能是 bug，报错 |
+
+`slow_down` 是我觉得最体贴的设计——很多协议限流就直接 429 断连接了，Device Flow 专门留了一个错误码告诉客户端"不是不让你问，是慢一点问"。实现时收到这个错误要在当前间隔基础上加 5 秒。
+
+正确的轮询代码大概长这样：
+
+```python
+import time, requests
+
+def poll_for_token(device_code, client_id, interval=5):
+    timeout = 900
+    elapsed = 0
+    
+    while elapsed < timeout:
+        r = requests.post(
+            "https://github.com/login/oauth/access_token",
+            data={
+                "client_id": client_id,
+                "device_code": device_code,
+                "grant_type": "urn:ietf:params:oauth:grant-type:device_code"
+            },
+            headers={"Accept": "application/json"}
+        )
+        data = r.json()
+        
+        if "access_token" in data:
+            return data["access_token"]
+        
+        err = data.get("error")
+        if err == "authorization_pending":
+            time.sleep(interval)
+            elapsed += interval
+        elif err == "slow_down":
+            interval += 5  # 加 5 秒
+            time.sleep(interval)
+            elapsed += interval
+        elif err in ("expired_token", "access_denied"):
+            raise Exception(f"授权失败: {err}")
+        else:
+            raise Exception(f"未知错误: {err}")
+    
+    raise Exception("授权超时")
+```
+
+有两个点容易被忽略：
+1. **收到 `slow_down` 后，新增的 5 秒是永久累加的**。不是恢复原来的间隔，而是从 `interval + 5` 开始。这是 RFC 8628 的要求。
+2. **轮询期间理论上可以展示进度反馈**。`gh auth login` 默认是在等，实现里可以加个 spinner 或者倒计时，至少让人知道程序还在跑。
+
+---
+
+## Device Flow vs 传统 OAuth：不是替代，是互补
+
+读完 RFC 8628 后我画了一张对比表：
+
+| | 授权码流程 | Device Flow |
+|---|---|---|
+| 适用场景 | Web/移动 App | CLI / IoT / 无头设备 |
+| 要不要浏览器 | 必须，在同一台设备 | 不需要，可在另一台设备 |
+| 授权方式 | 浏览器自动跳转 | 用户手动输入验证码 |
+| 回调机制 | 服务器接 code 参数 | 客户端轮询 |
+| `client_secret` | 必需 | 不需要（公开客户端） |
+| 用户体验 | 流畅，无感 | 多设备切换，需手动输入 |
+
+GitHub CLI 选择 Device Flow 的理由很实际：CLI 可能跑在 Docker 容器、CI 环境、跳板机——这些地方没有浏览器，配回调 URL 也麻烦。Device Flow 不需要注册回调地址，也不需要保管 `client_secret`（CLI 二进制的 `client_secret` 本来也保不住），对 CLI 工具来说是最省心的方案。
+
+---
+
+## 安全问题：验证码只有 8 位，够吗？
+
+第一反应是觉得 8 位验证码太短了。但读了 RFC 8628 的设计理由之后，理解了这个长度的权衡。
+
+8 位字符的熵是 20^8 ≈ 2^34.5 位（字符集只用了大写字母去掉易混淆字符，共 20 个）。单独看不算高，但配合几个限制就够用了：
+
+1. **有效期 15 分钟** — 窗口很短
+2. **提交限流** — 每小时最多 50 次验证码尝试
+3. **`device_code` 一次性** — 一个设备码对应一个令牌，用完即废
+
+真正的安全风险不在验证码长度，而在**远程钓鱼**。攻击者可以伪造一个页面让人输入验证码，然后用自己的账号完成授权。GitHub 的缓解方式是授权页面上显示设备类型、IP 地址、权限列表，让用户有信息做判断。
+
+Token 存储是另一个容易被忽略的点。`gh` 把 Token 存到 `~/.config/gh/hosts.yml`，权限设 `chmod 600`。如果你自己写工具调用 Device Flow，不要往 shell 历史里塞 token，也不要明文存文件。macOS 可以用 Keychain，Linux 可以用 Secret Service：
+
+```bash
+# macOS
+security add-generic-password -a "$USER" -s "github_token" -w "gho_xxx"
+
+# Linux
+secret-tool store --label="GitHub Token" service github user "$USER"
+```
+
+---
+
+## 什么时候用，什么时候别用
+
+**Device Flow 适合：**
+- CLI 工具（gh、aws-cli、gcloud 都在用）
+- 远程/CICD/容器环境
+- 任何没有浏览器或输入受限的设备
+
+**不该用它：**
+- Web 应用 — 用授权码 + PKCE
+- 移动 App — 用授权码 + PKCE
+- 有浏览器的桌面应用 — 用授权码
+
+这不是谁替代谁的问题——**两类流程解决的是不同的设备场景**。Device Flow 不做重定向，不要求回调 URL，不需要 `client_secret`，代价是用户多一步手动输入验证码。适合"设备不能跳转但人可以换设备"的场景。
+
+---
+
+## 🥚 彩蛋
+
+如果你也经常需要配远程服务器的 GitHub 认证，我写了一段脚本——一条命令走完"下载 gh + 认证 + 配置 git 用户"全流程：
+
+```bash
+# remote-gh-setup.sh
+# 在远程服务器上跑：curl -fsSL https://gist.github.com/binggg/xxx/remote-gh-setup.sh | bash
+# 然后在你自己的电脑上打开 https://github.com/login/device 输入验证码
+
+set -e
+
+# 1. 装 gh 到 ~/bin
+mkdir -p ~/bin
+curl -fsSL https://github.com/cli/cli/releases/latest/download/gh_*_linux_amd64.tar.gz \
+  | tar -xz -C /tmp
+cp /tmp/gh_*/bin/gh ~/bin/
+echo 'export PATH="$HOME/bin:$PATH"' >> ~/.bashrc
+export PATH="$HOME/bin:$PATH"
+
+# 2. 启动 Device Flow 认证
+gh auth login --web --git-protocol https
+
+# 3. 配 git user
+gh api user --jq '.login' | xargs -I{} git config --global user.name "{}"
+gh api user --jq '.email // .login + "@users.noreply.github.com"' | xargs -I{} git config --global user.email "{}"
+
+echo "✅ Done! Logged in as $(gh api user --jq '.login')"
+```
+
+这个脚本覆盖了我上一篇踩坑的全部流程。如果你那里还有我没遇到过的环境限制，评论区聊聊。
+
+---
+
+你觉得 Device Flow 相比 Personal Access Token 哪种更方便？实操中遇到过什么玄学问题？评论区见 👇
+
+*全文基于 GitHub CLI v2.62.0、RFC 8628（2019年8月发布）和一次实际部署验证。*
+
+---
+
+## 半年涨了 7 倍、连非程序员都在用的 Codex，从零到上线一个多人对战游戏
+
+*Published: 2026-06-28 | Full article: https://binggg.github.io/blog/2026-06-28-codex-cloudbase*
+
+> 这篇文章帮你搞懂四件事：① Codex 是什么、能干什么 → ② 五分钟上手做个能玩的小游戏 → ③ 基本用法和核心功能 → ④ 接低成本的国产开源模型，把做好的应用发布上线，让别人能访问。
+>
+> **赶时间？** Codex 现在能接 DeepSeek、GLM 这些便宜模型了。**想省钱 + 一键部署的，跳到第四步**复制一段配置就行。想从头搞懂的，往下读。
+
+![一图看懂 Codex：从它是什么，到配模型、装插件、写完上线](https://tcb-advanced-a656fc-1257967285.tcloudbaseapp.com/codex-article/images/scenes/codex-longform.png)
+
+
+
+## 第一步 · 先认识它
+
+Codex 是 OpenAI 推出的 AI 编程桌面工具，2026 年上半年周活从 60 万涨到了 **500 万**。涨得快，4 月 Sam Altman 直接在 X 上发帖"重置所有用户限额，每多 100 万再重置一次"。最值得注意的是：现在大约 **20% 的用户根本不写代码**，是产品、运营、做投资的人。
+
+跟你的关系直接：6 月 18 日 OpenAI 放开了第三方模型，DeepSeek、GLM、Kimi 都能接——用便宜的国产模型跑，成本能压下来一大截。
+
+### 它跟 ChatGPT 有啥不一样？
+
+不少人第一反应："这不就是个会写代码的 ChatGPT 吗？"差远了。
+
+ChatGPT 是对话式的——你问它答，它给你建议，但活还得你自己干。Codex 直接在文件系统上工作。你告诉它"写一个贪吃蛇游戏"，它自己创建文件、装依赖、运行调试。
+
+举个例子：你让 ChatGPT 写贪吃蛇，它给你一段代码，你得自己新建文件、粘贴、装库、运行、找错。你让 Codex 写贪吃蛇，它直接创建一个项目文件夹，生成代码，安装依赖，运行游戏。如果报错了，它会自己读错误信息，改完再跑，直到能玩为止。
+
+**ChatGPT 是顾问，Codex 是帮你干活的。**
+
+---
+
+## 第二步 · 五分钟上手，做个能玩的小游戏
+
+### 装好它：下载 · 登录 · 认识界面
+
+去 [codex.com](https://codex.com) 下载桌面 App，用 OpenAI 账号登录。
+
+界面不复杂，就三块：
+- **左侧**：项目文件列表
+- **中间**：对话窗口 + 代码编辑器
+- **右下**：终端（能看到它在干什么）
+
+### 第一个任务：一句话，让它做个贪吃蛇
+
+打开 Codex，在对话框里输入：
+
+> 用 Python 写一个贪吃蛇游戏，要用 pygame，能直接运行
+
+说完它就开始干了。注意看中间区域——它会先创建文件、写代码，然后自动运行。
+
+可能第一次报错（比如没装 pygame），它会自己发现问题，装好依赖再试一次。最终你会看到一个窗口弹出来，贪吃蛇已经能跑了。
+
+从打开 Codex 到玩上游戏，快的话 **五分钟**。
+
+---
+
+## 第三步 · 动手之前，先搞懂这些
+
+### ① 三档权限：决定它能动你多少东西
+
+Codex 有三档权限来控制它的行动范围：
+
+- **Clipboard Only**：只读剪贴板，啥也动不了，安全但没用
+- **Read & Write Files**：能读写文件，干活的基本盘
+- **Admin**：能装软件、改系统设置
+
+默认是 Read & Write，日常够用了。做游戏、写代码、部署都用这个。
+
+### ② 插件 · 技能 · MCP：三个最容易搞混的词
+
+这三个不是同一个东西：
+
+- **插件（Plugin）**：Codex 能调用的外部 API，比如连数据库、发消息、查天气。Codex 自己就内置了几十个。
+- **Skill**：教 Codex 怎么干活的一套指令。你写好一个 Skill，下次吩咐一句话，它就知道整套流程怎么走。
+- **MCP Server**：一个通用接口，让 Codex 能跟外部工具通信。
+
+### ③ 招牌技能 Skill：教它一次，以后一句话复用
+
+举个例子，你想让 Codex 每次写代码时都跑测试、检查类型、格式化代码。写一个 Skill：
+
+```
+## 代码质量规则
+
+在完成任何代码修改后：
+1. 运行 `npm test`，确保所有测试通过
+2. 运行 `npx tsc --noEmit`，确保没有类型错误
+3. 运行 `npx prettier --write .`，格式化代码
+```
+
+存成 Skill，下次说"用我的质量规则跑一遍"，它就按你说的做。
+
+---
+
+## 插曲 · 它远不止写代码
+
+### ⏰ 定时自动干活
+
+Codex 可以设定时任务：每天早上 9 点跑测试，每周一更新依赖。你睡觉的时候它帮你做这些杂活。
+
+### 🚀 一键部署网站
+
+写好的网页，跟 Codex 说一声它就能部署。配上 MCP 插件，它能直接连云服务。
+
+### 📱 手机远程遥控
+
+Codex 有手机 App，能随时看任务进度、发新指令。通勤路上看到 bug，直接手机发指令让它修。
+
+### 📄 顺手生成文档和图片
+
+画架构图、写更新日志、生成配图——都能干。
+
+---
+
+## 第四步 · 用便宜的国产模型，把游戏部署上线
+
+### 先说那个坑：想接国产模型省钱，却卡住了
+
+Codex 默认用 OpenAI 自己的模型，对于日常开发完全够用。但如果你想跑大量自动化任务或者团队协作，Token 消耗很快就上去了。
+
+6 月 18 日 Codex 开放了第三方模型接入。但有个问题：你要自己搞定 API Key、模型配置、部署环境。
+
+### 解法：CloudBase（配模型 + 装插件）
+
+CloudBase 是腾讯云的 Serverless 平台，它的 AI Toolkit 正好解决了这个问题。
+
+#### 配模型（5 分钟）
+
+CloudBase 兼容 OpenAI 的和 Anthropic 的协议，DeepSeek、GLM、Kimi 用一个 Key 打通。配置好之后，Codex 里直接选国产模型就行，Token 成本能降到原来的十分之一以下。
+
+#### 装插件（让它能直接部署）
+
+CloudBase MCP 插件装了之后，Codex 就能直接在对话里把应用部署上线。不需要手动登录云控制台、配置域名、传文件。说一句"帮我部署到线上"，它就自动办完。
+
+---
+
+## 写在最后
+
+Codex 这半年证明的事：**AI 工具拼的早就不是"能不能答题"，而是"能不能把活干完、把东西交付出来"。**
+
+对我这种普通人，真正的坎也不是"有没有便宜模型"，而是接进来麻烦、做完没地方部署。协议要对得上，上线要有地方落。踩完一圈，我现在的答案就是 CloudBase：三种协议都兼容，国产模型一个 Key 全打通，写完还能在同一个窗口里部署。
+
+**别处的 Token Plan 只给你 Token，CloudBase 还给你上线的地方。**
+
+---
+
+> 你用过 Codex 吗？是拿它写代码，还是干别的活？评论区聊聊，我都会回。
+
+---
+
+## 解放双手——Claude Code 五种"放手"机制的底层逻辑
+
+*Published: 2026-07-06 | Full article: https://binggg.github.io/blog/2026-07-06-claude-code-mechanisms*
+
+用过 Claude Code 做复杂任务的，八成遇到过这种事——
+
+让 AI 把 fetch 全换成 axios，泡了杯咖啡回来，发现它改了三四个文件就停下来等你点头。反复七八次，一杯咖啡都凉了
+
+或者睡前跑了 /loop 盯 PR，早上发现它凌晨两点卡在 git merge 冲突上，窗口占了一整夜
+
+或者开了三个 sub-agent 各查各的——完事三个结论互相矛盾，因为它们都没看到对方在做什么
+
+根不在 AI 不够聪明。Claude Code 是回合制的——每轮只能做一件事，做完等你决定下一步。想让它持续运行、自动决策、并行工作，就得靠产品层面的编排机制来弥补
+
+Claude Code 给了五个：/goal、/loop、sub-agent、Agent Teams、Workflows
+
+选错了不仅浪费 token，还会把事情搞得更复杂
+
+
+
+## 痛点一：我在等它，它在等我
+
+![痛点一：每轮确认停不下来](./images/scene-02-goal.png)
+
+你给 AI 一个明确目标，它有能力完成，但每一轮做完都停下来等你批准。这就是 /goal 要解决的问题
+
+### /goal — 条件引导的自主轮询
+
+```
+/goal 完成 data-editor 的测试经验泛化为全模块标准测试框架，分三步：
+  Step 1: 创建共享 test-utils.sh
+  Step 2: 为每个模块创建 verify-*.sh
+  Step 3: 更新验收标准
+```
+
+底层是轻量级的 Stop Hook：往 `sessionHooksRegistry` 注册一个 `type: 'prompt'` 的 hook，每个 turn 结束后触发一次评估
+
+评估模型拿到三样东西：
+1. **目标条件**——你写的 /goal 描述
+2. **对话 transcript**——从 goal 设定时刻之后的所有对话
+3. **元信息**——session ID、时间戳、权限模式等
+
+输出是结构化 JSON：
+
+```
+{"ok": false, "reason": "Step 1 已完成，test-utils.sh 已创建，但 Step 2 还未开始"}
+```
+
+`ok: true` → stop，`ok: false` → 带着 reason 继续下一轮
+
+关键设计：**干活的和做检查的是两个模型**，避免了主模型一边干活一边给自己打分。评估器只看 transcript，不做执行，所以能客观判断
+
+局限也很明显：
+- 串行的——一次跑一个 turn，只是省了手动回车
+- 评估器不可观测——没日志告诉你为什么判定通过或失败
+- 每个 turn 的 transcript 都传给评估器，对话越长评估成本越高
+- 评估模型延迟叠加到每个 turn 上，选 Haiku 省时间，选 Sonnet 保准确
+
+#### 适用边界
+
+**适合**：目标有明确终态的任务，过程可能跨多轮，你不想坐在旁边看着
+
+**不适合**：需要持续监控的（用 /loop），目标是发散探索性质的
+
+有个细节：评估模型可以换。目标复杂度高就用 Sonnet 做评估，反之用更小的模型省成本
+
+需要 v2.1.139+
+
+---
+
+## 痛点二：项目放着不管就长草
+
+![痛点二：loop 卡一整夜](./images/scene-03-loop.png)
+
+很多场景没终点——PR 需要持续关注、CI 挂了要处理、依赖要升级。你不可能一直盯着终端。但一个不盯着，就可能卡一整夜
+
+### /loop — 自适应调度器
+
+/goal 关心"做完了没"，/loop 关心"现在有什么需要做"
+
+不加参数执行三段式管线：
+1. 把没做完的收尾
+2. 检查当前 PR 评论、CI 状态、合并冲突
+3. 跑 lint、类型检查、格式化
+
+间隔动态调整：状态活跃时 1 分钟一轮，闲下来慢慢延长到 1 小时
+
+```
+/loop          # 自适应模式（日常推荐）
+/loop 15m      # 固定 15 分钟
+/loop 2h       # 固定 2 小时
+```
+
+三段式不是硬编码逻辑，是内置 prompt 模板，Claude 自己决定该执行哪一步。自适应间隔也靠 Claude 对"刚才发生了什么"的感知，不是外部指标（CI、CPU、日志）
+
+这个限制解释了为什么 Bedrock、Vertex AI、Azure Foundry 上自适应不可用——退化为固定 10 分钟。这些平台的 API 不支持"由模型决定间隔"的通信模式
+
+**代价**：/loop 跑在**同一个 session** 里。第 10 轮的上下文比第 1 轮臃肿得多——塞了前 9 轮的产物。开销在递增，注意力在被稀释。不是 loop 本身费钱，是 session 在老化
+
+---
+
+## 痛点三：主上下文被灌了一堆垃圾
+
+![痛点三：上下文爆掉](./images/scene-04-subagent.png)
+
+一个 session 跑久了，上下文里塞满中间产物——查过的文档、试过的方案、反复修正的路径。token 越花越多，模型越来越"笨"。但你的辅助工作（查 API、调研库、验证猜想）不该污染主线
+
+### Sub-Agent — 上下文隔离的工人
+
+sub-agent 解决的是"主上下文宝贵"的问题。每个 sub-agent 启动时拥有**全新的 context window**，看不到你的对话历史，做完只返回摘要，不污染主会话。嵌套限制 5 层，硬编码不可配置
+
+**隔离机制**（源码来自 `forkedAgent.ts`）：
+- **独立的 AbortController**：父会话取消不影响 sub-agent，反之亦然
+- **无状态传播（no-op state propagation）**：父会话不传递任何内部状态。sub-agent 连父会话用了哪些工具都不知道。想让 sub-agent 知道某个上下文，必须显式通过 prompt 传入
+
+5 层限制的理由很实际——每层嵌套开一个新 LLM session，深度 5 意味着同时维护 5 个 session 的 token 开销。超出深度的 sub-agent 不会收到 Agent 工具，等于被静默拒绝
+
+#### 三种创建方式
+
+```
+# 方式一：一次性的
+/agent 去调研下这个函数的调用链路
+
+# 方式二：配置文件（持久化）
+# .claude/agents/researcher.yaml
+name: researcher
+description: 专门做技术调研的 agent，擅长读源码、查文档
+prompt: 你专注于调研...
+model: claude-sonnet-4-20260514
+disallowedTools: [Write, Edit]
+
+# 方式三：SDK 创建
+const agent = claude.subAgent({ prompt: "..." });
+```
+
+配置文件的 `description` 字段有特殊作用——Claude 会根据描述内容自动决定什么时候该委派任务
+
+#### 什么时候用
+
+| 场景 | 用不用 sub-agent |
+|---|---|
+| 查一个函数调用链路 | 用 `/agent`，一次性，省事 |
+| 频繁做的调研任务 | 写 YAML 文件持久化，可复用 |
+| 并行调研多个方案 | 各开一个 sub-agent，互不干扰 |
+| 只是简单 grep 一下 | 不用，主会话直接跑更快 |
+
+#### 团队里的 sub-agent
+
+多人协作时，项目级 `.claude/agents/` 目录可以 git 共享。团队成员 push 自己配的 agent，其他人 pull 下来就能用。这个机制让 agent 配置变成了工程资产——跟 `.claude/rules/` 一样，是项目的一部分
+
+---
+
+## 痛点四：十个活挤在一起干
+
+![痛点四：多任务混在一起](./images/scene-05-teams.png)
+
+/goal 跑一个任务，sub-agent 处理一个子任务。但你有十个活要干——修 bug、重构模块、写文档、准备 demo。不可能一个一个来，也不能让它们互相踩
+
+### Agent Teams — 可观察的并行
+
+Claude Code v2.1.166+ 引入的功能。核心是用独立 session 跑每个任务，互不干扰。主 session 创建任务时指定 agenda（类似 job description），Team 层负责调度
+
+**关键行为**：
+
+```
+Task → sub-Agent session（独立，不可见）
+       ↕
+Task → sub-Agent session（独立，不可见）
+       ↕
+Main session ← 可观测 ← 各 Agent 汇报
+```
+
+相比 sub-agent，Teams 多了三层：
+1. **可观测性**——主 session 能看到各个 Agent 的实时进展
+2. **并行执行**——各 Agent 跑在各自的 session 里，真正的并行
+3. **被动调度**——不用显式写什么时候做什么，系统自动决定
+
+#### 子任务分配规则
+
+主 session 拆解任务并分发，拆法不是固定的提示工程，是模型自己的判断。给一个 agenda 说"重构 user 模块"，它自己决定怎么拆
+
+对主任务的"理解"就来自拆解的粒度：粗就代表它没真正理解，细就代表它理清了依赖关系
+
+#### 调试难题
+
+独立的 session 也意味着独立的 token 消耗。不出问题还好，出问题你根本不知道是哪个 Agent、哪一步、为什么。没有全局日志，每个 session 的输入输出只能单独看
+
+官方在同一个 TUI 里展示，但独立的 session 数据只能通过主 session 间接查看，没有中心化的调试视图。这是并行化天然要付出的代价
+
+---
+
+## 痛点五：一个复杂任务靠纯对话推不动
+
+![痛点五：复杂任务需要确定性](./images/scene-06-workflow.png)
+
+有些任务不是"干就完了"，而是多个步骤环环相扣——先调研，再设计，再编码，再测试。任何一个步骤出偏差，后面全歪。没有个框架约束，纯靠模型自由发挥，结果就是"第一次成功，第二次不行"
+
+### Workflows — 确定性的工作流
+
+Workflows 是 Claude Code 最近推的机制，用声明式 YAML 定义多 Agent 协作的拓扑结构。跟 Teams 的区别不在谁厉害，在**编排哲学不同**：
+
+| | Teams | Workflows |
+|---|---|---|
+| 拓扑 | Hub-and-Spoke（星型） | 有向图（DAG） |
+| 调度 | 被动——Task 创建后系统自动 | 显式——Step 执行顺序你定 |
+| 通信 | 主 session 单向看汇报 | 上一步输出是下一步输入 |
+| 确定性 | 低——看模型发挥 | 高——调参可复现 |
+| 适合 | 探索性、不确定性高的任务 | 确定性、质量要求稳定的任务 |
+
+Workflows 的阶段定义：
+
+```yaml
+name: "feature-dev"
+agents:
+  design:
+    model: claude-sonnet-4-20260514
+    prompt: "你负责技术设计..."
+  implement:
+    model: claude-sonnet-4-20260514
+    prompt: "你负责实现..."
+  review:
+    model: claude-sonnet-4-20260514
+    prompt: "你负责代码审查..."
+
+steps:
+  - agent: design
+    output: DESIGN
+  - agent: implement
+    input: DESIGN
+    output: CODE
+  - agent: review
+    input: CODE
+    output: REVIEW
+```
+
+每个 step 的 `output` 是上个 step 的输出路径，`input` 是当前 step 的输入。链条清晰，出了问题知道在哪一步断的
+
+#### Workflows 里的任务类型
+
+内置三种：
+- **feature** — 串行步进
+- **swe** — 专门针对软件工程的多轮循环（设计→编码→测试→修复→审查）
+- **research** — 探索性研究（不是多步，是让 agent 自己探索）
+
+---
+
+## 决策指南：什么场景用什么？
+
+![决策树：五种机制选哪个](./images/scene-07-decision.png)
+
+```
+                    你的痛点是什么？
+                           │
+          ┌────────────────┼────────────────┐
+          ▼                ▼                ▼
+  每轮确认太烦        不能一直盯着         任务太复杂
+   /goal               /loop               Workflows
+          │                │
+          ▼                ▼
+   主上下文爆了        十个活挤一起
+   sub-agent           Agent Teams
+```
+
+具体来说：
+
+- **单个明确目标，过程可能跨多轮** → /goal（串行自主，最轻量）
+- **没终点，需要持续关注** → /loop（自适应，但注意 session 老化）
+- **辅助工作不应污染主上下文** → sub-agent（隔离最彻底）
+- **同时做多件事，互不依赖** → Agent Teams（真正的并行）
+- **质量要求稳定，步骤环环相扣** → Workflows（确定性最高）
+
+---
+
+## 写在后面
+
+这些痛点的共同来源不是 Claude Code 的功能缺陷，而是**我们让 AI 做它设计上不擅长的事**——持续运行、自主决策、并行协作。/goal 把回合制伪装成持续执行，/loop 把等待包装成自适应调度，sub-agent 用隔离对抗膨胀。每个机制都在弥补回合制模型的局限
+
+补丁思维看，它们确实是 hook 和 session 层面的包装。但换个角度，Claude Code 没有重新发明运行时，而是在回合制上用最轻量的方式（hook、新 session、JS 沙箱）递进出编排能力的光谱——从简单到复杂，从串行到并行
+
+**回合制不是缺陷，是约束**。每次 turn 交回控制权，意味着可中断、可审计、可干预。持续执行的系统出问题很难喊停。回合制给了一个天然的安全边界
+
+**编排是妥协的艺术**。想要可预测性？用 Workflows，放弃灵活性。想要隔离性？用 sub-agent，接受上下文同步成本。没有完美机制，只有取舍
+
+**最贵的不是 token，是你的注意力**。省掉你盯着终端的时间，比省几个 token 更有价值。释放认知带宽才是这些机制真正的价值
+
+---
+
+## 🥚 彩蛋：一份可以直接用的 agent 配置包
+
+上面讲了五种机制，但最有用的事情是帮你配好。这是我目前在用的 `.claude/agents/` 配置——三个配置好的 Agent，各自管一件事：
+
+**1. researcher — 纯调研，不改代码**
+
+```yaml
+# .claude/agents/researcher.yaml
+name: researcher
+description: 专门做技术调研的 agent，擅长读源码、查文档、验证猜想
+prompt: |
+  你是一个技术调研助手。
+  你的工具权限限制为只读：可以 Read、Grep、Glob，但不能 Edit、Write、Bash（除了非破坏性命令）。
+  你收到的任务格式是：
+    ## 调研目标
+    [要搞清楚的问题]
+    
+    ## 背景
+    [相关代码/文档的定位]
+  调研完成后输出：
+    - 核心发现（3-5 条）
+    - 证据来源（文件路径 + 行号）
+    - 推荐方案或下一步
+model: claude-sonnet-4-20260514
+disallowedTools: [Write, Edit, Bash]
+```
+
+**2. reviewer — 代码审查，不改代码**
+
+```yaml
+# .claude/agents/reviewer.yaml
+name: reviewer
+description: 代码审查，侧重安全、性能、可维护性
+prompt: |
+  你是一个代码审查助手。
+  你只读不改。收到 PR diff 或代码块后，按以下维度审查：
+  1. 安全隐患（SQL 注入、XSS、凭据泄露）
+  2. 性能问题（N+1 查询、不必要的循环、内存泄漏）
+  3. 可维护性（重复代码、命名、复杂度）
+  4. 测试覆盖（缺什么测试、怎么补）
+  每条问题标注严重程度：P0(必须修) / P1(建议修) / P2(可以以后修)
+model: claude-sonnet-4-20260514
+disallowedTools: [Write, Edit]
+```
+
+**3. refactorer — 专注重构，全权限**
+
+```yaml
+# .claude/agents/refactorer.yaml
+name: refactorer  
+description: 代码重构 agent，处理有明确范围的重构任务
+prompt: |
+  你是一个重构助手。
+  你接收一个明确的模块路径 + 重构目标。
+  规则：
+  - 重构前必须先在当前目录跑一次测试，确认基线通过
+  - 每次修改后跑相关测试，失败立即回退
+  - 不改模块边界之外的文件
+  - 重构完成后输出变更摘要
+allowedTools: [Read, Write, Edit, Bash, Glob, Grep]
+```
+
+**用法：** 把这些文件放到项目根目录的 `.claude/agents/` 下，然后在 Claude Code 里用 `/agent researcher` 或 `/agent reviewer` 直接调。配置文件 Push 到仓库后团队都能用。
+
+---
+
+**你现在用什么场景在用这些机制？踩过什么坑？评论区聊聊 \:)**
+
+---
+
+*全文基于 Claude Code 实际使用 + 源码分析（forkedAgent.ts / sessionHooksRegistry / DynamicWorkflow testing 等），持续更新*
+
+---
+
+## Open Plugins：AI 编程助手的插件标准
+
+*Published: 2026-07-18 | Full article: https://binggg.github.io/blog/2026-07-18-open-plugins-standard*
+
+> 一个插件，七种工具，通用协议
+
+![](./img/cover.png)
+*图：Open Plugins 标准——一次编写，到处运行*
+
+最近我发现一个趋势——AI 编程工具越来越多，Cursor、Claude Code、Codex、Grok Build……各有各的扩展机制。然后就冒出了一个新东西，叫 **Open Plugins**。
+
+它是 Vercel Labs 维护的一个开放标准，能把 Skills、Agents、Hooks、MCP 服务器、LSP 服务器这些东西统统打包成一个标准化的插件目录，在七种不同的 AI 编程工具之间即装即用。
+
+这篇文章不打算泛泛而谈，我会把这个协议的来龙去脉、技术细节和实际用法一次性讲清楚。
+
+
+
+---
+
+## 现状：AI 编程工具的"插件战国"
+
+先说问题。
+
+![](./img/plugin-fragmentation.png)
+*图：各工具各说各话，夹不到一起*
+
+假设你有一组很好用的 AI 编程辅助工具：
+
+- 一个代码审查 skill，每次提交前自动审查变更
+- 一个 MCP 服务器，连接到公司的 API 文档
+- 一个钩子脚本，保存文件时自动格式化
+
+在 Claude Code 里配一遍，换到 Cursor 又得重新配，换到 Codex 格式可能还不一样。这就像 npm 出现之前的 JavaScript——每个库有自己的模块格式，想复用就得手动折腾。
+
+```mermaid
+flowchart LR
+    subgraph 工具们
+        CC[Claude Code<br/>.claude/]
+        Cursor[Cursor<br/>.cursor/]
+        Codex[Codex<br/>.codex/]
+        Grok[Grok Build<br/>.grok/]
+        KC[Kimi Code<br/>kimi/]
+    end
+
+    subgraph 各说各话
+        A[.claude-plugin/]
+        B[.cursor-plugin/]
+        C[.codex-plugin/]
+        D[.mcp.json]
+    end
+
+    CC --> A
+    Cursor --> B
+    Codex --> C
+    Grok --> D
+    KC --> D
+
+    style A fill:#ff6b6b,stroke:#c0392b,color:#fff
+    style B fill:#ff6b6b,stroke:#c0392b,color:#fff
+    style C fill:#ff6b6b,stroke:#c0392b,color:#fff
+    style D fill:#f39c12,stroke:#e67e22,color:#fff
+```
+
+Open Plugins 的目的就是终结这种割裂：**定一套标准，所有工具共用**。
+
+---
+
+## npx plugins：唯一的安装命令
+
+从用户角度，Open Plugins 的使用方式极其简单。一个 CLI 命令搞定：
+
+```bash
+# 从 GitHub 安装插件（短格式）
+npx plugins add vercel/vercel-plugin
+
+# 完整 HTTPS URL
+npx plugins add https://github.com/vercel/vercel-plugin
+
+# 从本地目录安装
+npx plugins add ./my-plugin
+
+# 先看看有哪些组件，不实际安装
+npx plugins discover owner/repo
+
+# 查看本地已检测到的工具
+npx plugins targets
+```
+
+这个 `plugins` 包（v1.3.4）就是 Open Plugins 生态的"安装器"。安装后的存储路径统一走 `.agents/plugins/`。
+
+它的工作流程可以看作一条流水线：
+
+```mermaid
+flowchart LR
+    subgraph 源解析
+        A[GitHub 短格式<br/>owner/repo] --> D
+        B[HTTPS/SSH URL] --> D
+        C[本地目录] --> D
+    end
+
+    D[shallow clone<br/>到 ~/.cache/plugins/] --> E
+
+    subgraph 三步发现
+        E{发现策略} --> F{有 marketplace.json?}
+        F -->|是| G[加载索引]
+        F -->|否| H{根目录是插件?}
+        H -->|是| G
+        H -->|否| I[递归扫描<br/>子目录 ≤ 2 层]
+    end
+
+    G --> J[翻译+安装]
+    I --> J
+    J --> K[装到所有<br/>检测到工具]
+
+    style J fill:#667eea,stroke:#5a67d8,color:#fff
+    style K fill:#48bb78,stroke:#38a169,color:#fff
+```
+
+支持的安装 scope 分为三档：
+
+```bash
+npx plugins add repo --scope user     # 用户级（~/.agents/plugins/）
+npx plugins add repo --scope project  # 项目级（./.agents/plugins/）
+npx plugins add repo --scope local    # 仅本地开发测试
+```
+
+还可以指定安装到某个特定工具：
+
+```bash
+npx plugins add owner/repo -t grok     # 只装到 Grok Build
+npx plugins add owner/repo -t vscode   # 只装到 VS Code
+```
+
+---
+
+## 支持七种 AI 编程工具
+
+`npx plugins targets` 会检测你机器上安装了哪些工具，然后自动安装到所有检测到的目标。
+
+来看看支持的工具有哪些，以及各自支持哪些组件类型：
+
+![](./img/plugin-7-tools.png)
+*图：七种 AI 编程工具，一个插件标准全支持*
+
+```mermaid
+mindmap
+  root((Open Plugins<br/>7 种工具))
+    工具覆盖
+      Claude Code
+      Cursor
+      Codex
+      Grok Build
+      Kimi Code
+      GitHub Copilot CLI
+      VS Code
+    组件类型
+      Skills 技能
+      Agents 子智能体
+      Rules 编码规范
+      Hooks 事件钩子
+      MCP 服务器
+      LSP 语言服务器
+```
+
+完整兼容矩阵：
+
+| 工具 | Skills | Agents | Rules | Hooks | MCP | LSP |
+|------|:------:|:------:|:-----:|:-----:|:---:|:---:|
+| **Claude Code** | ✅ | ✅ | ✅ | ✅ | ✅ | ❌ |
+| **Cursor** | ✅ | ❌ | ✅ | ✅ | ✅ | ✅ |
+| **Codex** | ✅ | ✅ | ✅ | ✅ | ✅ | ❌ |
+| **Grok Build** | ✅ | ❌ | ✅ | ✅ | ✅ | ✅ |
+| **Kimi Code** | ✅ | ❌ | ❌ | ✅ | ✅ | ❌ |
+| **GitHub Copilot CLI** | ✅ | ✅ | ✅ | ✅ | ✅ | ❌ |
+| **VS Code** | ✅ | ❌ | ✅ | ❌ | ✅ | ❌ |
+
+关键差异点：
+
+- **Cursor** 不支持 Agents 但支持 LSP，适合编辑器内深度使用
+- **Claude Code** 和 **Codex** 支持 Agents 但不支持 LSP，走的是 agent 路线
+- **Grok Build** 通过 xAI 的 CLI 提供，兼容 Claude Code 的 Skills 和 Agents 格式
+- **GitHub Copilot CLI** 最全能，全部组件都支持
+- **VS Code** 目前 Agent Plugins 还是 Preview 功能，需要开启 `chat.plugins.enabled`
+
+---
+
+## 插件协议规范 Deep Dive
+
+一个插件本质上就是一个目录，按约定结构放置各类组件。
+
+### 标准目录结构
+
+```mermaid
+flowchart TD
+    subgraph my-plugin
+        A[.plugin/<br/>plugin.json] --> B[commands/<br/>.md]
+        A --> C[agents/<br/>.md]
+        A --> D[skills/<br/>SKILL.md 子目录]
+        A --> E[rules/<br/>.mdc]
+        A --> F[hooks/<br/>hooks.json]
+        A --> G[.mcp.json]
+        A --> H[.lsp.json]
+        I[scripts/] -.-> F
+    end
+
+    style A fill:#667eea,stroke:#5a67d8,color:#fff
+    style B fill:#48bb78,stroke:#38a169,color:#fff
+    style C fill:#48bb78,stroke:#38a169,color:#fff
+    style D fill:#48bb78,stroke:#38a169,color:#fff
+    style E fill:#f093fb,stroke:#d53f8c,color:#fff
+```
+
+安装后的存储路径分两个 scope：
+
+```text
+~/.agents/plugins/          # 用户级
+<project>/.agents/plugins/  # 项目级
+```
+
+### plugin.json 清单文件
+
+清单文件**是可选的**。如果省略，插件名称从目录名派生，组件只在默认位置发现。
+
+如果提供，`name` 是**唯一必填字段**：
+
+```json
+{
+  "name": "my-plugin",
+  "version": "1.2.0",
+  "description": "插件描述",
+  "author": {
+    "name": "Author",
+    "email": "author@example.com"
+  },
+  "homepage": "https://example.com",
+  "repository": "https://github.com/author/plugin",
+  "license": "MIT",
+  "keywords": ["code-review", "automation"]
+}
+```
+
+`name` 的命名约束：1-64 字符，小写字母/数字/连字符/点号，字母数字开头结尾，禁止 `--` 或 `..`。✅ `deployment-tools`、`code-reviewer`、`prompts.chat` ❌ `My-Plugin`、`-tools`、`my--plugin`
+
+### 组件发现算法
+
+这是协议最核心的部分。工具扫描插件的完整流程：
+
+```mermaid
+flowchart TD
+    S[开始发现] --> M{有 vendor 前缀<br/>清单文件?}
+    M -->|有| P1[解析<br/>.claude-plugin/<br/>plugin.json]
+    M -->|没有| N{有 .plugin/<br/>plugin.json?}
+    N -->|有| P2[解析<br/>.plugin/<br/>plugin.json]
+    N -->|没有| P3[用目录名<br/>当插件名]
+
+    P1 --> C1[提取 name<br/>version 等]
+    P2 --> C1
+    P3 --> C1
+
+    C1 --> C2[构建组件路径列表]
+    C2 --> C3{有自定义路径?}
+    C3 -->|exclusive:true| C4a[只用自定义路径]
+    C3 -->|默认| C4b[合并默认+自定义]
+
+    C4a --> S1[路径安全检查]
+    C4b --> S1
+
+    S1 --> R[按模式加载组件]
+    R --> NS[命名空间化<br/>{plugin}:{name}]
+    NS --> PE[展开 PLUGIN_ROOT]
+    PE --> Done[✅ 完成]
+
+    subgraph 安全检查
+        S1 -->|拒绝 ../ 逃逸| S2
+        S2[必须 ./ 开头] --> S3[拒绝超出根目录]
+    end
+
+    subgraph 加载规则
+        R1[commands/ → .md 文件]
+        R2[agents/ → .md + frontmatter]
+        R3[skills/ → SKILL.md 子目录]
+        R4[rules/ → .mdc 文件]
+        R5[hooks/hooks.json]
+        R6[.mcp.json]
+    end
+
+    R --> R1 & R2 & R3 & R4 & R5 & R6
+
+    style M fill:#ff6b6b,stroke:#c0392b,color:#fff
+    style NS fill:#667eea,stroke:#5a67d8,color:#fff
+    style PE fill:#f093fb,stroke:#d53f8c,color:#fff
+    style Done fill:#48bb78,stroke:#38a169,color:#fff
+```
+
+插件的四步生命周期——从安装到激活：
+
+![](./img/plugin-workflow.png)
+*图：插件的安装、发现、命名空间和激活流程*
+
+### `${PLUGIN_ROOT}` 路径展开
+
+插件内的所有配置文件中都可以使用 `${PLUGIN_ROOT}`，工具加载时自动替换为插件根目录的绝对路径。这个机制让插件可以**自包含**——所有路径引用都相对于自身，装到任何位置都能工作。
+
+```json
+{
+  "mcpServers": {
+    "db-server": {
+      "command": "${PLUGIN_ROOT}/servers/db-server",
+      "args": ["--config", "${PLUGIN_ROOT}/config.json"],
+      "env": {
+        "DB_PATH": "${PLUGIN_ROOT}/data"
+      }
+    }
+  }
+}
+```
+
+扩展规则：递归展开，嵌套引用也会被替换；逃逸检查保证路径不超出插件目录。
+
+---
+
+## 实战：把 CloudBase MCP 改成 Open Plugins 插件
+
+前面讲了一堆理论，来点真实的。
+
+我们最近在维护一个叫 **[CloudBase MCP](https://github.com/TencentCloudBase/CloudBase-MCP)** 的开源项目，给 AI 编程工具提供云接入能力——AI 模型调用、NoSQL/PostgreSQL 数据库、云函数、云托管、云存储、微信小程序对接等等。以前手动配 `.claude-plugin/`、`.codex-plugin/`、`.mcp.json`，每个工具一个配置，维护起来头大。这次正好借 Open Plugins 标准的东风，做了一次改造。
+
+完整改造 PR：[TencentCloudBase/CloudBase-MCP#808](https://github.com/TencentCloudBase/CloudBase-MCP/pull/808)（+818 / -34）
+
+> ![](./img/plugin-pr808.png)
+> *图：PR #808 改造前后对比——从 vendor 专属格式到通用插件标准*
+
+### 改造前后对比
+
+```mermaid
+flowchart LR
+    subgraph 改造前
+        BEFORE[.claude-plugin/plugin.json<br/>.codex-plugin/plugin.json<br/>.mcp.json]
+        BEFORE -->|只对 Claude Code 生效| CC[Claude Code]
+        BEFORE -->|只对 Codex 生效| CX[Codex]
+        BEFORE -->|需要手动配置| Other[其他工具...]
+    end
+
+    subgraph 改造后
+        NOW[.plugin/plugin.json<br/>mcp.json<br/>保留原配置]
+        NOW -->|npx plugins 自动发现| ALL{7 种工具}
+        ALL --> ALL1[Claude Code]
+        ALL --> ALL2[Cursor]
+        ALL --> ALL3[Codex]
+        ALL --> ALL4[Grok Build]
+        ALL --> ALL5[Kimi Code]
+        ALL --> ALL6[GitHub Copilot CLI]
+        ALL --> ALL7[VS Code]
+    end
+
+    style BEFORE fill:#ff6b6b,stroke:#c0392b,color:#fff
+    style NOW fill:#48bb78,stroke:#38a169,color:#fff
+```
+
+### plugin.json
+
+按照 Open Plugins 规范 v1.0.0 的 closed schema，只保留规范允许的元数据字段：
+
+```json
+{
+  "$schema": "https://open-plugins.com/schemas/1.0.0/plugin.schema.json",
+  "name": "cloudbase",
+  "version": "0.2.0",
+  "description": "Tencent CloudBase — AI models, authentication, NoSQL/PostgreSQL databases, cloud functions, cloud storage, CloudRun backend services, and WeChat Mini Program integration.",
+  "author": {
+    "name": "Tencent CloudBase",
+    "url": "https://cloudbase.net"
+  },
+  "homepage": "https://github.com/TencentCloudBase/cloudbase-mcp",
+  "license": "MIT",
+  "keywords": [
+    "cloudbase", "tencent-cloud", "baas",
+    "ai-model", "database", "cloud-function",
+    "authentication", "storage", "cloudrun"
+  ]
+}
+```
+
+### mcp.json
+
+MCP 服务器配置从 `.mcp.json` 复制到规范路径 `mcp.json`：
+
+```json
+{
+  "mcpServers": {
+    "cloudbase-mcp": {
+      "command": "npx",
+      "args": ["-y", "@cloudbase/cloudbase-mcp@latest"],
+      "env": {}
+    }
+  }
+}
+```
+
+### 自动化构建
+
+写了 `build-open-plugin-spec.mjs` 构建脚本，从 `.claude-plugin/plugin.json` 自动生成产物。还加了 `--check` 模式跑在 CI 里——每次 PR 自动校验，防止改源码忘了更新。
+
+```bash
+# 生成产物
+node scripts/build-open-plugin-spec.mjs
+
+# CI 模式：只检查不写入
+node scripts/build-open-plugin-spec.mjs --check
+```
+
+配了 GitHub Actions workflow（`.github/workflows/open-plugin-spec-check.yml`），PR 自动跑检查。
+
+### 验收结果
+
+```mermaid
+flowchart LR
+    subgraph 验收矩阵
+        CHECK1[本地 npx plugins discover .]
+        CHECK2[远程 discover<br/>TencentCloudBase/CloudBase-MCP]
+        CHECK3[claude plugin install<br/>cloudbase@tencent-cloudbase]
+        CHECK4[codex plugin add<br/>cloudbase@tencent-cloudbase]
+        CHECK5[构建脚本<br/>--check]
+    end
+
+    CHECK1 -->|✅ 识别 cloudbase| R1[4 skills + mcp]
+    CHECK2 -->|✅ 识别 cloudbase + cloudbase-sites| R2[两个独立插件]
+    CHECK3 -->|✅ 回归通过| R3[旧路径仍可用]
+    CHECK4 -->|✅ 回归通过| R4[旧路径仍可用]
+    CHECK5 -->|✅ 产物最新| R5[CI 通过]
+
+    style R1 fill:#48bb78,stroke:#38a169,color:#fff
+    style R2 fill:#48bb78,stroke:#38a169,color:#fff
+    style R5 fill:#48bb78,stroke:#38a169,color:#fff
+```
+
+最大的成就感是一行命令装到所有工具：
+
+```bash
+npx plugins add TencentCloudBase/cloudbase-plugin
+```
+
+而且因为之前就已经在 `skills/` 目录下放了 4 个 Skill，`npx plugins discover` 自动把它们注册为命名空间下的命令：
+
+| 组件 | 用户调用方式 |
+|------|-------------|
+| `skills/ai-model/` | `/cloudbase:ai-model` |
+| `skills/cloudbase-data/` | `/cloudbase:cloudbase-data` |
+| `skills/cloud-functions/` | `/cloudbase:cloud-functions` |
+| `skills/mini-program/` | `/cloudbase:mini-program` |
+
+不用多写一行配置，按规范放目录就行。
+
+### 第一个坑：marketplace.json 冲突
+
+PR #808 合进去之后，兴冲冲跑 `npx plugins add TencentCloudBase/CloudBase-MCP`，结果：
+
+```bash
+No plugins found. 2 remote plugin(s) not shown.
+```
+
+插件就在仓库里，但 CLI 说找不到。
+
+查了半天发现原因：主仓库根目录有一个 `marketplace.json`，这是给 Claude Code 和 Codex 的 marketplace add 用的索引文件。`npx plugins` CLI 检测到它后，把整个仓库识别为 **marketplace**（多插件集合），拒绝安装其中的子目录插件。
+
+```mermaid
+flowchart LR
+    subgraph 问题
+        REPO[CloudBase-MCP 主仓库] --> M[marketplace.json]
+        M -->|npx plugins 误判| WRONG[标记为 marketplace<br/>不安装子目录插件]
+        REPO --> SUB[plugin/cloudbase/<br/>（真正的插件）]
+        SUB -.-x|✗ 拒绝安装| WRONG
+    end
+
+    subgraph 解决方案
+        NEW_REPO[cloudbase-plugin<br/>专门仓库] --> NEW[只有 .plugin/plugin.json<br/>没有 marketplace.json]
+        NEW -->|npx plugins 正确识别| RIGHT[✅ 标记为单插件<br/>直接安装]
+    end
+
+    style WRONG fill:#ff6b6b,stroke:#c0392b,color:#fff
+    style RIGHT fill:#48bb78,stroke:#38a169,color:#fff
+```
+
+**解决方案：创建专门插件仓库**
+
+参考 Vercel（`vercel/vercel-plugin`）和 Supabase（`supabase-community/supabase-plugin`）的做法——建专门的插件仓库，根目录只有 `.plugin/plugin.json`，没有 `marketplace.json`，让 CLI 识别为单插件。
+
+创建了两个仓库：
+
+| 仓库 | 安装命令 | 内容 |
+|------|---------|------|
+| `TencentCloudBase/cloudbase-plugin` | `npx plugins add TencentCloudBase/cloudbase-plugin` | 28 skills + MCP + 5 commands + 2 agents + hooks |
+| `TencentCloudBase/cloudbase-sites-plugin` | `npx plugins add TencentCloudBase/cloudbase-sites-plugin` | 1 skill + MCP + hooks |
+
+内容从主仓库 `plugin/cloudbase/` 和 `plugin/cloudbase-sites/` 自动同步，**同步时排除 `marketplace.json`**——这是关键。
+
+**自动化同步机制**
+
+```mermaid
+flowchart LR
+    subgraph CI 自动同步
+        TRIGGER[plugin/cloudbase/** 变更] --> BUILD[push-plugin-repos.mjs]
+        BUILD --> EXCLUDE[排除 marketplace.json]
+        EXCLUDE --> PUSH1[推送到<br/>cloudbase-plugin]
+        EXCLUDE --> PUSH2[推送到<br/>cloudbase-sites-plugin]
+    end
+
+    subgraph 用户安装
+        USER1[npx plugins add<br/>cloudbase-plugin] --> INST1[✅ 28 skills + MCP]
+        USER2[npx plugins add<br/>cloudbase-sites-plugin] --> INST2[✅ 1 skill + MCP]
+    end
+
+    style TRIGGER fill:#667eea,stroke:#5a67d8,color:#fff
+    style INST1 fill:#48bb78,stroke:#38a169,color:#fff
+    style INST2 fill:#48bb78,stroke:#38a169,color:#fff
+```
+
+新增了这些文件：
+
+| 文件 | 作用 |
+|------|------|
+| `scripts/push-plugin-repos.mjs` | 构建插件仓库产物到 `.plugin-repo-output/` |
+| `.github/workflows/push-plugin-repos.yaml` | CI 自动同步 workflow |
+| `scripts/build-open-plugin-spec.mjs`（扩展） | 同时处理 cloudbase + cloudbase-sites |
+| `plugin/cloudbase-sites/.plugin/plugin.json` | cloudbase-sites 的 Open Plugin Spec manifest |
+| `plugin/cloudbase-sites/mcp.json` | cloudbase-sites 的 MCP 配置 |
+
+验证全部通过：
+
+```bash
+npx plugins discover TencentCloudBase/cloudbase-plugin --remote
+# → ✅ Found 1 local plugin(s), 28 skills, 5 cmds, 2 agents, hooks
+
+npx plugins add TencentCloudBase/cloudbase-plugin --target cursor --scope local
+# → ✅ Installed
+
+npx plugins discover TencentCloudBase/cloudbase-sites-plugin --remote
+# → ✅ Found 1 local plugin(s), 1 skill, hooks
+```
+
+现在的安装命令统一指向专门仓库：
+
+```bash
+# 主插件
+npx plugins add TencentCloudBase/cloudbase-plugin
+
+# Sites 插件
+npx plugins add TencentCloudBase/cloudbase-sites-plugin
+```
+
+这个坑的核心教训是：**Open Plugins 会把根目录有 `marketplace.json` 的仓库当作插件集合，而非单插件。** 如果你的仓库本身就有多个发布物（像 CloudBase-MCP 既有 MCP 服务器又有插件），需要建专门的插件仓库。Vercel 和 Supabase 也是这样做的。
+
+---
+
+## Hook 系统：比你以为的更深
+
+Hooks 是 Open Plugins 里最灵活的组件——它可以拦截整个 agent 工作流的各个生命周期点。
+
+> ![](./img/plugin-hooks.png)
+> *图：Hook 系统——从 SessionStart 到 SessionEnd 的完整事件链*
+
+### 事件全景
+
+```mermaid
+flowchart TD
+    subgraph 会话生命周期
+        SS[SessionStart] --> US[UserPromptSubmit]
+        US --> PTU[PreToolUse]
+    end
+
+    subgraph 工具调用
+        PTU -->|成功| POT[PostToolUse]
+        PTU -->|失败| POF[PostToolUseFailure]
+    end
+
+    subgraph 文件操作
+        BRF[BeforeReadFile] --> AFE[AfterFileEdit]
+    end
+
+    subgraph Shell 执行
+        BSE[BeforeShellExecution] --> ASE[AfterShellExecution]
+    end
+
+    subgraph Agent 管理
+        SAS[SubagentStart] --> SAS2[SubagentStop]
+        ST[Stop]
+    end
+
+    POT --> AFE
+    AFE --> BSE
+    BSE --> SAS
+    SAS --> SE[SessionEnd]
+
+    style SS fill:#667eea,stroke:#5a67d8,color:#fff
+    style PTU fill:#f093fb,stroke:#d53f8c,color:#fff
+    style POT fill:#48bb78,stroke:#38a169,color:#fff
+    style POF fill:#ff6b6b,stroke:#c0392b,color:#fff
+    style SE fill:#667eea,stroke:#5a67d8,color:#fff
+```
+
+| 事件 | 触发时机 | 匹配器作用域 |
+|------|---------|-------------|
+| `PreToolUse` | agent 调用工具**前** | 工具名 |
+| `PostToolUse` | 工具调用**成功后** | 工具名 |
+| `PostToolUseFailure` | 工具调用**出错时** | 工具名 |
+| `BeforeReadFile` | 读取文件**前** | 文件路径 |
+| `AfterFileEdit` | 文件写入**后** | 文件路径 |
+| `BeforeShellExecution` | 执行 shell 命令**前** | 命令字符串 |
+| `AfterShellExecution` | shell 命令**完成后** | 命令字符串 |
+| `SessionStart` | 会话**开始时** | — |
+| `SessionEnd` | 会话**结束时** | — |
+| `UserPromptSubmit` | 用户**提交提示词** | — |
+| `Stop` | agent **尝试停止** | — |
+| `SubagentStart` | 子 agent **启动** | — |
+| `SubagentStop` | 子 agent **结束** | — |
+
+### 三种 Action 类型
+
+```mermaid
+flowchart LR
+    subgraph Hook Action
+        direction TB
+        CMD["⚙️ command<br/>执行外部脚本"] -->|stdin JSON| SCRIPT[脚本]
+        PRMPT["💬 prompt<br/>LLM 提示词"] -->|$ARGUMENTS 替换| LLM[大模型]
+        AGT["🤖 agent<br/>带工具访问"] -->|多步验证| LLM2[大模型 + 工具]
+    end
+
+    style CMD fill:#667eea,stroke:#5a67d8,color:#fff
+    style PRMPT fill:#f093fb,stroke:#d53f8c,color:#fff
+    style AGT fill:#48bb78,stroke:#38a169,color:#fff
+```
+
+**command** — 执行外部脚本，事件上下文通过 stdin JSON 传入：
+
+```json
+{ "type": "command", "command": "${PLUGIN_ROOT}/scripts/lint.sh" }
+```
+
+**prompt** — 向 LLM 发送提示词，`$ARGUMENTS` 替换为事件上下文：
+
+```json
+{ "type": "prompt", "prompt": "Review the change: $ARGUMENTS" }
+```
+
+**agent** — 类似 prompt 但带工具访问权限，可以做多步验证：
+
+```json
+{ "type": "agent", "prompt": "Verify style guide compliance: $ARGUMENTS" }
+```
+
+### 执行模型
+
+```mermaid
+flowchart LR
+    E[事件触发] --> R1{规则 1<br/>匹配?}
+    R1 -->|是| H1[Hook A → Hook B → Hook C]
+    R1 -->|否| R2{规则 2<br/>匹配?}
+    R2 -->|是| H2[Hook D → Hook E]
+    R2 -->|否| Done[完成]
+
+    style E fill:#667eea,stroke:#5a67d8,color:#fff
+    style H1 fill:#f093fb,stroke:#d53f8c,color:#fff
+    style H2 fill:#48bb78,stroke:#38a169,color:#fff
+    style Done fill:#a0aec0,stroke:#718096,color:#fff
+```
+
+- 多个规则可以匹配同一个事件，**全部执行**
+- 同一规则内的 hooks **按数组顺序串行执行**
+- 实现端**应该设置超时**
+- 失败**不能 crash 宿主工具**
+
+---
+
+## 协议集成：如何让你的工具支持 Open Plugins
+
+如果你是**工具开发者**，想让自己开发的 AI 编程工具兼容 Open Plugins，需要实现什么？
+
+核心就五条，一条不能少：
+
+### 五大核心能力
+
+```mermaid
+flowchart LR
+    subgraph 插件宿主工具
+        direction TB
+        C1[① 发现与加载<br/>扫描 .agents/plugins/]
+        C2[② 解析清单<br/>读取 plugin.json]
+        C3[③ 组件发现<br/>扫描默认位置]
+        C4[④ 路径展开<br/>PLUGIN_ROOT 替换]
+        C5[⑤ 命名空间<br/>{plugin}:{name}]
+    end
+
+    C1 --> C2 --> C3 --> C4 --> C5
+    C3 -.->|不支持的组件类型| IGNORE[MUST ignore<br/>不能报错]
+
+    style C5 fill:#667eea,stroke:#5a67d8,color:#fff
+    style IGNORE fill:#ff6b6b,stroke:#c0392b,color:#fff
+```
+
+### 不同工具的集成方式
+
+每个工具现有的插件机制不同，`npx plugins` 在安装时做了一层翻译——把通用 `.plugin/` 格式转成各工具自己的原生格式：
+
+| 工具 | 安装目标 | 集成机制 |
+|------|---------|---------|
+| **Claude Code** | `.claude/plugins/` | Skills 和配置直接兼容 |
+| **Cursor** | `.cursor/plugins/` | 通过 Rules + MCP 机制注册 |
+| **Codex** | 市场入口 `vercel@openai-curated` | 通过内置 Vercel 集成 |
+| **Grok Build** | `grok plugin install` | 原生插件命令 + Claude Code 兼容层 |
+| **Kimi Code** | Kimi 插件存储 | `/plugins` TUI 重载后可见 |
+| **GitHub Copilot CLI** | `copilot plugin marketplace add` | 注册源后 `plugin add plugin@marketplace` |
+| **VS Code** | `chat.pluginLocations` 设置 | 需开启 `chat.plugins.enabled`（Preview） |
+
+### 安全防护模型
+
+```mermaid
+flowchart TD
+    subgraph 六层防护
+        L1["① 沙箱隔离<br/>脚本在隔离环境运行"]
+        L2["② 权限白名单<br/>只执行受信任插件"]
+        L3["③ 安装确认<br/>含钩子时提示用户"]
+        L4["④ 审计日志<br/>记录所有执行"]
+        L5["⑤ 路径防火墙<br/>拒绝 ../ 逃逸"]
+        L6["⑥ 自包含要求<br/>不依赖外部文件"]
+    end
+
+    L1 --> L2 --> L3 --> L4 --> L5 --> L6
+
+    style L1 fill:#ff6b6b,stroke:#c0392b,color:#fff
+    style L2 fill:#f093fb,stroke:#d53f8c,color:#fff
+    style L3 fill:#667eea,stroke:#5a67d8,color:#fff
+    style L4 fill:#4facfe,stroke:#3b82f6,color:#fff
+    style L5 fill:#a8edea,stroke:#38b2ac,color:#fff
+    style L6 fill:#48bb78,stroke:#38a169,color:#fff
+```
+
+---
+
+## 一些感受
+
+Open Plugins 让我想起十年前 npm 刚流行的时候。JavaScript 的包管理也是一团乱麻：AMD、CommonJS、UMD、IIFE……每个项目有自己的一套。后来 npm + ES Modules 统一了标准，整个生态起飞了。AI 编程工具的插件生态，现在就处在那"前 npm"时代。
+
+这次给 CloudBase MCP 做改造是个挺有意思的过程。从 `npx plugins discover` 识别出插件，到一行命令装到所有工具，那种"写一次到处用"的感觉，恰好就是这个标准想解决的问题。
+
+> ![](./img/plugin-install-all.png)
+> *图：npx plugins add TencentCloudBase/cloudbase-plugin——一行命令装到所有工具*
+
+```mermaid
+flowchart LR
+    subgraph 一条命令
+        CMD[npx plugins add<br/>TencentCloudBase/cloudbase-plugin] --> INSTALL
+    end
+
+    subgraph 自动安装到
+        INSTALL[安装器] --> T1[Claude Code]
+        INSTALL --> T2[Cursor]
+        INSTALL --> T3[Codex]
+        INSTALL --> T4[Grok Build]
+        INSTALL --> T5[Kimi Code]
+        INSTALL --> T6[GitHub Copilot]
+        INSTALL --> T7[VS Code]
+    end
+
+    subgraph 直接使用
+        T1 & T2 & T3 & T4 & T5 & T6 & T7 --> USE["/cloudbase:ai-model<br/>/cloudbase:cloud-functions<br/>等 4 个 skill"]
+    end
+
+    style CMD fill:#667eea,stroke:#5a67d8,color:#fff
+    style USE fill:#48bb78,stroke:#38a169,color:#fff
+```
+
+如果你也做 AI 编程工具的扩展，推荐了解一下 Open Plugins 规范。好消息是不需要搞多复杂，只要在项目里加个 `.plugin/plugin.json`，你的插件就能被 7 种工具识别。我们的改造也就四百来行代码，两天不到搞完。
+
+最后，如果你在用 AI 编程工具做云开发——无论是 Claude Code、Cursor、Codex、Grok Build，还是 VS Code、Kimi Code、GitHub Copilot——可以试试我们的插件：
+
+```bash
+# 主插件（推荐）
+npx plugins add TencentCloudBase/cloudbase-plugin
+
+# Sites 部署插件
+npx plugins add TencentCloudBase/cloudbase-sites-plugin
+```
+
+装完后直接跟 Claude 说「查一下我的云函数」或者「帮我部署静态网站」，它就能通过 MCP 协议直接操作云资源了。支持 AI 模型调用、认证管理、NoSQL/PostgreSQL 数据库、云函数、云托管、云存储、微信小程序对接……比手动复制粘贴舒服不少。
+
+---
+
+## 参考链接
+
+- [Open Plugins 官网](https://open-plugins.com)
+- [plugins npm 包](https://www.npmjs.com/package/plugins) — `npx plugins add` 的安装器
+- [Agent Skills 规范](https://agentskills.io)
+- [Model Context Protocol](https://modelcontextprotocol.io)
+- [CloudBase Plugin](https://github.com/TencentCloudBase/cloudbase-plugin) — Open Plugins 标准插件仓库
+- [CloudBase Sites Plugin](https://github.com/TencentCloudBase/cloudbase-sites-plugin) — Sites 插件仓库
+- [CloudBase MCP](https://github.com/TencentCloudBase/CloudBase-MCP) — 腾讯云开发 MCP 插件
+- [PR #808: CloudBase MCP 集成 Open Plugin 规范](https://github.com/TencentCloudBase/CloudBase-MCP/pull/808)
+
+---

@@ -1,0 +1,10 @@
+# Allow all crawlers (including AI agents)
+User-agent: *
+Allow: /
+
+# Sitemaps
+Sitemap: https://binggg.github.io/sitemap.xml
+
+# AI agent resources
+# llms.txt: https://binggg.github.io/llms.txt (curated index)
+# llms-full.txt: https://binggg.github.io/llms-full.txt (full content)

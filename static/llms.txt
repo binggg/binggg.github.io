@@ -5,7 +5,24 @@
 ## Blog
 
 - [Blog Home](https://binggg.github.io/blog)
-- [Sitemap](https://binggg.github.io/sitemap.xml)
+- [Sitemap](https://binggg.github.io/sitemap.xml) (for all pages)
+- [llms-full.txt](https://binggg.github.io/llms-full.txt) (full content of all blog posts)
+- RSS Feed: [blog/rss.xml](https://binggg.github.io/blog/rss.xml)
+- Atom Feed: [blog/atom.xml](https://binggg.github.io/blog/atom.xml)
+
+### 2026
+
+- [Open Plugins：AI 编程助手的插件标准](https://binggg.github.io/blog/2026-07-18-open-plugins-standard) — Vercel Labs 的 Open Plugins 协议解析 + CloudBase MCP 改造实战，AI 编程工具的插件标准化之路。
+- [解放双手——Claude Code 五种"放手"机制的底层逻辑](https://binggg.github.io/blog/2026-07-06-claude-code-mechanisms) — 深入分析 Claude Code 的 request_loop、sub-agent、hook、/workflow、/loop 五种多步机制的源码实现与取舍。
+- [半年涨了 7 倍、连非程序员都在用的 Codex，从零到上线一个多人对战游戏](https://binggg.github.io/blog/2026-06-28-codex-cloudbase) — Codex + CloudBase 从零到上线的完整实战，含多人对战游戏开发案例。
+- [在远程服务器配置 GitHub CLI 时，我差不多把 Device Flow 协议拆了一遍](https://binggg.github.io/blog/2026-02-26-github-device-flow) — RFC 8628 Device Flow 协议深度解析，从踩坑到协议拆解到一键认证脚本。
+
+### 2025
+
+- [Vibe Coding 不是迷思：非技术人员也能用 AI 做出真正可用的应用](https://binggg.github.io/blog/2026-01-09-vibe-coding) — Vibe Coding 实用指南，从注册账号到部署上线，非技术人员也能上手。
+- [AI 编程，怎么从玩具到产品？](https://binggg.github.io/blog/2025-11-27-ai-toy-to-product) — AI 编程从原型到产品的五个坑——身份不明确、边界模糊、幻觉、性能、成本。
+- [为什么你的 AI 编程总是返工？SBE 方法论给出了答案](https://binggg.github.io/blog/2025-08-05-sbe-methodology) — SBE 方法论在 AI 编程中的应用，含 EARS 语法、Claude Code 接入模板。
+- [AI 编程不靠运气，Kiro Spec 工作流复刻全攻略](https://binggg.github.io/blog/2025-07-21-kiro-spec-workflow) — Kiro 规范驱动开发工作流完整复刻，含 Claude Code 配置模板和 EARS 语法实操。
 
 ## Projects
 
@@ -17,5 +34,6 @@
 
 ## Social
 
-- GitHub: https://github.com/binggg
+- GitHub: https://github.com/binggg (390+ followers)
 - X: https://x.com/being99
+- 掘金（中文技术社区）: https://juejin.cn/user/1609340751972270

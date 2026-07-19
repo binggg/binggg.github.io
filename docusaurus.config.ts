@@ -90,6 +90,7 @@ const config: Config = {
       },
       items: [
         { to: '/blog', label: 'Writing', position: 'left' },
+        { to: '/agent-resources', label: 'AI Agents', position: 'left' },
         { to: '/projects', label: 'Projects', position: 'left' },
         {
           href: 'https://github.com/binggg',

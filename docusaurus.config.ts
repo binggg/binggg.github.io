@@ -56,6 +56,24 @@ const config: Config = {
     mermaid: true,
   },
 
+  plugins: [
+    [
+      'docusaurus-plugin-llms',
+      {
+        generateLLMsTxt: true,
+        generateLLMsFullTxt: true,
+        includeBlog: true,
+        title: 'Booker Zhao',
+        description: 'Software Engineer, AI Enthusiast — AI full-stack developer, creator of CloudBase-MCP & CloudBase Framework.',
+        llmsTxtFilename: 'llms.txt',
+        llmsFullTxtFilename: 'llms-full.txt',
+        pathTransformation: {
+          ignorePaths: ['blog'],
+        },
+      },
+    ],
+  ],
+
   themes: ['@docusaurus/theme-mermaid'],
 
   themeConfig: {

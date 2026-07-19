@@ -69,16 +69,19 @@
 
 | 文件 | 用途 | URL |
 |---|---|---|
-| `static/llms.txt` | 内容索引，agent 发现博客有什么 | `https://binggg.github.io/llms.txt` |
-| `static/llms-full.txt` | 全部文章聚合，agent 一次获取完整上下文 | `https://binggg.github.io/llms-full.txt` |
+| 文件 | 用途 | URL |
+|---|---|---|
+| `llms.txt` | 内容索引，插件自动生成 | `https://binggg.github.io/llms.txt` |
+| `llms-full.txt` | 全部文章聚合，插件自动生成 | `https://binggg.github.io/llms-full.txt` |
 | `static/robots.txt` | 声明所有 crawler 允许抓取 | `https://binggg.github.io/robots.txt` |
 | `sitemap.xml` | Docusaurus 自动生成，含 lastmod 时间 | `https://binggg.github.io/sitemap.xml` |
 | RSS/Atom | 标准订阅源 | `blog/rss.xml` / `blog/atom.xml` |
 
 ### 维护要求
 
-- 新增博客文章时，同步更新 `static/llms.txt`（加一行链接 + 描述）
-- `static/llms-full.txt` 建议每次发新文章后重新生成
+- `llms.txt` 和 `llms-full.txt` 由 `docusaurus-plugin-llms` 在 `npm run build` 时自动生成，**无需手动维护**
+- 已配置 `includeBlog: true`，自动扫描所有博客文章
+- 如果新增的博客文章不需要被索引，在 frontmatter 加 `llms: false` 即可排除
 
 ### 参考来源
 

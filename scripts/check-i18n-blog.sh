@@ -1,8 +1,8 @@
 #!/bin/bash
 # check-i18n-blog.sh
-# CI 检查：中文博客是否有对应的英文翻译
-# 不阻断构建，只打印警告
-# 
+# CI 检查：中文博客必须有对应的英文翻译
+# 阻断构建（有逃生口：frontmatter 加 i18n_skip: true 跳过检查）
+#
 # 用法：在 GitHub Actions 中 build 前运行
 
 set -euo pipefail
@@ -20,18 +20,21 @@ for blog_path in "$BLOG_DIR"/*/; do
 
   # 检查 frontmatter 中是否标记了不需要翻译
   if head -20 "$index" | grep -q "^i18n_skip:"; then
+    echo "  ⏭️  ${slug} (i18n_skip, skipped)"
     continue
   fi
 
   # 检查中文博客是否有对应的英文目录
   if [ ! -d "$I18N_DIR/$slug" ]; then
-    # 从 index.md 提取标题
     title=$(head -20 "$index" | grep "^title:" | sed 's/^title: *//; s/"//g' || echo "$slug")
-    echo "  ⚠️  Missing EN translation:  ${title}  →  ${slug}"
+    echo ""
+    echo "  ❌ Missing EN translation:  ${title}  →  ${slug}"
     echo "     Create:  ${I18N_DIR}/${slug}/index.md"
-    # GitHub Actions 注释：在 commit 页面和 CI 总览上可见，不打开日志也能看到
+    echo "     Or add 'i18n_skip: true' to frontmatter to opt out."
+    echo ""
+    # GitHub Actions error annotation
     if [ -n "${GITHUB_ACTIONS:-}" ]; then
-      echo "::warning file=${blog_path}index.md,title=Missing EN Translation::Create ${I18N_DIR}/${slug}/index.md"
+      echo "::error file=${blog_path}index.md,title=Missing EN Translation::Create ${I18N_DIR}/${slug}/index.md or set i18n_skip:true in frontmatter"
     fi
     MISSING=$((MISSING+1))
   fi
@@ -41,8 +44,9 @@ echo ""
 if [ "$MISSING" -eq 0 ]; then
   echo "✅ All blog posts have English translations."
 else
-  echo "⚠️  ${MISSING} blog post(s) missing English translation (build not blocked)"
   if [ -n "${GITHUB_ACTIONS:-}" ]; then
-    echo "::warning title=EN Translations Missing::${MISSING} blog post(s) need English translation. See annotations above for details."
+    echo "::error title=EN Translations Missing::${MISSING} blog post(s) need English translation. Build failed."
   fi
+  echo "❌ ${MISSING} blog post(s) missing English translation — build aborted."
+  exit 1
 fi

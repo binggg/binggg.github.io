@@ -16,22 +16,22 @@ for blog_path in "$BLOG_DIR"/*/; do
   images_src="${blog_path}images"
 
   # 没有 images 目录 → 跳过
-  [ -d "$images_src" ] || { ((skipped++)); continue; }
+  [ -d "$images_src" ] || { skipped=$((skipped+1)); continue; }
 
   i18n_path="$I18N_DIR/$slug"
   i18n_images="$i18n_path/images"
 
   # i18n 目录不存在 → 跳过（还没翻译）
-  [ -d "$i18n_path" ] || { ((skipped++)); continue; }
+  [ -d "$i18n_path" ] || { skipped=$((skipped+1)); continue; }
 
   # 已经存在完整 images → 跳过
-  [ -d "$i18n_images" ] && { ((skipped++)); continue; }
+  [ -d "$i18n_images" ] && { skipped=$((skipped+1)); continue; }
 
   # 同步
   cp -r "$images_src" "$i18n_images"
   count=$(ls "$i18n_images" 2>/dev/null | wc -l)
   echo "  ✅ $slug → ${count} images synced"
-  ((synced++))
+  synced=$((synced+1))
 done
 
 echo "Done: ${synced} synced, ${skipped} skipped"

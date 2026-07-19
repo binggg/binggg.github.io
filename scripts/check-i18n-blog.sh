@@ -29,6 +29,10 @@ for blog_path in "$BLOG_DIR"/*/; do
     title=$(head -20 "$index" | grep "^title:" | sed 's/^title: *//; s/"//g' || echo "$slug")
     echo "  ⚠️  Missing EN translation:  ${title}  →  ${slug}"
     echo "     Create:  ${I18N_DIR}/${slug}/index.md"
+    # GitHub Actions 注释：在 commit 页面和 CI 总览上可见，不打开日志也能看到
+    if [ -n "${GITHUB_ACTIONS:-}" ]; then
+      echo "::warning file=${blog_path}index.md,title=Missing EN Translation::Create ${I18N_DIR}/${slug}/index.md"
+    fi
     MISSING=$((MISSING+1))
   fi
 done
@@ -38,4 +42,7 @@ if [ "$MISSING" -eq 0 ]; then
   echo "✅ All blog posts have English translations."
 else
   echo "⚠️  ${MISSING} blog post(s) missing English translation (build not blocked)"
+  if [ -n "${GITHUB_ACTIONS:-}" ]; then
+    echo "::warning title=EN Translations Missing::${MISSING} blog post(s) need English translation. See annotations above for details."
+  fi
 fi

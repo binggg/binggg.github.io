@@ -1,105 +1,90 @@
-# 博客文章规范
+# binggg.github.io 内容规范 v1
 
-## 目录结构
+> 2026-07-19 制定，基于 Booker 写作偏好和博客定位。
 
-```
-blog/
-├── CONTENT_SPEC.md       # 本文档
-├── authors.yml            # 作者定义
-├── tags.yml               # 标签定义
-├── 2026-07-18-post-slug/  # 推荐: 目录式组织（含图片）
-│   ├── index.md           # 文章正文
-│   └── img/
-│       ├── cover.png      # 封面图 (1200×630)
-│       └── screenshot-1.png
-└── 2026-07-17-old-post.md # 也可单文件（无本地图片时）
-```
+## 一、内容定位
 
-## 文件命名
+个人博客，不是官方文档、不是教程站。核心声音是：
 
-`YYYY-MM-DD-英文短横-slug`，日期决定发布时间和排序。
+> **10 年全栈 + AI 工程化的真实观察。不教课，不抄文档，不写废话。**
 
-## Frontmatter 规范
+## 二、发表标准（7 条硬门槛）
 
-```yaml
+每篇文章必须同时满足以下 7 条才能发：
+
+1. **有个人视角** — 必须有"我"的判断、偏好、踩坑记录。不能是第三方教程口吻。
+2. **问题驱动** — 开头从真实问题/痛点切入，不搞"今天我们来学习 X"。
+3. **反 AI 腔** — 无过渡句（"最能说明问题的是""从这个角度来说"）、无工整排比、无"不是……而是……"结构、无"本质上"。
+4. **实话实说** — 好就是好，坑就是坑。不粉饰、不夸大。
+5. **段落短节奏快** — 每段不超过 5 行，正文不用编号标题（一、二、三）。
+6. **有结尾动作** — 结尾抛问题给读者，或放彩蛋（实用的工具/工作流/代码片段）。
+7. **来源真实** — 不编个人经历、不编数据。"三年踩坑经验"如果是编的就不写。
+
+## 三、不发清单
+
+以下类型不发布：
+
+- 纯翻译（无个人见解）
+- 产品功能介绍（不是 CloudBase 官方文档）
+- 内部研究报告（未转博客口吻）
+- 副业/无关话题
+- 纯技术选型对比报告（除非有独到发现）
+
+## 四、文章分级
+
+| 级别 | 标准 | 动作 |
+|---|---|---|
+| P0 代表作 | 原创性强、可实操、有差异化 | 发博客 + 推社交媒体 |
+| P1 好文章 | 内容扎实、有个人见解 | 发博客 |
+| P2 有价值 | 实用但不惊艳 | 改后发博客 |
+| P3 跳过 | 不符合以上标准 | 不发，留作存档 |
+
+## 五、补发规则
+
+- 补发文章保留原始创建日期（frontmatter 中 `date` 字段）
+- 发布后不再修改正文，只修正错别字
+- 如需更新内容 → 发新文章并链向旧文
+
 ---
-title: 文章标题
-description: 简短描述（用于 SEO / RSS / 社交卡片）
-tags: [AI, CloudBase, 开发]
-authors: booker
-date: 2026-07-18
-image: ./img/cover.png   # 社交卡片图，可选
-slug: /custom-slug       # 自定义URL，可选
-hide_table_of_contents: false  # 是否隐藏右侧目录
----
-```
 
-必填: `title`, `description`, `tags`, `authors`, `date`
+<!-- 以下为扩展阅读，非规范正文 -->
 
-## 图片存放
+## 六、5 星评分标准（5 维每维 20 分）
 
-**两种方式**，按场景选：
+| 维度 | 满分 | 高分特征 | 低分特征 |
+|---|---|---|---|
+| 原创洞察 | 20 | 有 Booker 独有的视角/方法论/复刻方案。别人写不出来。 | 纯教程、产品功能介绍、已有知识汇总 |
+| 可实操 | 20 | 读者看完能直接复用——模板、代码、决策树、配置。 | 只有概念没有动作 |
+| 个人声音 | 20 | 有真实踩坑经历、个人取舍判断。"我碰过，疼过"。 | 客观教程口吻、无"我"字 |
+| 技术深度 | 20 | 源码级分析、协议层拆解、数据支撑。 | 表面介绍、道听途说 |
+| 传播潜力 | 20 | 话题有搜索量、有差异化、让人想转发。 | 窄众、同质化、看完不想分享 |
 
-### A. 随文图片（推荐 — 文章独立完整）
+**分级**: 90+→⭐⭐⭐⭐⭐ / 70-89→⭐⭐⭐⭐ / 50-69→⭐⭐⭐ / <50→⭐⭐
 
-```
-blog/2026-07-18-my-post/
-├── index.md
-└── img/
-    ├── cover.png
-    └── architecture.png
-```
+**一票否决**: 纯翻译/产品文档→最高⭐⭐；全文无个人视角→最高⭐⭐⭐；编造→不发布
 
-Markdown 引用: `![alt](./img/architecture.png)`
+## 五、AI Agent 资源（2026-07-19 新增）
 
-### B. 全局共用图片（跨文章复用）
+博客提供以下机器可读资源，方便 AI 编码助手（Claude Code、Codex、Cursor、Copilot 等）获取内容：
 
-```
-static/img/blog/
-├── cloudbase-logo.png
-└── common-banner.png
-```
+| 文件 | 用途 | URL |
+|---|---|---|
+| `static/llms.txt` | 内容索引，agent 发现博客有什么 | `https://binggg.github.io/llms.txt` |
+| `static/llms-full.txt` | 全部文章聚合，agent 一次获取完整上下文 | `https://binggg.github.io/llms-full.txt` |
+| `static/robots.txt` | 声明所有 crawler 允许抓取 | `https://binggg.github.io/robots.txt` |
+| `sitemap.xml` | Docusaurus 自动生成，含 lastmod 时间 | `https://binggg.github.io/sitemap.xml` |
+| RSS/Atom | 标准订阅源 | `blog/rss.xml` / `blog/atom.xml` |
 
-Markdown 引用: `![alt](/img/blog/cloudbase-logo.png)`
+### 维护要求
 
-### 图片规范
+- 新增博客文章时，同步更新 `static/llms.txt`（加一行链接 + 描述）
+- `static/llms-full.txt` 建议每次发新文章后重新生成
 
-- 封面: 1200×630px（社交卡片比例）
-- 正文内图: 宽度 ≤ 800px
-- 格式: PNG 优先（截图/图示），JPG（照片），WebP（可选更优压缩）
-- 文件命名: 英文小写短横，如 `architecture-overview.png`
+### 参考来源
 
-## Authors
+Vercel 的 Agent Resources 体系：[vercel.com/docs/agent-resources](https://vercel.com/docs/agent-resources)，三层框架：
+- **Layer 1 Discovery**: llms.txt / sitemap / robots.txt / JSON-LD
+- **Layer 2 Retrieval**: content negotiation / .md endpoints / agent auto-detection
+- **Layer 3 Tool Access**: MCP Server / search API
 
-### 目前已定义
-
-`blog/authors.yml` 已配置 `booker`（即你）。外部 agent 写文章时 `authors: booker` 即可。
-
-### 如需新增合作作者
-
-在 `blog/authors.yml` 追加条目:
-
-```yaml
-author-key:
-  name: 显示名
-  title: 头衔
-  url: 个人链接
-  image_url: 头像 URL
-  socials:
-    github: github-handle
-```
-
-## 内容格式
-
-- **正文语言**: 中文为主，代码/术语可英文
-- **代码块**: 标注语言 ` ```typescript `
-- **标题层级**: 从 `##` 起，`#` 保留给文章标题（Docusaurus 自动渲染）
-- **Callout**: 使用 Docusaurus 的 MDX  admonitions（`:::tip`, `:::note`, `:::warning`, `:::danger`）
-- **文末**: 可加 `---` 分割线后接作者简介
-
-## 发布流程
-
-1. 在 `blog/` 下创建 posts
-2. 本机 `npm run start` 预览
-3. push 到 `develop` 分支
-4. GitHub Actions 自动构建 → 部署到 `https://binggg.github.io`
+目前博客已实现 Layer 1。Layer 2-3 待后续。

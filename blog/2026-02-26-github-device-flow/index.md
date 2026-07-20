@@ -27,9 +27,9 @@ authors: [booker]
 ![](./images/cover.png)
 *图：文章配图*
 
-## 一次无 sudo 的 CLI 安装
+## 部署场景：无 sudo 装 gh
 
-先交代环境。这台服务器的情况很典型：
+先把环境搭起来。这台服务器的情况很典型：
 
 ```bash
 # 无 sudo，手动装 gh
@@ -208,7 +208,7 @@ def poll_for_token(device_code, client_id, interval=5):
 
 ---
 
-## Device Flow vs 传统 OAuth：不是替代，是互补
+## Device Flow vs 传统 OAuth
 
 读完 RFC 8628 后我画了一张对比表：
 
@@ -222,8 +222,6 @@ def poll_for_token(device_code, client_id, interval=5):
 | 用户体验 | 流畅，无感 | 多设备切换，需手动输入 |
 
 GitHub CLI 选择 Device Flow 的理由很实际：CLI 可能跑在 Docker 容器、CI 环境、跳板机——这些地方没有浏览器，配回调 URL 也麻烦。Device Flow 不需要注册回调地址，也不需要保管 `client_secret`（CLI 二进制的 `client_secret` 本来也保不住），对 CLI 工具来说是最省心的方案。
-
----
 
 ## 安全问题：验证码只有 8 位，够吗？
 
@@ -247,23 +245,7 @@ security add-generic-password -a "$USER" -s "github_token" -w "gho_xxx"
 secret-tool store --label="GitHub Token" service github user "$USER"
 ```
 
----
 
-## 什么时候用，什么时候别用
-
-**Device Flow 适合：**
-- CLI 工具（gh、aws-cli、gcloud 都在用）
-- 远程/CICD/容器环境
-- 任何没有浏览器或输入受限的设备
-
-**不该用它：**
-- Web 应用 — 用授权码 + PKCE
-- 移动 App — 用授权码 + PKCE
-- 有浏览器的桌面应用 — 用授权码
-
-这不是谁替代谁的问题——**两类流程解决的是不同的设备场景**。Device Flow 不做重定向，不要求回调 URL，不需要 `client_secret`，代价是用户多一步手动输入验证码。适合"设备不能跳转但人可以换设备"的场景。
-
----
 
 ## 🥚 彩蛋
 

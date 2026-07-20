@@ -11,13 +11,11 @@ lang: en
 > One plugin, seven tools, universal protocol.
 
 ![](./img/cover.png)
-*Fig: Open Plugins standard — write once, run everywhere*
+*Fig: Open Plugins — install once, works across seven tools*
 
 Lately I've noticed a trend — AI coding tools are multiplying. Cursor, Claude Code, Codex, Grok Build… each with its own extension mechanism. Then something new emerged: **Open Plugins**.
 
-It's an open standard maintained by Vercel Labs that packages Skills, Agents, Hooks, MCP servers, LSP servers, and more into a standardized plugin directory that works out-of-the-box across seven different AI coding tools.
-
-This article won't stay superficial. I'll cover the full story behind this protocol, its technical details, and real-world usage in one go.
+It's an open standard maintained by Vercel Labs. Install one plugin, it works across seven AI coding tools. I'll walk through the whole thing from the ground up.
 
 {/* truncate */}
 
@@ -71,9 +69,9 @@ Open Plugins aims to end this fragmentation: **define one standard, share across
 
 ---
 
-## npx plugins: The One Install Command
+## npx plugins: How to Install
 
-From a user's perspective, Open Plugins is dead simple. One CLI command:
+One command:
 
 ```bash
 # Install a plugin from GitHub (short format)
@@ -190,9 +188,9 @@ Key differences:
 
 ---
 
-## Plugin Protocol Deep Dive
+## Protocol Breakdown
 
-A plugin is essentially a directory with components organized by convention.
+A plugin is essentially a directory with files organized by convention.
 
 ### Standard Directory Structure
 
@@ -558,9 +556,9 @@ The core lesson: **Open Plugins treats a repo with `marketplace.json` at its roo
 
 ---
 
-## The Hook System: Deeper Than You Think
+## The Hook System
 
-Hooks are the most flexible component in Open Plugins — they can intercept various lifecycle points throughout the agent workflow.
+When I read the spec, the Hook system was the most striking part — it can hook into every lifecycle point of an agent workflow. But heads up: **Hooks aren't in Spec v1**, support is entirely up to the host tool. Claude Code and Copilot CLI have the fullest support, VS Code and Kimi Code don't recognize them (silently ignored, no error).
 
 > ![](./img/plugin-hooks.png)
 > *Fig: The Hook system — complete event chain from SessionStart to SessionEnd*
@@ -677,11 +675,9 @@ flowchart LR
 
 ---
 
-## Protocol Integration: Making Your Tool Support Open Plugins
+## Adding Open Plugins Support to Your Tool
 
-If you're a **tool developer** building an AI coding tool that should be compatible with Open Plugins, what do you need to implement?
-
-Five core capabilities, none optional:
+If you're building an AI coding tool and want plugin ecosystem compatibility, five things to implement:
 
 ### Five Core Capabilities
 
@@ -777,17 +773,14 @@ flowchart LR
 
 If you build extensions for AI coding tools, I recommend checking out the Open Plugins spec. The good news is you don't need anything complex — just add a `.plugin/plugin.json` to your project and it becomes discoverable by 7 tools. Our migration was about 400 lines of code, finished in under two days.
 
-Finally, if you're using AI coding tools for cloud development — whether it's Claude Code, Cursor, Codex, Grok Build, VS Code, Kimi Code, or GitHub Copilot — give our plugin a try:
+The CloudBase-MCP plugins are at these repos, for reference:
 
 ```bash
-# Main plugin (recommended)
 npx plugins add TencentCloudBase/cloudbase-plugin
-
-# Sites deployment plugin
 npx plugins add TencentCloudBase/cloudbase-sites-plugin
 ```
 
-After installation, just tell Claude "check my cloud functions" or "deploy a static site" — it can directly manipulate cloud resources through the MCP protocol. Supports AI model invocation, authentication management, NoSQL/PostgreSQL databases, cloud functions, CloudRun, cloud storage, WeChat Mini Program integration… much better than manual copy-pasting.
+Open Plugins isn't "mature" yet, but the direction is right. Getting the same plugin to work across different tools is a problem worth solving. The rest depends on how the community grows.
 
 ---
 

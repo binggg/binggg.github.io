@@ -10,13 +10,11 @@ image: ./img/cover.png
 > 一个插件，七种工具，通用协议
 
 ![](./img/cover.png)
-*图：Open Plugins 标准——一次编写，到处运行*
+*图：Open Plugins 标准——装一个就能在七个工具里用*
 
-最近我发现一个趋势——AI 编程工具越来越多，Cursor、Claude Code、Codex、Grok Build……各有各的扩展机制。然后就冒出了一个新东西，叫 **Open Plugins**。
+最近我发现一个趋势——AI 编程工具越来越多，Cursor、Claude Code、Codex、Grok Build……每个都有自己的扩展机制。然后就冒出了一个新东西，叫 **Open Plugins**。
 
-它是 Vercel Labs 维护的一个开放标准，能把 Skills、Agents、Hooks、MCP 服务器、LSP 服务器这些东西统统打包成一个标准化的插件目录，在七种不同的 AI 编程工具之间即装即用。
-
-这篇文章不打算泛泛而谈，我会把这个协议的来龙去脉、技术细节和实际用法一次性讲清楚。
+它是 Vercel Labs 维护的一个开放标准。装一个插件，七种 AI 编程工具都能用。下面从头拆一遍。
 
 {/* truncate */}
 
@@ -70,9 +68,9 @@ Open Plugins 的目的就是终结这种割裂：**定一套标准，所有工�
 
 ---
 
-## npx plugins：唯一的安装命令
+## npx plugins：怎么装
 
-从用户角度，Open Plugins 的使用方式极其简单。一个 CLI 命令搞定：
+怎么用？一条命令：
 
 ```bash
 # 从 GitHub 安装插件（短格式）
@@ -175,9 +173,9 @@ Spec v1 不保证 → Hooks / Commands / Agents（宿主不认识就忽略，不
 
 ---
 
-## 插件协议规范 Deep Dive
+## 协议拆解
 
-一个插件本质上就是一个目录，按约定结构放置各类组件。
+一个插件其实就是按约定结构放了一堆文件的目录。
 
 ### 标准目录结构
 
@@ -543,9 +541,9 @@ npx plugins add TencentCloudBase/cloudbase-sites-plugin
 
 ---
 
-## Hook 系统：比你以为的更深
+## Hook 系统
 
-Hooks 是 Open Plugins 里最灵活的组件——它可以拦截整个 agent 工作流的各个生命周期点。不过要注意：**Hooks 不在 Spec v1 标准之内**，支不支持完全看宿主工具。Claude Code 和 Copilot CLI 支持最完整，VS Code 和 Kimi Code 就不认（静默忽略，不报错）。
+我看规范时觉得最值钱的部分是这个——Hook 能在 agent 工作流的各个生命周期点插一脚。不过注意：**Hook 不在 Spec v1 标准里**，支不支持全看宿主工具。Claude Code 和 Copilot CLI 支持最全，VS Code 和 Kimi Code 就不认（静默忽略，不报错）。
 
 下面讲的事件模型来自 Open Plugin Spec 的 Hooks 组件规范——如果你的宿主工具支持 Hooks，这就是它的工作方式。
 
@@ -664,11 +662,9 @@ flowchart LR
 
 ---
 
-## 协议集成：如何让你的工具支持 Open Plugins
+## 给你的工具加上 Open Plugins 支持
 
-如果你是**工具开发者**，想让自己开发的 AI 编程工具兼容 Open Plugins，需要实现什么？
-
-核心就五条，一条不能少：
+如果你自己做 AI 编程工具、想让插件生态兼容 Open Plugins，需要实现五条：
 
 ### 五大核心能力
 
@@ -762,19 +758,16 @@ flowchart LR
     style USE fill:#48bb78,stroke:#38a169,color:#fff
 ```
 
-如果你也做 AI 编程工具的扩展，推荐了解一下 Open Plugins 规范。好消息是不需要搞多复杂，只要在项目里加个 `.plugin/plugin.json`，你的插件就能被 7 种工具识别。我们的改造也就四百来行代码，两天不到搞完。
+如果你也在做 AI 编程工具的扩展，推荐看看 Open Plugins 规范。好消息是不用搞多复杂——项目里加个 `.plugin/plugin.json`，你的插件就能被 7 种工具识别。我们的改造也就四百来行代码，两天不到搞完。
 
-最后，如果你在用 AI 编程工具做云开发——无论是 Claude Code、Cursor、Codex、Grok Build，还是 VS Code、Kimi Code、GitHub Copilot——可以试试我们的插件：
+CloudBase-MCP 对应的插件在这两个仓库，供参考：
 
 ```bash
-# 主插件（推荐）
 npx plugins add TencentCloudBase/cloudbase-plugin
-
-# Sites 部署插件
 npx plugins add TencentCloudBase/cloudbase-sites-plugin
 ```
 
-装完后直接跟 Claude 说「查一下我的云函数」或者「帮我部署静态网站」，它就能通过 MCP 协议直接操作云资源了。支持 AI 模型调用、认证管理、NoSQL/PostgreSQL 数据库、云函数、云托管、云存储、微信小程序对接……比手动复制粘贴舒服不少。
+Open Plugins 还没到"成熟"那一步，但方向是对的。能让同一份插件在不同工具之间跑，这个问题本身值得被认真解决。剩下的就看社区怎么长出来了。
 
 ---
 

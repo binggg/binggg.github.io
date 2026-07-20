@@ -13,7 +13,7 @@ This article covers two things:
 1. **Making AI-generated code actually deployable** — AI writes demo-quality code, full of security holes. The root cause: AI doesn't understand production environments.
 2. **Fixing "AI has Skills but won't use them"** — activation rates can be as low as 20%. Here's how we pushed that to 84%.
 
-<!-- truncate -->
+{/* truncate */}
 
 ---
 

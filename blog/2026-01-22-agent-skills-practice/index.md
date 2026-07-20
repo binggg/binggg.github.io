@@ -13,7 +13,7 @@ tags: [AI, agent, skills, prompt-engineering, claude-code]
 1. **让 AI 生成的代码能真正上线** — AI 写的代码 Demo 感十足，一上线就全是安全隐患。问题是 AI 不感知真实的后端底座。
 2. **解决"AI 有 Skill 却不爱用"的毛病** — 明明配好了 Skills，AI 却视而不见，非要凭直觉盲干。技能激活率从 20% 硬拉到 84% 的方法。
 
-<!-- truncate -->
+{/* truncate */}
 
 ---
 

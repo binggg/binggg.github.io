@@ -12,7 +12,7 @@ I spent months experimenting with prompts, stripping back parameters, testing di
 
 These three style recipes are the ones that worked best in practice. Just append the prompt suffix to your base prompt and you're good to go.
 
-<!-- truncate -->
+{/* truncate */}
 
 ---
 

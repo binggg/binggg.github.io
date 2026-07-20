@@ -12,7 +12,7 @@ tags: [AI, image-generation, prompt-engineering]
 
 下面这三套方案是实战下来最稳的，直接贴 prompt 后缀就能用。
 
-<!-- truncate -->
+{/* truncate */}
 
 ---
 

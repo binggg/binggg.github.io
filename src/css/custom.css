@@ -419,18 +419,29 @@ a {
   letter-spacing: 0.05em;
 }
 
-/* Tags */
+/* Tags — clean minimal labels, no borders */
 [class*='tag'] {
+  border: 0 !important;
+  background: none !important;
   font-size: 0.75rem !important;
-  border: 1px solid var(--ifm-hr-border-color);
-  border-radius: 3px;
-  padding: 0.15rem 0.6rem;
-  transition: all 0.2s ease;
+  padding: 0 !important;
+  color: var(--ifm-font-color-secondary) !important;
+  transition: color 0.2s ease;
 }
 [class*='tag']:hover {
-  border-color: var(--ifm-color-primary);
-  color: var(--ifm-color-primary);
+  color: var(--ifm-color-primary) !important;
   text-decoration: none;
+}
+/* Keep tag list container inline */
+[class*='tagsListInline'] [class*='tag'] {
+  margin: 0 0.75rem 0.5rem 0;
+  display: inline-block;
+}
+/* Tag count badge on /tags page */
+[class*='tagWithCount'] span,
+[class*='tagWithCount']::before,
+[class*='tagWithCount']::after {
+  display: none !important;
 }
 
 /* Blog sidebar */

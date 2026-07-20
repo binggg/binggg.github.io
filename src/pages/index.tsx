@@ -35,13 +35,6 @@ export default function Home(): ReactNode {
       {/* HERO */}
       <section className="relative overflow-hidden">
         <div className="mx-auto" style={{ maxWidth: '1400px', padding: '4rem 1.5rem 5rem' }}>
-          <Reveal>
-            <div className="flex items-center gap-3 mb-10 md:mb-16 text-xs uppercase tracking-wide" style={{ color: 'var(--ink-500)' }}>
-              <span className="inline-block w-2 h-2 rounded-full" style={{ backgroundColor: 'var(--accent)' }} />
-              <span>{translate({ id: 'homepage.hero.tagline', message: '15年 AI 全栈工程师 · CloudBase AI ToolKit 作者' })}</span>
-            </div>
-          </Reveal>
-
           <h1 className="font-display" style={{ fontSize: 'clamp(2.5rem, 7vw, 6rem)', lineHeight: '0.95', letterSpacing: '-0.04em', fontWeight: 500 }}>
             <Reveal delay={100}>
               <span style={{ display: 'block', color: 'var(--ifm-heading-color)' }}>
@@ -60,22 +53,6 @@ export default function Home(): ReactNode {
               </span>
             </Reveal>
           </h1>
-
-          <Reveal delay={400}>
-            <div style={{ marginTop: '3.5rem', display: 'grid', gap: '2.5rem', maxWidth: '36rem' }}>
-              <p className="leading-relaxed" style={{ color: 'var(--ink-600)', fontSize: '1.0625rem', lineHeight: '1.8' }}>
-                {translate({ id: 'homepage.bio', message: '15年 AI 全栈工程师。CloudBase AI ToolKit 作者。两个孩子的爸爸。深圳人。' })}
-              </p>
-              <div style={{ fontSize: '0.875rem', color: 'var(--ink-500)', lineHeight: '1.7' }}>
-                <p>{translate({ id: 'homepage.recent', message: '最近在把 CloudBase 的 AI 能力做成 MCP 工具，搭建全本地化 AI 工作流。' })}</p>
-                <div className="flex flex-wrap gap-3" style={{ marginTop: '1.5rem' }}>
-                  <Link to="/blog" className="link-underline" style={{ color: 'var(--ink-800)' }}>{translate({ id: 'homepage.writing.link', message: 'Browse all essays →' })}</Link>
-                  <span style={{ color: 'var(--ink-300)' }}>·</span>
-                  <Link to="/projects" className="link-underline" style={{ color: 'var(--ink-800)' }}>{translate({ id: 'homepage.projects.link', message: 'All projects →' })}</Link>
-                </div>
-              </div>
-            </div>
-          </Reveal>
         </div>
       </section>
 

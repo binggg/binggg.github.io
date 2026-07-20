@@ -50,12 +50,7 @@ export default function About(): ReactNode {
       <section className="mx-auto" style={{ maxWidth: '1400px', padding: '5rem 1.5rem 5rem' }}>
         <Reveal delay={100}>
           <Heading as="h1" style={{ fontSize: 'clamp(2.5rem, 6vw, 5rem)', lineHeight: '1.0', letterSpacing: '-0.035em', fontWeight: 500, maxWidth: '55rem' }}>
-            {translate({ id: 'about.page.title1', message: '我是 ' })}
             <span className="serif-italic">Booker</span>。
-            <br />
-            {translate({ id: 'about.page.title2', message: '15年 AI 全栈工程师，' })}
-            <br />
-            <span style={{ color: 'var(--ink-500)' }}>{translate({ id: 'about.page.title3', message: '写代码这件事，没停过。' })}</span>
           </Heading>
         </Reveal>
 

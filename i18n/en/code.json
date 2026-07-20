@@ -1,7 +1,4 @@
 {
-  "homepage.hero.tagline": {
-    "message": "15yrs AI full-stack engineer · CloudBase AI ToolKit author"
-  },
   "homepage.hero.line1": {
     "message": "I build quiet"
   },
@@ -10,12 +7,6 @@
   },
   "homepage.hero.line3": {
     "message": "sometimes I write about it"
-  },
-  "homepage.bio": {
-    "message": "15yrs AI full-stack engineer. CloudBase AI ToolKit author. Father of two. From Shenzhen."
-  },
-  "homepage.recent": {
-    "message": "Currently turning CloudBase AI into MCP tools and building a fully local AI workflow."
   },
   "homepage.writing.title": {
     "message": "Long-form thoughts"
@@ -58,15 +49,6 @@
   },
   "projects.footer.desc": {
     "message": "All open source projects at github.com/binggg. Also wrote some Vue components as xunleif2e."
-  },
-  "about.page.title1": {
-    "message": "I'm "
-  },
-  "about.page.title2": {
-    "message": "15yrs AI full-stack engineer,"
-  },
-  "about.page.title3": {
-    "message": "I've never stopped writing code."
   },
   "about.bio.p1": {
     "message": "I work at Tencent CloudBase team on AI ToolKit and MCP ecosystem. I like making small things that get used over and over."

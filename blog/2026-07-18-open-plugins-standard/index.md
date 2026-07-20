@@ -142,50 +142,36 @@ npx plugins add owner/repo -t vscode   # 只装到 VS Code
 
 `npx plugins targets` 会检测你机器上安装了哪些工具，然后自动安装到所有检测到的目标。
 
-来看看支持的工具有哪些，以及各自支持哪些组件类型：
-
 ![](./img/plugin-7-tools.png)
 *图：七种 AI 编程工具，一个插件标准全支持*
 
-```mermaid
-mindmap
-  root((Open Plugins<br/>7 种工具))
-    工具覆盖
-      Claude Code
-      Cursor
-      Codex
-      Grok Build
-      Kimi Code
-      GitHub Copilot CLI
-      VS Code
-    组件类型
-      Skills 技能
-      Agents 子智能体
-      Rules 编码规范
-      Hooks 事件钩子
-      MCP 服务器
-      LSP 语言服务器
+不过，装完不等于每个组件都在所有工具里能用。这里有个关键认知——**Open Plugin Spec v1 保证的只有两类组件：Skills 和 MCP**。其他组件（Hooks、Commands、Agents）不在 v1 规范里，支不支持完全看宿主工具。
+
+```
+Spec v1 保证 → Skills + MCP（装完就能用）
+Spec v1 不保证 → Hooks / Commands / Agents（宿主不认识就忽略，不报错）
 ```
 
-完整兼容矩阵：
+来看看各工具的实际情况：
 
-| 工具 | Skills | Agents | Rules | Hooks | MCP | LSP |
-|------|:------:|:------:|:-----:|:-----:|:---:|:---:|
-| **Claude Code** | ✅ | ✅ | ✅ | ✅ | ✅ | ❌ |
-| **Cursor** | ✅ | ❌ | ✅ | ✅ | ✅ | ✅ |
-| **Codex** | ✅ | ✅ | ✅ | ✅ | ✅ | ❌ |
-| **Grok Build** | ✅ | ❌ | ✅ | ✅ | ✅ | ✅ |
-| **Kimi Code** | ✅ | ❌ | ❌ | ✅ | ✅ | ❌ |
-| **GitHub Copilot CLI** | ✅ | ✅ | ✅ | ✅ | ✅ | ❌ |
-| **VS Code** | ✅ | ❌ | ✅ | ❌ | ✅ | ❌ |
+| 工具 | Skills | MCP | Hooks | Agents | Commands | 备注 |
+|------|:------:|:---:|:-----:|:------:|:--------:|------|
+| **Claude Code** | ⭐ v1 | ⭐ v1 | ✅ 原生 | ✅ 原生 | ✅ 原生 | 最全面的宿主 |
+| **Cursor** | ⭐ v1 | ⭐ v1 | ✅ | ❌ | ❌ | |
+| **Codex** | ⭐ v1 | ⭐ v1 | ✅ | ✅ | ✅ | |
+| **Grok Build** | ⭐ v1 | ⭐ v1 | ✅ | ❌ | ❌ | |
+| **Kimi Code** | ⭐ v1 | ⭐ v1 | ❌ | ❌ | ❌ | |
+| **GitHub Copilot CLI** | ⭐ v1 | ⭐ v1 | ✅ | ✅ | ✅ | |
+| **VS Code** | ⭐ v1 | ⭐ v1 | ❌ | ❌ | ❌ | Preview |
 
-关键差异点：
+> ⭐ v1 = Spec v1 标准保证；✅ = 宿主额外支持；❌ = 不支持（宿主会静默忽略）
 
-- **Cursor** 不支持 Agents 但支持 LSP，适合编辑器内深度使用
-- **Claude Code** 和 **Codex** 支持 Agents 但不支持 LSP，走的是 agent 路线
-- **Grok Build** 通过 xAI 的 CLI 提供，兼容 Claude Code 的 Skills 和 Agents 格式
-- **GitHub Copilot CLI** 最全能，全部组件都支持
-- **VS Code** 目前 Agent Plugins 还是 Preview 功能，需要开启 `chat.plugins.enabled`
+关键要点：
+
+- **Skills + MCP 是跨 IDE 通用协议**，装到哪个工具都能用——这是我们推荐 `npx plugins add` 的根本原因
+- **Hooks 不是全员标配**。Claude Code 和 Copilot CLI 支持最完整，VS Code 和 Kimi Code 就不认
+- Claude Code 通过原生 marketplace 机制支持最全（hooks + commands + agents），但那是宿主能力，不是 v1 标准
+- 不支持 Hooks 的工具会静默忽略，不会报错，插件仍然能正常工作
 
 ---
 
@@ -559,7 +545,9 @@ npx plugins add TencentCloudBase/cloudbase-sites-plugin
 
 ## Hook 系统：比你以为的更深
 
-Hooks 是 Open Plugins 里最灵活的组件——它可以拦截整个 agent 工作流的各个生命周期点。
+Hooks 是 Open Plugins 里最灵活的组件——它可以拦截整个 agent 工作流的各个生命周期点。不过要注意：**Hooks 不在 Spec v1 标准之内**，支不支持完全看宿主工具。Claude Code 和 Copilot CLI 支持最完整，VS Code 和 Kimi Code 就不认（静默忽略，不报错）。
+
+下面讲的事件模型来自 Open Plugin Spec 的 Hooks 组件规范——如果你的宿主工具支持 Hooks，这就是它的工作方式。
 
 > ![](./img/plugin-hooks.png)
 > *图：Hook 系统——从 SessionStart 到 SessionEnd 的完整事件链*

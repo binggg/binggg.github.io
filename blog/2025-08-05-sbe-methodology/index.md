@@ -2,6 +2,7 @@
 slug: sbe-methodology
 title: 为什么你的 AI 编程总是返工？SBE 方法论给出了答案
 date: 2025-08-05
+image: ./images/cover.png
 authors: [booker]
 tags: [ai, 全栈]
 ---
@@ -13,6 +14,9 @@ tags: [ai, 全栈]
 原来，Kiro 的 Spec 工作流背后，是 SBE（Specification by Example）方法论的完美实践。**今天就来揭秘这套方法论，解决你的 AI 编程返工问题。**
 
 {/* truncate */}
+
+![](./images/cover.png)
+*图：文章配图*
 
 ## 你的 AI 编程为什么总是返工？
 

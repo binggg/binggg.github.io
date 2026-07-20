@@ -2,6 +2,7 @@
 slug: ai-toy-to-product
 title: AI 编程，怎么从玩具到产品？
 date: 2025-11-27
+image: ./images/cover.png
 authors: [booker]
 tags: [ai, 全栈]
 ---
@@ -13,6 +14,9 @@ tags: [ai, 全栈]
 不是技术问题，是别的问题。
 
 {/* truncate */}
+
+![](./images/cover.png)
+*图：文章配图*
 
 ## 一个典型的场景
 

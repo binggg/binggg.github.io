@@ -4,6 +4,7 @@ title: 在远程服务器配置 GitHub CLI 时，我差不多把 Device Flow 协
 description: 没有浏览器、没有 sudo，怎么在一台裸机上完成 GitHub 认证？这篇文章从一次踩坑出发拆了 RFC 8628 全协议。
 tags: [GitHub, OAuth, Device Flow, CLI, RFC]
 date: 2026-02-26
+image: ./images/cover.png
 authors: [booker]
 ---
 
@@ -21,7 +22,10 @@ authors: [booker]
 
 整个流程不到两分钟。当时觉得——这东西挺聪明的，值得拆开看看里面怎么跑的。
 
-{/* truncate */}}
+{/* truncate */}
+
+![](./images/cover.png)
+*图：文章配图*
 
 ## 一次无 sudo 的 CLI 安装
 

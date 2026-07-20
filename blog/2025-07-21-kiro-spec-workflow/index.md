@@ -4,11 +4,15 @@ description: 一文复刻 Kiro Spec 工作流到任意 AI IDE——用 EARS 语�
 tags: [ai, 全栈, 开源]
 authors: booker
 date: 2025-07-21
+image: ./images/cover.png
 ---
 
 最近研究 Kiro 的推文又爆了，很多朋友私信问细节，所以再来整理一篇文章，系统分享下具体内容和实操方法。
 
 {/* truncate */}
+
+![](./images/cover.png)
+*图：文章配图*
 
 ---
 

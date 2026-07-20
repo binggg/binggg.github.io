@@ -2,6 +2,7 @@
 title: 如何生成"不油腻"的 AI 图片：3 套去油风格方案
 description: 自己做了 AI 生图大半年，踩过最多的坑不是模型不好用，而是图片一眼能看出来是 AI 画的。这篇总结了三套经过验证的去油方案。
 date: 2026-01-13
+image: ./images/cover.png
 authors: [booker]
 tags: [AI, image-generation, prompt-engineering]
 ---
@@ -13,6 +14,9 @@ tags: [AI, image-generation, prompt-engineering]
 下面这三套方案是实战下来最稳的，直接贴 prompt 后缀就能用。
 
 {/* truncate */}
+
+![](./images/cover.png)
+*图：文章配图*
 
 ---
 

@@ -2,6 +2,7 @@
 slug: vibe-coding-non-technical
 title: Vibe Coding 不是迷思：非技术人员也能用 AI 做出真正可用的应用
 date: 2026-01-09
+image: ./images/cover.png
 authors: [booker]
 tags: [ai, 全栈]
 ---
@@ -17,6 +18,9 @@ tags: [ai, 全栈]
 **今天，我将为你分享一套系统的方法，从基础概念到调试技巧，再到后端方案，让你从"能生成应用"到"能做出真正可用的应用"。**
 
 {/* truncate */}
+
+![](./images/cover.png)
+*图：文章配图*
 
 ## 问题的本质：为什么 Debug 这么难？
 

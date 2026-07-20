@@ -26,7 +26,7 @@ Claude Code 给了五个：/goal、/loop、sub-agent、Agent Teams、Workflows
 
 ## 痛点一：我在等它，它在等我
 
-![痛点一：每轮确认停不下来](./images/scene-02-goal.png)
+![/goal——条件引导的自主轮询](./images/scene-02-goal.png)
 
 你给 AI 一个明确目标，它有能力完成，但每一轮做完都停下来等你批准。这就是 /goal 要解决的问题
 
@@ -76,7 +76,7 @@ Claude Code 给了五个：/goal、/loop、sub-agent、Agent Teams、Workflows
 
 ## 痛点二：项目放着不管就长草
 
-![痛点二：loop 卡一整夜](./images/scene-03-loop.png)
+![/loop——自适应调度器](./images/scene-03-loop.png)
 
 很多场景没终点——PR 需要持续关注、CI 挂了要处理、依赖要升级。你不可能一直盯着终端。但一个不盯着，就可能卡一整夜
 
@@ -107,7 +107,7 @@ Claude Code 给了五个：/goal、/loop、sub-agent、Agent Teams、Workflows
 
 ## 痛点三：主上下文被灌了一堆垃圾
 
-![痛点三：上下文爆掉](./images/scene-04-subagent.png)
+![Sub-Agent——上下文隔离的工人](./images/scene-04-subagent.png)
 
 一个 session 跑久了，上下文里塞满中间产物——查过的文档、试过的方案、反复修正的路径。token 越花越多，模型越来越"笨"。但你的辅助工作（查 API、调研库、验证猜想）不该污染主线
 
@@ -158,7 +158,7 @@ const agent = claude.subAgent({ prompt: "..." });
 
 ## 痛点四：十个活挤在一起干
 
-![痛点四：多任务混在一起](./images/scene-05-teams.png)
+![Agent Teams——可观察的并行](./images/scene-05-teams.png)
 
 /goal 跑一个任务，sub-agent 处理一个子任务。但你有十个活要干——修 bug、重构模块、写文档、准备 demo。不可能一个一个来，也不能让它们互相踩
 
@@ -197,7 +197,7 @@ Main session ← 可观测 ← 各 Agent 汇报
 
 ## 痛点五：一个复杂任务靠纯对话推不动
 
-![痛点五：复杂任务需要确定性](./images/scene-06-workflow.png)
+![Workflows——确定性的工作流](./images/scene-06-workflow.png)
 
 有些任务不是"干就完了"，而是多个步骤环环相扣——先调研，再设计，再编码，再测试。任何一个步骤出偏差，后面全歪。没有个框架约束，纯靠模型自由发挥，结果就是"第一次成功，第二次不行"
 
@@ -291,7 +291,7 @@ steps:
 
 ---
 
-## 🥚 彩蛋：一份可以直接用的 agent 配置包
+## 彩蛋：一份可以直接用的 agent 配置包
 
 上面讲了五种机制，但最有用的事情是帮你配好。这是我目前在用的 `.claude/agents/` 配置——三个配置好的 Agent，各自管一件事：
 

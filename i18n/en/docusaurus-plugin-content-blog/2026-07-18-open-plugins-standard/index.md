@@ -8,14 +8,14 @@ image: ./img/cover.png
 lang: en
 ---
 
-> One plugin, seven tools, universal protocol.
+> One plugin standard, shared across seven tools.
 
 ![](./img/cover.png)
 *Fig: Open Plugins — install once, works across seven tools*
 
-Lately I've noticed a trend — AI coding tools are multiplying. Cursor, Claude Code, Codex, Grok Build… each with its own extension mechanism. Then something new emerged: **Open Plugins**.
+AI coding tools are multiplying: Cursor, Claude Code, Codex, Grok Build — each with its own plugin format. Then came **Open Plugins**.
 
-It's an open standard maintained by Vercel Labs. Install one plugin, it works across seven AI coding tools. I'll walk through the whole thing from the ground up.
+It's an open standard maintained by Vercel Labs. Install one plugin, it runs across seven tools.
 
 {/* truncate */}
 

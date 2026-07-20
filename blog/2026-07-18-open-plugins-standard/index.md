@@ -7,14 +7,14 @@ date: 2026-07-18
 image: ./img/cover.png
 ---
 
-> 一个插件，七种工具，通用协议
+> 一个插件标准，七个工具共用
 
 ![](./img/cover.png)
 *图：Open Plugins 标准——装一个就能在七个工具里用*
 
-最近我发现一个趋势——AI 编程工具越来越多，Cursor、Claude Code、Codex、Grok Build……每个都有自己的扩展机制。然后就冒出了一个新东西，叫 **Open Plugins**。
+最近 AI 编程工具越来越多：Cursor、Claude Code、Codex、Grok Build……每个一套插件格式。然后冒出了个 **Open Plugins**。
 
-它是 Vercel Labs 维护的一个开放标准。装一个插件，七种 AI 编程工具都能用。下面从头拆一遍。
+它是 Vercel Labs 维护的一个开放标准。装一个插件，就能在七个工具里跑。
 
 {/* truncate */}
 

@@ -7,11 +7,12 @@ date: 2026-02-26
 authors: [booker]
 ---
 
-I was setting up GitHub CLI on a TencentOS server recently and hit a classic scenario:
+I was setting up GitHub CLI on a TencentOS server recently — an AI agent was running on it, and I needed to talk to it via phone IM. Classic authentication puzzle:
 
 - No browser (remote server, no GUI)
 - No sudo (can only install to my `~/bin`)
 - Needed `gh` to authenticate and create PRs
+- **Critical: couldn't send a Token through the IM chat** (IM servers, chat history, agent context — every layer sees it)
 
 Traditional OAuth requires browser redirects. Not an option here.
 
@@ -245,19 +246,40 @@ secret-tool store --label="GitHub Token" service github user "$USER"
 
 ---
 
-## When to use Device Flow, when not to
+## Why Device Flow is the best auth method for AI Agents
 
-**Device Flow is good for:**
-- CLI tools (gh, aws-cli, gcloud all use it)
-- Remote / CI/CD / container environments
-- Any device without a browser or with constrained input
+I was actually solving another problem when I wrote this article: an AI agent runs on a remote server, I talk to it via phone IM. The agent needs GitHub API access to manage repos, create PRs, handle issues — but how do you give it credentials securely?
 
-**Don't use it for:**
-- Web apps — use authorization code + PKCE
-- Mobile apps — use authorization code + PKCE
-- Desktop apps with a browser — use authorization code
+The most intuitive approach is sending the Token through the IM chat. It's also the most dangerous one.
 
-It's not about one replacing the other — **each flow solves a different device scenario**. Device Flow doesn't do redirects, doesn't need callback URLs, doesn't need `client_secret`. The trade-off is one extra step of manual code entry. It's designed for "the device can't redirect, but the human can switch devices."
+```
+IM Token path:
+  You → [ IM Server ] → [ Chat History ] → [ Agent Context ]
+                                                ↓
+                                          Every layer sees your Token
+```
+
+Once the Token enters the chat, the IM server has it, your local chat history has it, and the agent's message context has it. And Tokens don't expire on their own — obtain it once, use it forever.
+
+Device Flow solves this differently: **your machine never touches the Token.**
+
+1. The agent prints a verification code (`BFEE-895F`) in the chat
+2. You open `github.com/login/device` — GitHub's official auth page, not a link the agent gave you
+3. Enter the code and authorize on GitHub's page
+4. The Token goes directly from GitHub's server to the agent (server-to-server)
+
+```
+Device Flow path:
+  Agent prints code → you see it
+        ↓
+  You open github.com/login/device → enter code → complete OAuth
+        ↓
+  Token goes from GitHub to agent (server-to-server, no middle layers)
+```
+
+Your IM only ever sees an 8-character verification code (15-minute validity, single-use). The Token never passes through your chat history.
+
+If you're using an AI agent for automation, or running a CLI tool that needs credentials on a remote machine — **Device Flow isn't one option among many. It's the only correct choice.**
 
 ---
 
@@ -294,6 +316,6 @@ This script covers the whole pipeline from my previous article. If you've run in
 
 ---
 
-Do you find Device Flow or Personal Access Tokens more convenient? Hit any mystical issues in practice? Comments below 👇
+How does your remote agent handle auth? DIY Token setup or Device Flow? Comments below 👇
 
 *Based on GitHub CLI v2.62.0, RFC 8628 (published August 2019), and one real deployment verification.*

@@ -8,11 +8,12 @@ image: ./images/cover.png
 authors: [booker]
 ---
 
-前阵子在一台 TencentOS 服务器上配 GitHub CLI，遇到一个经典场景：
+前阵子在一台 TencentOS 服务器上配 GitHub CLI——AI Agent 跑在上面，需要通过手机 IM 跟它对话。遇到了一个经典场景：
 
 - 没有浏览器（远程服务器，没图形界面）
 - 没有 sudo 权限（只能装到自己 `~/bin`）
 - 需要 `gh` 能正常认证、创建 PR
+- **关键：不能把 Token 发到微信聊天里给 Agent**（IM 服务器、聊天记录、Agent 上下文——每一层都能看到它）
 
 传统 OAuth 流程要在浏览器里跳转。这里行不通。
 
@@ -247,6 +248,45 @@ secret-tool store --label="GitHub Token" service github user "$USER"
 
 
 
+## Device Flow 为什么是 AI Agent 的最佳认证方案
+
+写这篇文章的时候我其实在解决另一个问题：Agent 跑在远端服务器上，我通过微信跟它对话。Agent 要调用 GitHub API 来操作仓库、创建 PR、管理 issues——但怎么安全地给它授权？
+
+最直觉的做法是把 Token 发到微信聊天里。这也是最危险的。
+
+```
+IM 发 Token 的路径：
+  你 → [ 微信服务器 ] → [ 聊天记录 ] → [ Agent 上下文 ]
+                                            ↓
+                                     每一层都能看到你的 Token
+```
+
+Token 一旦进了聊天记录，IM 服务器有一份、本地聊天记录有一份、Agent 的消息上下文里也有一份。而且 Token 不会过期——拿到一次就能一直用。
+
+Device Flow 解决了这个问题：**你的机器从不接触 Token。**
+
+它的思路是这样的：
+
+1. Agent 打印一串验证码（`BFEE-895F`）到聊天里
+2. 你打开 `github.com/login/device`——这是 GitHub 的官方授权页，不是 Agent 给你的链接
+3. 输入验证码，在 GitHub 的页面上完成授权
+4. Token 直接从 GitHub 服务器发给 Agent（server-to-server）
+
+```
+Device Flow 的路径：
+  Agent 打印验证码 → 你看到
+        ↓
+  你打开 github.com/login/device → 输入验证码 → 完成 OAuth
+        ↓
+  Token 直接从 GitHub 到 Agent（server-to-server，不经过任何中间层）
+```
+
+你的 IM 里只有一段 8 位验证码（15 分钟有效，用完作废）。Token 从头到尾没有经过你的聊天记录。
+
+如果你在用 Agent 做自动化、或者写了一个远端运行的 CLI 工具需要认证——**Device Flow 不是多个方案中的一个，是唯一对的选择。**
+
+---
+
 ## 🥚 彩蛋
 
 如果你也经常需要配远程服务器的 GitHub 认证，我写了一段脚本——一条命令走完"下载 gh + 认证 + 配置 git 用户"全流程：
@@ -280,6 +320,6 @@ echo "✅ Done! Logged in as $(gh api user --jq '.login')"
 
 ---
 
-你觉得 Device Flow 相比 Personal Access Token 哪种更方便？实操中遇到过什么玄学问题？评论区见 👇
+你的 Agent 在远端怎么认证的？是自己配的 Token 还是走了 Device Flow？评论区聊聊 👇
 
 *全文基于 GitHub CLI v2.62.0、RFC 8628（2019年8月发布）和一次实际部署验证。*

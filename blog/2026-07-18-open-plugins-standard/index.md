@@ -257,7 +257,7 @@ flowchart TD
     C4b --> S1
 
     S1 --> R[按模式加载组件]
-    R --> NS[命名空间化<br/>{plugin}:{name}]
+    R --> NS[命名空间化<br/>plugin:name]
     NS --> PE[展开 PLUGIN_ROOT]
     PE --> Done[✅ 完成]
 
@@ -680,7 +680,7 @@ flowchart LR
         C2[② 解析清单<br/>读取 plugin.json]
         C3[③ 组件发现<br/>扫描默认位置]
         C4[④ 路径展开<br/>PLUGIN_ROOT 替换]
-        C5[⑤ 命名空间<br/>{plugin}:{name}]
+        C5[⑤ 命名空间<br/>plugin:name]
     end
 
     C1 --> C2 --> C3 --> C4 --> C5

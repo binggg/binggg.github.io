@@ -2,6 +2,7 @@
 slug: codex-getting-started-cloudbase
 title: 半年涨了 7 倍、连非程序员都在用的 Codex，从零到上线一个多人对战游戏
 date: 2026-06-28
+image: ./images/cover.png
 authors: [booker]
 tags: [ai, 全栈, cloudbase]
 description: Codex 从零上手到部署上线全攻略——五分钟做贪吃蛇、搞懂权限和插件、用国产模型省钱、CloudBase 一键部署多人对战游戏。
@@ -14,6 +15,9 @@ description: Codex 从零上手到部署上线全攻略——五分钟做贪吃�
 ![一图看懂 Codex：从它是什么，到配模型、装插件、写完上线](https://tcb-advanced-a656fc-1257967285.tcloudbaseapp.com/codex-article/images/scenes/codex-longform.png)
 
 {/* truncate */}
+
+![](./images/cover.png)
+*图：文章配图*
 
 ## 第一步 · 先认识它
 

@@ -279,7 +279,7 @@ Device Flow path:
 
 Your IM only ever sees an 8-character verification code (15-minute validity, single-use). The Token never passes through your chat history.
 
-If you're using an AI agent for automation, or running a CLI tool that needs credentials on a remote machine — **Device Flow isn't one option among many. It's the only correct choice.**
+Looking back, if your agent needs remote auth — Device Flow is about the only way to keep secrets out of your chat logs.
 
 ---
 

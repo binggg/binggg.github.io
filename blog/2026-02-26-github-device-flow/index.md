@@ -1,6 +1,6 @@
 ---
 slug: github-device-flow-deep-dive
-title: 在远程服务器配置 GitHub CLI 时，我差不多把 Device Flow 协议拆了一遍
+title: 你的 Agent 在云端需要认证？Device Flow 协议拆解
 description: 没有浏览器、没有 sudo，怎么在一台裸机上完成 GitHub 认证？这篇文章从一次踩坑出发拆了 RFC 8628 全协议。
 tags: [GitHub, OAuth, Device Flow, CLI, RFC]
 date: 2026-02-26
@@ -13,7 +13,7 @@ authors: [booker]
 - 没有浏览器（远程服务器，没图形界面）
 - 没有 sudo 权限（只能装到自己 `~/bin`）
 - 需要 `gh` 能正常认证、创建 PR
-- **关键：不能把 Token 发到微信聊天里给 Agent**（IM 服务器、聊天记录、Agent 上下文——每一层都能看到它）
+- **关键：不能把 Token 直接发给 Agent**——不管走什么通道，Token 一旦进了 Agent 的上下文就会被记录、可能被写入日志、甚至出现在训练数据里
 
 传统 OAuth 流程要在浏览器里跳转。这里行不通。
 

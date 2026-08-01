@@ -16,12 +16,12 @@ function Star() {
 const timeline: { year: string; items: ReactNode[] }[] = [
   { year: '2026', items: [
     translate({ id: 'about.timeline.2026.0', message: 'AI Maker Summit / QECon / AI+研发数字峰会 讲师' }),
-    translate({ id: 'about.timeline.2026.1', message: 'CloudBase MCP 发布，连接 18+ AI IDE' }),
+    translate({ id: 'about.timeline.2026.1', message: 'CloudBase AI Toolkit 发布，支持 18+ AI IDE' }),
     translate({ id: 'about.timeline.2026.2', message: '个人博客 binggg.github.io 上线' }),
   ]},
   { year: '2025', items: [
     translate({ id: 'about.timeline.2025.0', message: '科技生态圈峰会 & AI+研发数字峰会 分享 AI Agent 实践' }),
-    translate({ id: 'about.timeline.2025.1', message: 'CloudBase-MCP 发布，AI Agent 与云开发打通' }),
+    translate({ id: 'about.timeline.2025.1', message: 'CloudBase AI Toolkit 发布，打通 AI Agent 与云开发' }),
     translate({ id: 'about.timeline.2025.2', message: 'Kiro Spec 工作流复刻攻略在掘金 4k+ 阅读' }),
   ]},
   { year: '2023', items: [

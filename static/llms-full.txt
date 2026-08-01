@@ -1,6 +1,6 @@
 # Booker Zhao
 
-> Software Engineer, AI Enthusiast, Father of Two — AI full-stack developer, creator of CloudBase-MCP & CloudBase Framework.
+> Software Engineer, AI Enthusiast, Father of Two — AI full-stack developer, creator of CloudBase AI Toolkit & CloudBase Framework.
 
 ## Bio
 
@@ -11,7 +11,7 @@
 
 ## Projects
 
-- [CloudBase-MCP](https://github.com/TencentCloudBase/CloudBase-MCP) (1.1k⭐): Connect CloudBase to your AI Agent.
+- [CloudBase AI Toolkit](https://github.com/TencentCloudBase/CloudBase-AI-ToolKit) (1.1k⭐): AI toolkit for CloudBase — MCP server, skills & plugins for AI coding tools.
 - [CloudBase Framework](https://github.com/Tencent/cloudbase-framework) (2k⭐): Cloud-native all-in-one deployment tool.
 - [MRN](https://github.com/binggg/mrn) (1.7k⭐): Material Design React Native components.
 - [CloudBase AI ToolKit](https://github.com/TencentCloudBase/CloudBase-AI-ToolKit) (927⭐): AI Agent bridge with CloudBase.

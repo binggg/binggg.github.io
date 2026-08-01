@@ -5,7 +5,7 @@ description: "From /goal to Workflows — five mechanisms that solve one problem
 tags: [Claude Code, AI Programming, Agent]
 date: 2026-07-06
 authors: [booker]
-image: ./images/scene-01-cover.png
+image: /og/en/claude-code-five-mechanisms.png
 ---
 
 If you've used Claude Code for complex tasks, you've probably experienced this:

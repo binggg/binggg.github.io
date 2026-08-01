@@ -51,7 +51,7 @@
     "message": "All open source projects at github.com/binggg. Also wrote some Vue components as xunleif2e."
   },
   "about.bio.p1": {
-    "message": "I work at Tencent CloudBase team on AI ToolKit and MCP ecosystem. I like making small things that get used over and over."
+    "message": "I work at Tencent CloudBase team on AI Toolkit ecosystem. I like making small things that get used over and over."
   },
   "about.bio.p2": {
     "message": "Outside work, I maintain open source projects at github.com/binggg. I'm interested in AI Agents, Serverless architecture, and developer tools."
@@ -108,13 +108,13 @@
     "message": "Open Plugins: The Plugin Standard for AI Coding Assistants"
   },
   "homepage.writing.card.desc": {
-    "message": "An open standard maintained by Vercel Labs — one plugin, seven tools, write once run anywhere. From protocol spec to CloudBase MCP migration, all in one article."
+    "message": "An open standard maintained by Vercel Labs — one plugin, seven tools, write once run anywhere. From protocol spec to CloudBase AI Toolkit migration, all in one article."
   },
   "about.timeline.2026.0": {
     "message": "Speaker at AI Maker Summit / QECon / AI+研发数字峰会"
   },
   "about.timeline.2026.1": {
-    "message": "CloudBase MCP released, connecting 18+ AI IDEs"
+    "message": "CloudBase AI Toolkit released, supporting 18+ AI IDEs"
   },
   "about.timeline.2026.2": {
     "message": "Personal blog binggg.github.io launched"
@@ -123,7 +123,7 @@
     "message": "Shared AI Agent practices at tech ecosystem summit"
   },
   "about.timeline.2025.1": {
-    "message": "CloudBase-MCP released — AI Agent meets CloudBase"
+    "message": "CloudBase AI Toolkit released — AI Agent meets CloudBase"
   },
   "about.timeline.2025.2": {
     "message": "Kiro Spec workflow article hit 4k+ reads on 掘金 (Juejin)"
@@ -159,7 +159,7 @@
     "message": "Explored Strapi / SSR / MRN (1.7k⭐)"
   },
   "project.cb-mcp.tagline": {
-    "message": "Connect CloudBase to your AI Agent. From AI prompt to deployed app."
+    "message": "AI toolkit for CloudBase — MCP server, skills & plugins for AI coding tools."
   },
   "project.cb-framework.tagline": {
     "message": "Tencent CloudBase cloud-native deployment tool. One-click deploy, any framework."

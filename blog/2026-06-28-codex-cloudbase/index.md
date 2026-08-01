@@ -2,7 +2,7 @@
 slug: codex-getting-started-cloudbase
 title: 半年涨了 7 倍、连非程序员都在用的 Codex，从零到上线一个多人对战游戏
 date: 2026-06-28
-image: ./images/cover.png
+image: /og/codex-getting-started-cloudbase.png
 authors: [booker]
 tags: [ai, 全栈, cloudbase]
 description: Codex 从零上手到部署上线全攻略——五分钟做贪吃蛇、搞懂权限和插件、用国产模型省钱、CloudBase 一键部署多人对战游戏。
@@ -137,7 +137,7 @@ CloudBase 兼容 OpenAI 的和 Anthropic 的协议，DeepSeek、GLM、Kimi 用�
 
 #### 装插件（让它能直接部署）
 
-CloudBase MCP 插件装了之后，Codex 就能直接在对话里把应用部署上线。不需要手动登录云控制台、配置域名、传文件。说一句"帮我部署到线上"，它就自动办完。
+CloudBase AI Toolkit 插件装了之后，Codex 就能直接在对话里把应用部署上线。不需要手动登录云控制台、配置域名、传文件。说一句"帮我部署到线上"，它就自动办完。
 
 ---
 

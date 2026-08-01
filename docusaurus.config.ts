@@ -64,7 +64,7 @@ const config: Config = {
         generateLLMsFullTxt: true,
         includeBlog: true,
         title: 'Booker Zhao',
-        description: 'Software Engineer, AI Enthusiast — AI full-stack developer, creator of CloudBase-MCP & CloudBase Framework.',
+        description: 'Software Engineer, AI Enthusiast — AI full-stack developer, creator of CloudBase AI Toolkit & CloudBase Framework.',
         llmsTxtFilename: 'llms.txt',
         llmsFullTxtFilename: 'llms-full.txt',
         pathTransformation: {
@@ -77,7 +77,7 @@ const config: Config = {
   themes: ['@docusaurus/theme-mermaid'],
 
   themeConfig: {
-    image: 'img/docusaurus.png',
+    image: 'img/og-default.png',
     colorMode: {
       respectPrefersColorScheme: true,
     },

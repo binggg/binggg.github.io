@@ -1,6 +1,6 @@
 # Booker Zhao
 
-> Software Engineer, AI Enthusiast, Father of Two — AI full-stack developer, creator of CloudBase-MCP & CloudBase Framework.
+> Software Engineer, AI Enthusiast, Father of Two — AI full-stack developer, creator of CloudBase AI Toolkit & CloudBase Framework.
 
 ## Blog
 
@@ -12,7 +12,7 @@
 
 ### 2026
 
-- [Open Plugins：AI 编程助手的插件标准](https://binggg.github.io/blog/2026-07-18-open-plugins-standard) — Vercel Labs 的 Open Plugins 协议解析 + CloudBase MCP 改造实战，AI 编程工具的插件标准化之路。
+- [Open Plugins：AI 编程助手的插件标准](https://binggg.github.io/blog/2026-07-18-open-plugins-standard) — Vercel Labs 的 Open Plugins 协议解析 + CloudBase AI Toolkit 改造实战，AI 编程工具的插件标准化之路。
 - [解放双手——Claude Code 五种"放手"机制的底层逻辑](https://binggg.github.io/blog/2026-07-06-claude-code-mechanisms) — 深入分析 Claude Code 的 request_loop、sub-agent、hook、/workflow、/loop 五种多步机制的源码实现与取舍。
 - [半年涨了 7 倍、连非程序员都在用的 Codex，从零到上线一个多人对战游戏](https://binggg.github.io/blog/2026-06-28-codex-cloudbase) — Codex + CloudBase 从零到上线的完整实战，含多人对战游戏开发案例。
 - [在远程服务器配置 GitHub CLI 时，我差不多把 Device Flow 协议拆了一遍](https://binggg.github.io/blog/2026-02-26-github-device-flow) — RFC 8628 Device Flow 协议深度解析，从踩坑到协议拆解到一键认证脚本。
@@ -26,7 +26,7 @@
 
 ## Projects
 
-- [CloudBase-MCP](https://github.com/TencentCloudBase/CloudBase-MCP): CloudBase MCP server for AI Agents — 1.1k stars.
+- [CloudBase AI Toolkit](https://github.com/TencentCloudBase/CloudBase-AI-ToolKit): AI toolkit for CloudBase — MCP server, skills & plugins for AI coding tools — 1.1k stars.
 - [CloudBase Framework](https://github.com/Tencent/cloudbase-framework): Cloud-native all-in-one deployment tool — 2k stars.
 - [Material React Native (MRN)](https://github.com/binggg/mrn): Material Design React Native components — 1.7k stars.
 - [CloudBase AI ToolKit](https://github.com/TencentCloudBase/CloudBase-AI-ToolKit): AI Agent bridge with CloudBase — 927 stars.

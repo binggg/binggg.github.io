@@ -2,7 +2,7 @@
 slug: sbe-methodology
 title: 为什么你的 AI 编程总是返工？SBE 方法论给出了答案
 date: 2025-08-05
-image: ./images/cover.png
+image: /og/sbe-methodology.png
 authors: [booker]
 tags: [ai, 全栈]
 ---

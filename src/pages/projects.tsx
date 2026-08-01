@@ -7,9 +7,9 @@ import Reveal from '../components/Reveal'
 
 const projects = [
   {
-    name: 'CloudBase-MCP',
-    tagline: translate({ id: 'project.cb-mcp.tagline', message: 'Connect CloudBase to your AI Agent. 从 AI prompt 到上线应用。' }),
-    url: 'https://github.com/TencentCloudBase/CloudBase-MCP',
+    name: 'CloudBase AI Toolkit',
+    tagline: translate({ id: 'project.cb-mcp.tagline', message: 'AI toolkit for CloudBase — MCP server, skills & plugins for AI coding tools.' }),
+    url: 'https://github.com/TencentCloudBase/CloudBase-AI-ToolKit',
     year: '2025',
     role: 'Creator',
     stack: ['TypeScript', 'MCP', 'AI', 'CloudBase'],

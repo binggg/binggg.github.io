@@ -1,5 +1,6 @@
 ---
 title: "AI coding without luck: the complete guide to replicating Kiro's Spec workflow"
+image: /og/en/kiro-spec-workflow.png
 description: A complete guide to porting Kiro's Spec workflow to any AI IDE — write requirements with EARS syntax, design technical solutions, split tasks, and move from vibe coding to engineered AI development.
 tags: [ai, fullstack, open-source]
 authors: booker

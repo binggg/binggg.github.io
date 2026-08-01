@@ -2,7 +2,7 @@
 slug: vibe-coding-non-technical
 title: Vibe Coding 不是迷思：非技术人员也能用 AI 做出真正可用的应用
 date: 2026-01-09
-image: ./images/cover.png
+image: /og/vibe-coding-non-technical.png
 authors: [booker]
 tags: [ai, 全栈]
 ---

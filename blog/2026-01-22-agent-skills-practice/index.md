@@ -2,7 +2,7 @@
 title: AI 编程的下半场：别让 AI 写的代码只活在 localhost 里
 description: 给 AI 配了 Skills 还是只管自己写？踩了几个月坑，我发现最折磨人的不是 AI 不会写代码，而是它写的代码只能活在本地。分享怎么把技能激活率从 20% 拉到 84%。
 date: 2026-01-22
-image: ./images/cover.png
+image: /og/agent-skills-practice.png
 authors: [booker]
 tags: [AI, agent, skills, prompt-engineering, claude-code]
 ---

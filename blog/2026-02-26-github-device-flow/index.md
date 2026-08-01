@@ -4,7 +4,7 @@ title: 你的 Agent 在云端需要认证？Device Flow 协议拆解
 description: 没有浏览器、没有 sudo，怎么在一台裸机上完成 GitHub 认证？这篇文章从一次踩坑出发拆了 RFC 8628 全协议。
 tags: [GitHub, OAuth, Device Flow, CLI, RFC]
 date: 2026-02-26
-image: ./images/cover.png
+image: /og/github-device-flow-deep-dive.png
 authors: [booker]
 ---
 

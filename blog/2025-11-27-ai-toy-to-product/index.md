@@ -2,7 +2,7 @@
 slug: ai-toy-to-product
 title: AI 编程，怎么从玩具到产品？
 date: 2025-11-27
-image: ./images/cover.png
+image: /og/ai-toy-to-product.png
 authors: [booker]
 tags: [ai, 全栈]
 ---

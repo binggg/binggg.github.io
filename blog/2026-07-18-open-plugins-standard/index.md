@@ -1,10 +1,10 @@
 ---
 title: Open Plugins：AI 编程助手的插件标准
-description: Vercel Labs 维护的开放标准——一个插件，七种工具，一次编写到处运行。从协议规范到 CloudBase MCP 改造实战，一文讲透。
+description: Vercel Labs 维护的开放标准——一个插件，七种工具，一次编写到处运行。从协议规范到 CloudBase AI Toolkit 改造实战，一文讲透。
 tags: [ai, 开源, 全栈, cloudbase]
 authors: booker
 date: 2026-07-18
-image: ./img/cover.png
+image: /og/open-plugins-standard.png
 ---
 
 > 一个插件标准，七个工具共用
@@ -308,13 +308,13 @@ flowchart TD
 
 ---
 
-## 实战：把 CloudBase MCP 改成 Open Plugins 插件
+## 实战：把 CloudBase AI Toolkit 改成 Open Plugins 插件
 
 前面讲了一堆理论，来点真实的。
 
-我们最近在维护一个叫 **[CloudBase MCP](https://github.com/TencentCloudBase/CloudBase-MCP)** 的开源项目，给 AI 编程工具提供云接入能力——AI 模型调用、NoSQL/PostgreSQL 数据库、云函数、云托管、云存储、微信小程序对接等等。以前手动配 `.claude-plugin/`、`.codex-plugin/`、`.mcp.json`，每个工具一个配置，维护起来头大。这次正好借 Open Plugins 标准的东风，做了一次改造。
+我们最近在维护一个叫 **[CloudBase AI Toolkit](https://github.com/TencentCloudBase/CloudBase-AI-ToolKit)** 的开源项目，给 AI 编程工具提供云接入能力——AI 模型调用、NoSQL/PostgreSQL 数据库、云函数、云托管、云存储、微信小程序对接等等。以前手动配 `.claude-plugin/`、`.codex-plugin/`、`.mcp.json`，每个工具一个配置，维护起来头大。这次正好借 Open Plugins 标准的东风，做了一次改造。
 
-完整改造 PR：[TencentCloudBase/CloudBase-MCP#808](https://github.com/TencentCloudBase/CloudBase-MCP/pull/808)（+818 / -34）
+完整改造 PR：[TencentCloudBase/CloudBase-AI-ToolKit#808](https://github.com/TencentCloudBase/CloudBase-AI-ToolKit/pull/808)（+818 / -34）
 
 > ![](./img/plugin-pr808.png)
 > *图：PR #808 改造前后对比——从 vendor 专属格式到通用插件标准*
@@ -360,7 +360,7 @@ flowchart LR
     "name": "Tencent CloudBase",
     "url": "https://cloudbase.net"
   },
-  "homepage": "https://github.com/TencentCloudBase/cloudbase-mcp",
+  "homepage": "https://github.com/TencentCloudBase/CloudBase-AI-ToolKit",
   "license": "MIT",
   "keywords": [
     "cloudbase", "tencent-cloud", "baas",
@@ -406,7 +406,7 @@ node scripts/build-open-plugin-spec.mjs --check
 flowchart LR
     subgraph 验收矩阵
         CHECK1[本地 npx plugins discover .]
-        CHECK2[远程 discover<br/>TencentCloudBase/CloudBase-MCP]
+        CHECK2[远程 discover<br/>TencentCloudBase/CloudBase-AI-ToolKit]
         CHECK3[claude plugin install<br/>cloudbase@tencent-cloudbase]
         CHECK4[codex plugin add<br/>cloudbase@tencent-cloudbase]
         CHECK5[构建脚本<br/>--check]
@@ -442,7 +442,7 @@ npx plugins add TencentCloudBase/cloudbase-plugin
 
 ### 第一个坑：marketplace.json 冲突
 
-PR #808 合进去之后，兴冲冲跑 `npx plugins add TencentCloudBase/CloudBase-MCP`，结果：
+PR #808 合进去之后，兴冲冲跑 `npx plugins add TencentCloudBase/CloudBase-AI-ToolKit`，结果：
 
 ```bash
 No plugins found. 2 remote plugin(s) not shown.
@@ -455,7 +455,7 @@ No plugins found. 2 remote plugin(s) not shown.
 ```mermaid
 flowchart LR
     subgraph 问题
-        REPO[CloudBase-MCP 主仓库] --> M[marketplace.json]
+        REPO[CloudBase AI Toolkit 主仓库] --> M[marketplace.json]
         M -->|npx plugins 误判| WRONG[标记为 marketplace<br/>不安装子目录插件]
         REPO --> SUB[plugin/cloudbase/<br/>（真正的插件）]
         SUB -.-x|✗ 拒绝安装| WRONG
@@ -537,7 +537,7 @@ npx plugins add TencentCloudBase/cloudbase-plugin
 npx plugins add TencentCloudBase/cloudbase-sites-plugin
 ```
 
-这个坑的核心教训是：**Open Plugins 会把根目录有 `marketplace.json` 的仓库当作插件集合，而非单插件。** 如果你的仓库本身就有多个发布物（像 CloudBase-MCP 既有 MCP 服务器又有插件），需要建专门的插件仓库。Vercel 和 Supabase 也是这样做的。
+这个坑的核心教训是：**Open Plugins 会把根目录有 `marketplace.json` 的仓库当作插件集合，而非单插件。** 如果你的仓库本身就有多个发布物（像 CloudBase AI Toolkit 既有 MCP 服务器又有插件），需要建专门的插件仓库。Vercel 和 Supabase 也是这样做的。
 
 ---
 
@@ -729,7 +729,7 @@ flowchart TD
 
 Open Plugins 让我想起十年前 npm 刚流行的时候。JavaScript 的包管理也是一团乱麻：AMD、CommonJS、UMD、IIFE……每个项目有自己的一套。后来 npm + ES Modules 统一了标准，整个生态起飞了。AI 编程工具的插件生态，现在就处在那"前 npm"时代。
 
-这次给 CloudBase MCP 做改造是个挺有意思的过程。从 `npx plugins discover` 识别出插件，到一行命令装到所有工具，那种"写一次到处用"的感觉，恰好就是这个标准想解决的问题。
+这次给 CloudBase AI Toolkit 做改造是个挺有意思的过程。从 `npx plugins discover` 识别出插件，到一行命令装到所有工具，那种"写一次到处用"的感觉，恰好就是这个标准想解决的问题。
 
 > ![](./img/plugin-install-all.png)
 > *图：npx plugins add TencentCloudBase/cloudbase-plugin——一行命令装到所有工具*
@@ -760,7 +760,7 @@ flowchart LR
 
 如果你也在做 AI 编程工具的扩展，推荐看看 Open Plugins 规范。好消息是不用搞多复杂——项目里加个 `.plugin/plugin.json`，你的插件就能被 7 种工具识别。我们的改造也就四百来行代码，两天不到搞完。
 
-CloudBase-MCP 对应的插件在这两个仓库，供参考：
+CloudBase AI Toolkit 对应的插件在这两个仓库，供参考：
 
 ```bash
 npx plugins add TencentCloudBase/cloudbase-plugin
@@ -779,5 +779,5 @@ Open Plugins 还没到"成熟"那一步，但方向是对的。能让同一份�
 - [Model Context Protocol](https://modelcontextprotocol.io)
 - [CloudBase Plugin](https://github.com/TencentCloudBase/cloudbase-plugin) — Open Plugins 标准插件仓库
 - [CloudBase Sites Plugin](https://github.com/TencentCloudBase/cloudbase-sites-plugin) — Sites 插件仓库
-- [CloudBase MCP](https://github.com/TencentCloudBase/CloudBase-MCP) — 腾讯云开发 MCP 插件
-- [PR #808: CloudBase MCP 集成 Open Plugin 规范](https://github.com/TencentCloudBase/CloudBase-MCP/pull/808)
+- [CloudBase AI Toolkit](https://github.com/TencentCloudBase/CloudBase-AI-ToolKit) — 腾讯云开发 AI Toolkit，含 MCP 服务器、skills 和插件
+- [PR #808: CloudBase AI Toolkit 集成 Open Plugin 规范](https://github.com/TencentCloudBase/CloudBase-AI-ToolKit/pull/808)

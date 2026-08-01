@@ -7,9 +7,9 @@ import Reveal from '../components/Reveal'
 
 const featuredProjects = [
   {
-    name: 'CloudBase-MCP',
-    tagline: translate({ id: 'project.cb-mcp.tagline', message: 'Connect CloudBase to your AI Agent. 从 AI prompt 到上线应用。' }),
-    url: 'https://github.com/TencentCloudBase/CloudBase-MCP',
+    name: 'CloudBase AI Toolkit',
+    tagline: translate({ id: 'project.cb-mcp.tagline', message: 'AI toolkit for CloudBase — MCP server, skills & plugins for AI coding tools.' }),
+    url: 'https://github.com/TencentCloudBase/CloudBase-AI-ToolKit',
     year: '2025',
   },
   {
@@ -95,7 +95,7 @@ export default function Home(): ReactNode {
                     {translate({ id: 'homepage.writing.card.title', message: 'Open Plugins：AI 编程助手的插件标准' })}
                   </h3>
                   <p className="leading-relaxed" style={{ color: 'var(--ink-600)', maxWidth: '36rem' }}>
-                    {translate({ id: 'homepage.writing.card.desc', message: 'Vercel Labs 维护的开放标准——一个插件，七种工具，一次编写到处运行。从协议规范到 CloudBase MCP 改造实战，一文讲透。' })}
+                    {translate({ id: 'homepage.writing.card.desc', message: 'Vercel Labs 维护的开放标准——一个插件，七种工具，一次编写到处运行。从协议规范到 CloudBase AI Toolkit 改造实战，一文讲透。' })}
                   </p>
                   <div className="mt-6 flex items-center gap-3 text-sm" style={{ color: 'var(--ink-500)' }}>
                     <span className="link-underline" style={{ color: 'var(--ink-800)' }}>Read essay →</span>

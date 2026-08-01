@@ -5,7 +5,7 @@ description: 从 /goal 到 Workflows，五个机制解决同一个问题：怎�
 tags: [Claude Code, AI 编程, Agent]
 date: 2026-07-06
 authors: [booker]
-image: ./images/scene-01-cover.png
+image: /og/claude-code-five-mechanisms.png
 ---
 
 用过 Claude Code 做复杂任务的，八成遇到过这种事——

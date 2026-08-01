@@ -1,10 +1,10 @@
 ---
 title: "Open Plugins: The Plugin Standard for AI Coding Tools"
-description: An open standard maintained by Vercel Labs — one plugin, seven tools, write once run everywhere. From protocol specs to CloudBase MCP migration, explained in full.
+description: An open standard maintained by Vercel Labs — one plugin, seven tools, write once run everywhere. From protocol specs to CloudBase AI Toolkit migration, explained in full.
 tags: [ai, 开源, 全栈, cloudbase]
 authors: booker
 date: 2026-07-18
-image: ./img/cover.png
+image: /og/en/open-plugins-standard.png
 lang: en
 ---
 
@@ -323,13 +323,13 @@ Expansion rules: recursive expansion (nested references are replaced); escape ch
 
 ---
 
-## In Practice: Migrating CloudBase MCP to Open Plugins
+## In Practice: Migrating CloudBase AI Toolkit to Open Plugins
 
 Enough theory — let's get real.
 
-We've been maintaining an open-source project called **[CloudBase MCP](https://github.com/TencentCloudBase/CloudBase-MCP)** that provides cloud access for AI coding tools — AI model invocation, NoSQL/PostgreSQL databases, cloud functions, CloudRun, cloud storage, WeChat Mini Program integration, and more. Previously we manually configured `.claude-plugin/`, `.codex-plugin/`, `.mcp.json` — one config per tool, a maintenance headache. Open Plugins came at the perfect time for a migration.
+We've been maintaining an open-source project called **[CloudBase AI Toolkit](https://github.com/TencentCloudBase/CloudBase-AI-ToolKit)** that provides cloud access for AI coding tools — AI model invocation, NoSQL/PostgreSQL databases, cloud functions, CloudRun, cloud storage, WeChat Mini Program integration, and more. Previously we manually configured `.claude-plugin/`, `.codex-plugin/`, `.mcp.json` — one config per tool, a maintenance headache. Open Plugins came at the perfect time for a migration.
 
-Full migration PR: [TencentCloudBase/CloudBase-MCP#808](https://github.com/TencentCloudBase/CloudBase-MCP/pull/808) (+818 / -34)
+Full migration PR: [TencentCloudBase/CloudBase-AI-ToolKit#808](https://github.com/TencentCloudBase/CloudBase-AI-ToolKit/pull/808) (+818 / -34)
 
 > ![](./img/plugin-pr808.png)
 > *Fig: PR #808 before/after — from vendor-specific formats to a universal plugin standard*
@@ -375,7 +375,7 @@ Following the Open Plugins spec v1.0.0 closed schema, only retaining permitted m
     "name": "Tencent CloudBase",
     "url": "https://cloudbase.net"
   },
-  "homepage": "https://github.com/TencentCloudBase/cloudbase-mcp",
+  "homepage": "https://github.com/TencentCloudBase/CloudBase-AI-ToolKit",
   "license": "MIT",
   "keywords": [
     "cloudbase", "tencent-cloud", "baas",
@@ -421,7 +421,7 @@ GitHub Actions workflow (`.github/workflows/open-plugin-spec-check.yml`) runs ch
 flowchart LR
     subgraph Validation Matrix
         CHECK1[Local npx plugins discover .]
-        CHECK2[Remote discover<br/>TencentCloudBase/CloudBase-MCP]
+        CHECK2[Remote discover<br/>TencentCloudBase/CloudBase-AI-ToolKit]
         CHECK3[claude plugin install<br/>cloudbase@tencent-cloudbase]
         CHECK4[codex plugin add<br/>cloudbase@tencent-cloudbase]
         CHECK5[Build script<br/>--check]
@@ -457,7 +457,7 @@ No extra config needed — just place directories by convention.
 
 ### First Pitfall: marketplace.json Conflict
 
-After PR #808 was merged, I excitedly ran `npx plugins add TencentCloudBase/CloudBase-MCP` and got:
+After PR #808 was merged, I excitedly ran `npx plugins add TencentCloudBase/CloudBase-AI-ToolKit` and got:
 
 ```bash
 No plugins found. 2 remote plugin(s) not shown.
@@ -470,7 +470,7 @@ After digging: the main repo root has a `marketplace.json` — an index file for
 ```mermaid
 flowchart LR
     subgraph The Problem
-        REPO[CloudBase-MCP main repo] --> M[marketplace.json]
+        REPO[CloudBase AI Toolkit main repo] --> M[marketplace.json]
         M -->|npx plugins misidentifies| WRONG[Marked as marketplace<br/>won't install subdirectory plugins]
         REPO --> SUB[plugin/cloudbase/<br/>the actual plugin]
         SUB -.-x|✗ Installation denied| WRONG
@@ -552,7 +552,7 @@ npx plugins add TencentCloudBase/cloudbase-plugin
 npx plugins add TencentCloudBase/cloudbase-sites-plugin
 ```
 
-The core lesson: **Open Plugins treats a repo with `marketplace.json` at its root as a plugin collection, not a single plugin.** If your repo has multiple artifacts (like CloudBase-MCP with both an MCP server and plugins), you need dedicated plugin repos. Vercel and Supabase do the same.
+The core lesson: **Open Plugins treats a repo with `marketplace.json` at its root as a plugin collection, not a single plugin.** If your repo has multiple artifacts (like CloudBase AI Toolkit with both an MCP server and plugins), you need dedicated plugin repos. Vercel and Supabase do the same.
 
 ---
 
@@ -742,7 +742,7 @@ flowchart TD
 
 Open Plugins reminds me of when npm was just gaining traction ten years ago. JavaScript package management was a mess: AMD, CommonJS, UMD, IIFE… every project had its own system. Then npm + ES Modules unified the standard, and the entire ecosystem took off. The AI coding tool plugin ecosystem is in that "pre-npm" era right now.
 
-Migrating CloudBase MCP was a fascinating process. From `npx plugins discover` identifying the plugin, to installing it across every tool with one command — that feeling of "write once, use everywhere" is exactly what this standard aims to deliver.
+Migrating CloudBase AI Toolkit was a fascinating process. From `npx plugins discover` identifying the plugin, to installing it across every tool with one command — that feeling of "write once, use everywhere" is exactly what this standard aims to deliver.
 
 > ![](./img/plugin-install-all.png)
 > *Fig: npx plugins add TencentCloudBase/cloudbase-plugin — one command to install everywhere*
@@ -773,7 +773,7 @@ flowchart LR
 
 If you build extensions for AI coding tools, I recommend checking out the Open Plugins spec. The good news is you don't need anything complex — just add a `.plugin/plugin.json` to your project and it becomes discoverable by 7 tools. Our migration was about 400 lines of code, finished in under two days.
 
-The CloudBase-MCP plugins are at these repos, for reference:
+The CloudBase AI Toolkit plugins are at these repos, for reference:
 
 ```bash
 npx plugins add TencentCloudBase/cloudbase-plugin
@@ -792,5 +792,5 @@ Open Plugins isn't "mature" yet, but the direction is right. Getting the same pl
 - [Model Context Protocol](https://modelcontextprotocol.io)
 - [CloudBase Plugin](https://github.com/TencentCloudBase/cloudbase-plugin) — Open Plugins standard plugin repo
 - [CloudBase Sites Plugin](https://github.com/TencentCloudBase/cloudbase-sites-plugin) — Sites plugin repo
-- [CloudBase MCP](https://github.com/TencentCloudBase/CloudBase-MCP) — Tencent Cloud MCP plugin
-- [PR #808: CloudBase MCP Open Plugin Spec Integration](https://github.com/TencentCloudBase/CloudBase-MCP/pull/808)
+- [CloudBase AI Toolkit](https://github.com/TencentCloudBase/CloudBase-AI-ToolKit) — Tencent Cloud AI Toolkit, MCP server, skills & plugins
+- [PR #808: CloudBase AI Toolkit Open Plugin Spec Integration](https://github.com/TencentCloudBase/CloudBase-AI-ToolKit/pull/808)

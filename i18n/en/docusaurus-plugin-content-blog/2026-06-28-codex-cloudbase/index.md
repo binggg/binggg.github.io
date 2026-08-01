@@ -1,6 +1,7 @@
 ---
 slug: codex-getting-started-cloudbase
 title: "Codex grew 7x in 6 months and non-programmers are using it — here's how to go from zero to deployed multiplayer game"
+image: /og/en/codex-getting-started-cloudbase.png
 date: 2026-06-28
 authors: [booker]
 tags: [ai, fullstack, cloudbase]
@@ -133,7 +134,7 @@ CloudBase supports both OpenAI and Anthropic protocols. DeepSeek, GLM, Kimi — 
 
 #### Install plugins (one-click deployment)
 
-With the CloudBase MCP plugin installed, Codex can deploy apps directly from the conversation. No need to manually log into a cloud console, configure domains, or upload files. Just say "deploy it" and it handles everything.
+With the CloudBase AI Toolkit plugin installed, Codex can deploy apps directly from the conversation. No need to manually log into a cloud console, configure domains, or upload files. Just say "deploy it" and it handles everything.
 
 ---
 

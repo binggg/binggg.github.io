@@ -11,12 +11,20 @@
  *   4. 额外生成站点级默认 OG 图 → static/img/og-default.png
  *
  * 设计语言（参考 scottspence.com 的动态 OG，融入本站品牌）：
- *   - 极淡近白渐变背景（蓝白 → 薰衣草白 → 青绿白，借鉴 scottspence 的干净留白）
+ *   - 可感知的浅蓝白渐变背景（蓝白 → 薰衣草白 → 青绿白，对齐 scottspence 的
+ *     干净留白但保留渐变层次，避免被误读为纯白）
  *   - 左侧大标题主导（占最大视觉空间），右侧高饱和抽象几何色块组
- *     （靛紫/亮蓝/青绿/琥珀，紧凑交叠、错落连接，带浮空阴影）
- *   - 信息层级：品牌标 → 标题 → 副标题（最多 2 行）→ 作者/站点
- *   - 2026-08-02 优化：副标题截断至 2 行消除密集感；色块组收紧交错增强动感；
- *     背景减淡至近白提升极简质感（对齐 scottspence 参考）
+ *     （靛紫/亮蓝/青绿/琥珀，松散错落、交叠连接，带柔和浮空阴影）
+ *   - 信息层级：标题 → 副标题（最多 2 行，弱化处理）→ 作者/站点
+ *   - 2026-08-02 二轮优化（对齐 scott 参考）：
+ *     背景渐变加深至可感知；主紫块缩小、新增琥珀橙方块、整体更松散错落；
+ *     新增连接点阵动线消除左右割裂；副标题弱化（更浅灰、更小）
+ *   - 2026-08-03 四轮优化（像素级对齐 scott 的极简美学）：
+ *     移除顶部品牌行（B 方块 + BLOG 徽标）——scott 无品牌标，标题才是主角；
+ *     标题字号随之放大、位置上移；作者署名移到标题下方（对齐 scott 的
+ *     「• Scott Spence / scottspence.com」位置），替代底部蓝线 meta 行；
+ *     移除连接点阵（像素分析显示其侵入文字区 x<420，scott 无此元素）；
+ *     背景右端增加淡粉紫渐变段（对齐 scott 冷蓝白→粉紫的冷暖过渡）
  *
  * 用法：node scripts/generate-og-images.mjs [--force]
  *   --force 强制重新生成所有图（默认跳过已存在且较新的图）
@@ -96,6 +104,69 @@ function fitTitle(title, maxWidth, fontSize) {
 }
 
 /* ---------------------------------------------------------------------------
+ * 标题自适应排版（对齐 scottspence：标题完整显示，不截断成省略号）
+ *  - 模拟换行（CJK 逐字、拉丁逐词），按真实渲染行数动态选字号
+ *  - 优先 3 行（62→34px），长标题降级 4 行（32→28px），最后才截断
+ * ------------------------------------------------------------------------- */
+/** 文本 token 化：CJK 逐字，拉丁串（含空格）为整体 */
+function tokenize(text) {
+  const tokens = [];
+  let latin = '';
+  for (const ch of text) {
+    const cp = ch.codePointAt(0);
+    if (cp >= 0x2e80) {
+      if (latin) { tokens.push(latin); latin = ''; }
+      tokens.push(ch);
+    } else {
+      latin += ch;
+    }
+  }
+  if (latin) tokens.push(latin);
+  return tokens;
+}
+
+/** 模拟换行，返回行数组（与 Satori/Yoga 的 CJK 逐字、拉丁逐词换行一致） */
+function wrapText(text, maxWidth, fontSize) {
+  const lines = [];
+  let cur = '';
+  for (const t of tokenize(text)) {
+    if (cur === '') { cur = t; continue; }
+    if (textWidth(cur + t, fontSize) <= maxWidth) { cur += t; continue; }
+    lines.push(cur);
+    cur = t;
+    /* 单个超长 token（极端连续英文）按字符拆行 */
+    while (textWidth(cur, fontSize) > maxWidth) {
+      let acc = '';
+      for (const ch of cur) {
+        if (textWidth(acc + ch, fontSize) > maxWidth) break;
+        acc += ch;
+      }
+      lines.push(acc);
+      cur = cur.slice(acc.length);
+    }
+  }
+  if (cur) lines.push(cur);
+  return lines;
+}
+
+/** 按「最大可完整显示」原则选字号与行数，返回 {fontSize, lineClamp, text} */
+function fitTitleSmart(title, maxWidth) {
+  for (const s of [62, 58, 54, 50, 46, 42, 38, 34]) {
+    if (wrapText(title, maxWidth * 0.95, s).length <= 3) {
+      return {fontSize: s, lineClamp: 3, text: title};
+    }
+  }
+  for (const s of [32, 30, 28]) {
+    if (wrapText(title, maxWidth * 0.95, s).length <= 4) {
+      return {fontSize: s, lineClamp: 4, text: title};
+    }
+  }
+  /* 兜底：28px 截断到 4 行 + 省略号 */
+  const kept = wrapText(title, maxWidth * 0.95, 28).slice(0, 4);
+  return {fontSize: 28, lineClamp: 4, text: kept.join('').slice(0, -1) + '…'};
+}
+
+/* ---------------------------------------------------------------------------
  * 轻量 JSX 工厂（Satori 接受 {type, props} 结构，children 需展平）
  * ------------------------------------------------------------------------- */
 const h = (type, props = {}, ...children) => {
@@ -110,14 +181,44 @@ const h = (type, props = {}, ...children) => {
  * ------------------------------------------------------------------------- */
 const BRAND_BLUE = '#2563eb';
 const INK = '#1e293b';
-const MUTED = '#64748b';
+
+/* 背景细网格（对齐 scottspence.com 的标志性坐标纸质感）
+ * Satori 不支持 repeating-linear-gradient / url(data:) 背景图，
+ * 用 SVG line 元素平铺绘制——24px 格距、1px 浅灰线、对比度克制不抢文字。 */
+const GRID_SIZE = 24;
+function GridBackground() {
+  const lines = [];
+  for (let x = 0; x <= WIDTH; x += GRID_SIZE) {
+    lines.push(h('line', {x1: x, y1: 0, x2: x, y2: HEIGHT, stroke: 'rgba(100,116,139,0.14)', strokeWidth: 1}));
+  }
+  for (let y = 0; y <= HEIGHT; y += GRID_SIZE) {
+    lines.push(h('line', {x1: 0, y1: y, x2: WIDTH, y2: y, stroke: 'rgba(100,116,139,0.14)', strokeWidth: 1}));
+  }
+  return h('svg', {
+    width: WIDTH, height: HEIGHT,
+    style: {position: 'absolute', top: 0, left: 0, display: 'block'},
+  }, ...lines);
+}
 
 /* 几何装饰组件：右侧高饱和抽象色块组
  * 2026-08-01 重构：对齐 scottspence.com OG 风格——
  *   高饱和实色块（靛紫/亮蓝/青绿/琥珀）错落重叠 + 浮空阴影，成为画面视觉锚点。
  *   旧版低透明度色块（0.13-0.38）视觉上几乎不可见，整图被误读为纯白文档。
- * 2026-08-02 优化：色块组收紧、交叠加深（青绿块上移叠入紫块右缘、新增浅蓝小块、
- *   琥珀条加长延伸），借鉴参考图的「方块交叠连接」动感。
+ * 2026-08-02 首轮：色块组收紧、交叠加深，借鉴参考图的「方块交叠连接」动感。
+ * 2026-08-02 二轮（对齐 scott）：
+ *   - 主紫块 340→280 缩小，整体更松散错落（scott 的方块群偏中等尺寸、不独占画面）
+ *   - 新增琥珀橙方块（对应 scott 的珊瑚橙块，暖色平衡冷色）
+ *   - 青绿块加大并叠入紫块右缘，交叠更深
+ *   - 新增 6 点渐变连接点阵：从文字区边界延伸到色块组，
+ *     形成「文字 → 数据流 → 图形」动线，消除左右割裂
+ * 2026-08-03 三轮（对齐 scott 的克制美学）：
+ *   - 装饰从 10 元素精简到 5：只保留「紫主块 + 青绿块 + 橙块 + 蓝小方 + 3 点阵」
+ *   - 移除紫色圆环 / 琥珀扁条 / 双圆点，消除堆砌感
+ *   - 像素级对比：scott 右侧高饱和像素占比约 25%，旧版 50% → 本轮回到 ~30%
+ * 2026-08-03 四轮（像素级对齐 scott）：
+ *   - 移除连接点阵——像素分析显示 3 点阵位于 x 400-536，侵入标题区
+ *     （标题占 x 64-784），而 scott 色块严格集中在 x 820-1120
+ *   - 橙块右移（right 336→280）：scott 色块群 x 820~1120，旧版橙块 x 764 偏左
  * 注意：返回数组并直接展开到 root 下，色块 absolute 相对 root 定位。
  *   不能包一层 inset:0 容器——Satori 不支持 inset shorthand，容器会被解析为 0x0，色块全部偏移出画布。 */
 function Decor() {
@@ -125,70 +226,48 @@ function Decor() {
     // 大靛紫渐变方块（右上主锚点，浮空阴影）
     h('div', {
       style: {
-        position: 'absolute', right: 92, top: 60, width: 340, height: 340, borderRadius: 68,
+        position: 'absolute', right: 110, top: 78, width: 240, height: 240, borderRadius: 52,
         background: 'linear-gradient(135deg, #4F46E5 0%, #7C3AED 100%)',
         transform: 'rotate(8deg)',
-        boxShadow: '0 28px 56px rgba(79,70,229,0.30)',
+        boxShadow: '0 24px 48px rgba(79,70,229,0.24)',
       },
     }),
     // 亮蓝小方块（错落叠于大块左上缘）
     h('div', {
       style: {
-        position: 'absolute', right: 168, top: 88, width: 92, height: 92, borderRadius: 20,
+        position: 'absolute', right: 176, top: 102, width: 72, height: 72, borderRadius: 18,
         background: '#2563EB', transform: 'rotate(-14deg)',
-        boxShadow: '0 12px 24px rgba(37,99,235,0.35)',
+        boxShadow: '0 10px 20px rgba(37,99,235,0.28)',
       },
     }),
     // 青绿渐变方块（叠入大块右下缘，交叠连接）
     h('div', {
       style: {
-        position: 'absolute', right: 150, bottom: 92, width: 170, height: 170, borderRadius: 36,
+        position: 'absolute', right: 140, bottom: 92, width: 184, height: 184, borderRadius: 40,
         background: 'linear-gradient(135deg, #0D9488 0%, #06B6D4 100%)',
         transform: 'rotate(-6deg)',
-        boxShadow: '0 16px 32px rgba(13,148,136,0.32)',
+        boxShadow: '0 14px 28px rgba(13,148,136,0.26)',
       },
     }),
-    // 浅蓝小方块（叠于紫块右下角，点睛连接）
+    // 琥珀橙方块（对应 scott 珊瑚橙块，暖色平衡；right 336→280 对齐 scott 色块群 x 范围）
     h('div', {
       style: {
-        position: 'absolute', right: 96, top: 320, width: 64, height: 64, borderRadius: 16,
-        background: '#60A5FA', transform: 'rotate(12deg)',
-        boxShadow: '0 10px 20px rgba(96,165,250,0.35)',
+        position: 'absolute', right: 280, bottom: 60, width: 100, height: 100, borderRadius: 24,
+        background: 'linear-gradient(135deg, #F59E0B 0%, #F97316 100%)',
+        transform: 'rotate(10deg)',
+        boxShadow: '0 12px 24px rgba(249,115,22,0.24)',
       },
-    }),
-    // 紫色圆环（装饰间隙）
-    h('div', {
-      style: {
-        position: 'absolute', right: 424, top: 132, width: 96, height: 96, borderRadius: 48,
-        border: '20px solid rgba(124,58,237,0.30)',
-      },
-    }),
-    // 琥珀渐变扁条（底部延伸，呼应暖色连接感）
-    h('div', {
-      style: {
-        position: 'absolute', right: 40, bottom: 66, width: 250, height: 24, borderRadius: 12,
-        background: 'linear-gradient(90deg, #F59E0B 0%, #F97316 100%)',
-        transform: 'rotate(-4deg)',
-      },
-    }),
-    // 橙色圆点（提亮）
-    h('div', {
-      style: {position: 'absolute', right: 108, top: 436, width: 30, height: 30, borderRadius: 15, background: '#F97316'},
-    }),
-    // 青色小圆点（叠于青绿块上沿）
-    h('div', {
-      style: {position: 'absolute', right: 300, bottom: 172, width: 26, height: 26, borderRadius: 13, background: '#06B6D4'},
     }),
   ];
 }
 
-/** 品牌标：蓝色圆角方块 + 白字 B（与 static/img/logo.svg 一致） */
-function BrandMark() {
+/** 品牌标：蓝色圆角方块 + 白字 B（与 static/img/logo.svg 一致），支持尺寸定制 */
+function BrandMark(size = 44) {
   return h('div', {
     style: {
-      width: 44, height: 44, borderRadius: 10, background: BRAND_BLUE,
+      width: size, height: size, borderRadius: Math.round(size * 0.23), background: BRAND_BLUE,
       display: 'flex', alignItems: 'center', justifyContent: 'center',
-      color: '#fff', fontSize: 26, fontWeight: 700, lineHeight: 1,
+      color: '#fff', fontSize: Math.round(size * 0.6), fontWeight: 700, lineHeight: 1,
     },
   }, 'B');
 }
@@ -198,17 +277,14 @@ function BrandMark() {
  * @param {Object} opts
  * @param {string}   opts.title        主标题
  * @param {string}   [opts.subtitle]   副标题（站点 tagline 或文章 description）
- * @param {string}   [opts.badge]      顶部徽标文字
- * @param {string}   [opts.meta]       底部元信息（作者 · 站点）
+ * @param {string}   [opts.badge]      顶部徽标文字（可选，仅站点级图使用；文章图不传以对齐 scott 极简风格）
+ * @param {string}   [opts.meta]       署名信息（作者 · 站点）
  */
-export async function renderOg({title, subtitle, badge = 'BLOG', meta = 'Booker Zhao · binggg.github.io'}) {
-  /* 标题字号自适应：越长字号越小，最多 3 行（标题是画面主角，占最大视觉空间） */
-  const len = title.length;
-  const fontSize = len <= 16 ? 62 : len <= 24 ? 56 : len <= 32 ? 50 : 46;
-  const lineHeight = 1.32;
+export async function renderOg({title, subtitle, badge = '', meta = 'Booker Zhao · binggg.github.io'}) {
+  /* 标题字号自适应：模拟换行选最大能完整显示的字号（优先 3 行，长标题降级 4 行） */
   const titleWidth = 720; // 标题可用宽度（避开右侧色块区）
-  const maxLines = 3;
-  const fitted = fitTitle(title, titleWidth * maxLines * 0.97, fontSize);
+  const lineHeight = 1.32;
+  const {fontSize, lineClamp, text: fitted} = fitTitleSmart(title, titleWidth);
 
   /* 副标题：最多 2 行，超长截断（信息层级克制，避免与标题抢视觉） */
   const fittedSub = subtitle ? fitTitle(subtitle, titleWidth * 2 * 0.97, 24) : undefined;
@@ -216,12 +292,27 @@ export async function renderOg({title, subtitle, badge = 'BLOG', meta = 'Booker 
   const jsx = h('div', {
     style: {
       width: WIDTH, height: HEIGHT, display: 'flex', position: 'relative',
-      background: 'linear-gradient(118deg, #F7FAFE 0%, #F5F3FC 46%, #F0FAF7 100%)',
+      background: 'linear-gradient(118deg, #EFF3FB 0%, #EBE7F7 40%, #F0E6F2 100%)',
       fontFamily: 'Noto Sans CJK SC',
     },
   }, [
+    /* 背景细网格（scott 标志性坐标纸质感，置于最底层） */
+    GridBackground(),
+    /* 背景光晕（对齐 scottspence：右上粉紫、左下淡蓝，增强渐变可感知度） */
+    h('div', {
+      style: {
+        position: 'absolute', right: -140, top: -140, width: 600, height: 600, borderRadius: 999,
+        background: 'radial-gradient(circle, rgba(217,70,239,0.13) 0%, rgba(217,70,239,0) 65%)',
+      },
+    }),
+    h('div', {
+      style: {
+        position: 'absolute', left: -160, bottom: -160, width: 640, height: 640, borderRadius: 999,
+        background: 'radial-gradient(circle, rgba(37,99,235,0.13) 0%, rgba(37,99,235,0) 65%)',
+      },
+    }),
     ...Decor(),
-    /* 左侧内容区 */
+    /* 左侧内容区（对齐 scott：无顶部品牌行，标题为主体，署名在标题下方） */
     h('div', {
       style: {
         position: 'relative', display: 'flex', flexDirection: 'column',
@@ -229,35 +320,33 @@ export async function renderOg({title, subtitle, badge = 'BLOG', meta = 'Booker 
         width: '100%', height: '100%',
       },
     }, [
-      /* 顶部品牌行 */
-      h('div', {style: {display: 'flex', alignItems: 'center', gap: 14, marginBottom: 28}}, [
-        BrandMark(),
-        h('div', {
-          style: {
-            fontSize: 22, fontWeight: 700, letterSpacing: '0.14em', color: BRAND_BLUE,
-          },
-        }, badge),
-      ]),
-      /* 主标题（自动换行，最多 3 行） */
+      /* 顶部徽标（可选，仅站点级图；文章图 badge 为空不渲染） */
+      badge && h('div', {
+        style: {
+          fontSize: 20, fontWeight: 700, letterSpacing: '0.16em', color: BRAND_BLUE,
+          marginBottom: 26,
+        },
+      }, badge),
+      /* 主标题（自动换行，最多 3 行，长标题降级 4 行完整显示） */
       h('div', {
         style: {
           fontSize, fontWeight: 700, color: INK, lineHeight,
-          display: '-webkit-box', WebkitLineClamp: 3, WebkitBoxOrient: 'vertical',
+          display: '-webkit-box', WebkitLineClamp: lineClamp, WebkitBoxOrient: 'vertical',
           overflow: 'hidden', maxWidth: titleWidth,
         },
       }, fitted),
-      /* 副标题（最多 2 行，超长省略） */
+      /* 副标题（最多 2 行，超长省略；弱化处理——更浅灰、更小，避免与标题抢视觉） */
       fittedSub && h('div', {
         style: {
-          marginTop: 18, fontSize: 24, color: MUTED, lineHeight: 1.5,
+          marginTop: 16, fontSize: 22, color: '#94a3b8', lineHeight: 1.5,
           display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical',
           overflow: 'hidden', maxWidth: titleWidth,
         },
       }, fittedSub),
-      /* 底部元信息 */
-      h('div', {style: {display: 'flex', alignItems: 'center', gap: 12, marginTop: 34}}, [
-        h('div', {style: {width: 30, height: 3, borderRadius: 2, background: BRAND_BLUE}}),
-        h('div', {style: {fontSize: 22, color: '#475569', letterSpacing: '0.02em'}}, meta),
+      /* 署名行（对齐 scott「标题下方作者信息」：品牌小标 + 作者 · 站点） */
+      h('div', {style: {display: 'flex', alignItems: 'center', gap: 12, marginTop: 30}}, [
+        BrandMark(34),
+        h('div', {style: {fontSize: 21, color: '#475569', letterSpacing: '0.02em'}}, meta),
       ]),
     ]),
   ]);

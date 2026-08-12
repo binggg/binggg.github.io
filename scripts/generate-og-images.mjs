@@ -373,8 +373,16 @@ function findDisplayViolations(node, path = 'root') {
 
 /* ---------------------------------------------------------------------------
  * 同步 frontmatter：把文章的 image 字段指向生成的 OG 图（幂等）
- *  - 已有 image 行 → 替换
- *  - 无 image 行 → 插到 title 行之后
+ *  - 已有 image 行 → 替换；无 image 行 → 插到 title 行之后
+ *  - 仅当期望值不一致时才写文件（不依赖图是否重新生成）
+ *
+ * imageValue 形态（2026-08-12 修复）：
+ *  - zh（默认 locale）：站内绝对路径 `/og/<slug>.png`，Docusaurus 的
+ *    addBaseUrl 会拼成站点绝对 URL，行为正确
+ *  - en（i18n locale）：必须用完整绝对 URL `https://binggg.github.io/og/en/<slug>.png`。
+ *    相对路径会被 Docusaurus i18n 加 locale 前缀 → 产物 `/en/og/en/<slug>.png`
+ *    双层冗余路径（依赖 static 复制到 locale 目录才可用）；
+ *    addBaseUrl 对 hasProtocol(url) 短路原样返回，完整 URL 才能得到干净路径
  * ------------------------------------------------------------------------- */
 function syncFrontmatterImage(file, imageValue) {
   let content = fs.readFileSync(file, 'utf8');
@@ -395,6 +403,12 @@ function syncFrontmatterImage(file, imageValue) {
   return true;
 }
 
+/* 站点绝对 OG URL：zh → /og/<slug>.png；en（i18n）→ https://binggg.github.io/og/en/<slug>.png
+ * 仅 en 需要完整 URL：Docusaurus i18n 会对站内相对路径的 metadata.image 加 locale 前缀 */
+function ogImageValue(relOut, isI18n) {
+  return isI18n ? `https://binggg.github.io/${relOut}` : `/${relOut}`;
+}
+
 /* ---------------------------------------------------------------------------
  * 主流程
  * ------------------------------------------------------------------------- */
@@ -405,10 +419,10 @@ async function main() {
 
   /* 1. 逐篇扫描博客文章（默认语言 + 英文 i18n） */
   const locales = [
-    {dir: BLOG_DIR, outDir: OG_DIR, metaSite: 'binggg.github.io'},
-    {dir: I18N_BLOG_DIR, outDir: path.join(OG_DIR, 'en'), metaSite: 'binggg.github.io · English'},
+    {dir: BLOG_DIR, outDir: OG_DIR, metaSite: 'binggg.github.io', isI18n: false},
+    {dir: I18N_BLOG_DIR, outDir: path.join(OG_DIR, 'en'), metaSite: 'binggg.github.io · English', isI18n: true},
   ];
-  for (const {dir, outDir, metaSite} of locales) {
+  for (const {dir, outDir, metaSite, isI18n} of locales) {
     if (!fs.existsSync(dir)) continue;
     fs.mkdirSync(outDir, {recursive: true});
     const entries = fs.readdirSync(dir, {withFileTypes: true})
@@ -424,26 +438,29 @@ async function main() {
       const slug = fm.slug || entry.name.replace(/^\d{4}-\d{2}-\d{2}-/, '');
       const outFile = path.join(outDir, `${slug}.png`);
 
-      /* 已生成且比文章新则跳过（--force 除外） */
-      if (!FORCE && fs.existsSync(outFile)) {
+      /* 图比文章旧才重新生成（--force 除外） */
+      let needsRegen = FORCE;
+      if (!needsRegen && fs.existsSync(outFile)) {
         const outStat = fs.statSync(outFile);
         const srcStat = fs.statSync(indexFile);
-        if (outStat.mtimeMs > srcStat.mtimeMs) continue;
+        needsRegen = outStat.mtimeMs <= srcStat.mtimeMs;
+      }
+      if (needsRegen) {
+        const date = fm.date ? String(fm.date) : '';
+        const meta = ['Booker Zhao', date && date.replace(/-/g, '.'), metaSite].filter(Boolean).join(' · ');
+        const png = await renderOg({
+          title,
+          subtitle: fm.description,
+          meta,
+        });
+        fs.writeFileSync(outFile, png);
+        generated.push(outFile);
       }
 
-      const date = fm.date ? String(fm.date) : '';
-      const meta = ['Booker Zhao', date && date.replace(/-/g, '.'), metaSite].filter(Boolean).join(' · ');
-      const png = await renderOg({
-        title,
-        subtitle: fm.description,
-        meta,
-      });
-      fs.writeFileSync(outFile, png);
-      generated.push(outFile);
-
-      /* 同步 frontmatter image 指向（static 目录映射到站点根，路径从 static 之后算） */
+      /* 同步 frontmatter image 指向（独立于图是否重新生成，期望值不一致才写）
+       * static 目录映射到站点根，路径从 static 之后算 */
       const relOut = path.relative(path.join(ROOT, 'static'), outFile).replace(/\\/g, '/');
-      if (syncFrontmatterImage(indexFile, `/${relOut}`)) synced.push(indexFile);
+      if (syncFrontmatterImage(indexFile, ogImageValue(relOut, isI18n))) synced.push(indexFile);
     }
   }
 

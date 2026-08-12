@@ -1,7 +1,7 @@
 ---
 slug: vibe-coding-non-technical
 title: "Vibe Coding isn't a myth: non-developers can build real apps with AI too"
-image: /og/en/vibe-coding-non-technical.png
+image: https://binggg.github.io/og/en/vibe-coding-non-technical.png
 date: 2026-01-09
 authors: [booker]
 tags: [ai, fullstack]

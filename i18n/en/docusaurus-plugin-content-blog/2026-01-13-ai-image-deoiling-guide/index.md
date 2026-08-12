@@ -1,6 +1,6 @@
 ---
 title: 'How to Generate "Non-Oily" AI Images: 3 Anti-AI Style Guides'
-image: /og/en/ai-image-deoiling-guide.png
+image: https://binggg.github.io/og/en/ai-image-deoiling-guide.png
 description: 'After spending months generating AI images, the biggest problem wasn''t the models — it was that every image screamed "made by AI." Here are 3 proven style recipes that fix it.'
 date: 2026-01-13
 authors: [booker]

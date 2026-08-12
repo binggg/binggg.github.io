@@ -1,7 +1,7 @@
 ---
 slug: codex-getting-started-cloudbase
 title: "Codex grew 7x in 6 months and non-programmers are using it — here's how to go from zero to deployed multiplayer game"
-image: /og/en/codex-getting-started-cloudbase.png
+image: https://binggg.github.io/og/en/codex-getting-started-cloudbase.png
 date: 2026-06-28
 authors: [booker]
 tags: [ai, fullstack, cloudbase]

@@ -1,7 +1,7 @@
 ---
 slug: sbe-methodology
 title: "Why does your AI code always need rework? SBE methodology has the answer"
-image: /og/en/sbe-methodology.png
+image: https://binggg.github.io/og/en/sbe-methodology.png
 date: 2025-08-05
 authors: [booker]
 tags: [ai, fullstack]

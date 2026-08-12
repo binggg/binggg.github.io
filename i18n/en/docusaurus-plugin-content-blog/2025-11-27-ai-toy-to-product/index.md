@@ -1,7 +1,7 @@
 ---
 slug: ai-toy-to-product
 title: "AI coding: how do you go from toy to product?"
-image: /og/en/ai-toy-to-product.png
+image: https://binggg.github.io/og/en/ai-toy-to-product.png
 date: 2025-11-27
 authors: [booker]
 tags: [ai, fullstack]

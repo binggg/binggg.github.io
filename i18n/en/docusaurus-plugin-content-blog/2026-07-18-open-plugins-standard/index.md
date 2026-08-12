@@ -4,7 +4,7 @@ description: An open standard maintained by Vercel Labs — one plugin, seven to
 tags: [ai, 开源, 全栈, cloudbase]
 authors: booker
 date: 2026-07-18
-image: /og/en/open-plugins-standard.png
+image: https://binggg.github.io/og/en/open-plugins-standard.png
 lang: en
 ---
 

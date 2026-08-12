@@ -131,3 +131,37 @@ Vercel 的 Agent Resources 体系：[vercel.com/docs/agent-resources](https://ve
 - **Layer 3 Tool Access**: MCP Server / search API
 
 目前博客已实现 Layer 1。Layer 2-3 待后续。
+
+## 九、OG 卡片链路（分享前必读，2026-08-12 稳定化）
+
+### 机制
+
+```
+文章 frontmatter image → prebuild 生成 static/og/<slug>.png → GitHub Pages 部署 → X 抓取页面 meta → 卡片
+```
+
+- OG 图由 `scripts/generate-og-images.mjs` 在 `npm run build` 的 prebuild 阶段自动生成（Satori 渲染 1200x630 PNG）
+- frontmatter `image` 字段由脚本自动同步：
+  - **zh**（默认 locale）：`/og/<slug>.png`（相对路径，Docusaurus 自动拼绝对 URL）
+  - **en**（i18n）：**必须用完整绝对 URL** `https://binggg.github.io/og/en/<slug>.png`
+    - 相对路径会被 Docusaurus i18n 加 locale 前缀 → 产物 `/en/og/en/<slug>.png`（双层冗余，依赖 static 复制才可用，历史教训）
+    - `addBaseUrl` 对带协议 URL 短路原样输出，绝对 URL 才能得到干净路径
+- **手动改 frontmatter image 会被脚本覆盖**——始终用 `node scripts/generate-og-images.mjs` 管理
+
+### 分享前核验（发布预热）
+
+X 对 URL 首次抓取后**缓存卡片约 1 周**：发帖早于部署完成 → X 缓存失败结果，卡片带不出来；og 图更新后 X 不自动重抓（官方卡片调试器已废弃）。
+
+```bash
+node scripts/verify-og.mjs                  # 全量核验（zh + en 全部文章）
+node scripts/verify-og.mjs <slug>           # 单篇（如 open-plugins）
+node scripts/verify-og.mjs <slug> --en      # 单篇英文
+```
+
+核验项：页面 200 / og:title / og:description / og:image（绝对 URL + 200 + 1200x630 + <5MB）/ twitter:card=summary_large_image / robots 放行。全部通过才分享链接。
+
+### 部署时序纪律
+
+1. push 后等 GitHub Actions `Deploy to GitHub Pages` 跑完（约 1-2 分钟），**再**分享链接
+2. 分享前跑 `node scripts/verify-og.mjs <slug>` 确认链路健康
+3. 若已发帖但卡片没出来：等缓存过期（约 1 周）或改链接（加 query 参数让 URL 变新）

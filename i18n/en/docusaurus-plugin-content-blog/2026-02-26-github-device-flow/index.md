@@ -1,7 +1,7 @@
 ---
 slug: github-device-flow-deep-dive
 title: "Your remote AI agent needs auth? A Device Flow protocol deep-dive"
-image: /og/en/github-device-flow-deep-dive.png
+image: https://binggg.github.io/og/en/github-device-flow-deep-dive.png
 description: "No browser, no sudo — how do you authenticate on a bare-metal machine? This article starts from a real pain point and dismantles the entire RFC 8628 protocol."
 tags: [GitHub, OAuth, Device Flow, CLI, RFC]
 date: 2026-02-26

@@ -72,6 +72,29 @@ const config: Config = {
         },
       },
     ],
+    [
+      '@docusaurus/plugin-client-redirects',
+      {
+        redirects: [
+          {
+            from: '/blog/2025/07/21/kiro-spec-workflow',
+            to: '/blog/kiro-spec-workflow',
+          },
+          {
+            from: '/blog/2026/01/13/ai-image-deoiling-guide',
+            to: '/blog/ai-image-deoiling-guide',
+          },
+          {
+            from: '/blog/2026/01/22/agent-skills-practice',
+            to: '/blog/agent-skills-practice',
+          },
+          {
+            from: '/blog/2026/07/18/open-plugins-standard',
+            to: '/blog/open-plugins-standard',
+          },
+        ],
+      },
+    ],
   ],
 
   themes: ['@docusaurus/theme-mermaid'],

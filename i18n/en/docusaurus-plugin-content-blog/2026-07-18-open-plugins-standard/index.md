@@ -1,4 +1,5 @@
 ---
+slug: open-plugins-standard
 title: "Open Plugins: The Plugin Standard for AI Coding Tools"
 description: An open standard maintained by Vercel Labs — one plugin, seven tools, write once run everywhere. From protocol specs to CloudBase AI Toolkit migration, explained in full.
 tags: [ai, open-source, fullstack, cloudbase]

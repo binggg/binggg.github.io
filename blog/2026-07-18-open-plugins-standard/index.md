@@ -1,4 +1,5 @@
 ---
+slug: open-plugins-standard
 title: Open Plugins：AI 编程助手的插件标准
 description: Vercel Labs 维护的开放标准——一个插件，七种工具，一次编写到处运行。从协议规范到 CloudBase AI Toolkit 改造实战，一文讲透。
 tags: [ai, 开源, 全栈, cloudbase]

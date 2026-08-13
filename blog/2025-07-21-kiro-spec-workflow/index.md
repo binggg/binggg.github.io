@@ -1,4 +1,5 @@
 ---
+slug: kiro-spec-workflow
 title: AI 编程不靠运气，Kiro Spec 工作流复刻全攻略
 description: 一文复刻 Kiro Spec 工作流到任意 AI IDE——用 EARS 语法写需求、技术方案设计、任务拆分，从 vibe coding 到工程化 AI 开发。
 tags: [ai, 全栈, 开源]

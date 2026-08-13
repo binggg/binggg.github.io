@@ -1,4 +1,5 @@
 ---
+slug: agent-skills-practice
 title: "AI Programming's Second Half: Don't Let AI Code Live Only on Localhost"
 image: https://binggg.github.io/og/en/agent-skills-practice.png
 description: You gave your AI agent Skills but it ignores them. After months of wrestling, the hardest problem isn't AI writing bad code — it's AI writing code that only works locally. Here's how we pushed skill activation from 20% to 84%.

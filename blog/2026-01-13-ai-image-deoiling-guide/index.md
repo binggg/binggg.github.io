@@ -4,7 +4,7 @@ description: 自己做了 AI 生图大半年，踩过最多的坑不是模型不
 date: 2026-01-13
 image: /og/ai-image-deoiling-guide.png
 authors: [booker]
-tags: [AI, image-generation, prompt-engineering]
+tags: [ai, image-generation, prompt-engineering]
 ---
 
 一开始用 AI 生图的时候，我自己没有太在意风格。Midjourney 默认输出什么样，我就用什么样：光影浓郁、细节饱满、色彩鲜艳。结果配到文章里怎么看怎么不对——不是画得不好，是**太像 AI 画的了**。

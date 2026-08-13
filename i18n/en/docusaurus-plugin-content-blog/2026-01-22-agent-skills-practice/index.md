@@ -4,7 +4,7 @@ image: https://binggg.github.io/og/en/agent-skills-practice.png
 description: You gave your AI agent Skills but it ignores them. After months of wrestling, the hardest problem isn't AI writing bad code — it's AI writing code that only works locally. Here's how we pushed skill activation from 20% to 84%.
 date: 2026-01-22
 authors: [booker]
-tags: [AI, agent, skills, prompt-engineering, claude-code]
+tags: [ai, agent, skills, prompt-engineering, claude-code]
 ---
 
 I've been working with Agent Skills for a while now. The most frustrating discovery: it's not that AI can't write code. It's that the code it writes **only works on localhost**, and it **keeps ignoring the rules you set**.

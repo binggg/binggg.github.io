@@ -4,7 +4,7 @@ description: 给 AI 配了 Skills 还是只管自己写？踩了几个月坑，�
 date: 2026-01-22
 image: /og/agent-skills-practice.png
 authors: [booker]
-tags: [AI, agent, skills, prompt-engineering, claude-code]
+tags: [ai, agent, skills, prompt-engineering, claude-code]
 ---
 
 最近折腾 Agent Skills 有一阵子了。实战下来最折磨人的不是 AI 不会写代码，而是它写的代码**"只能活在本地"**，以及它**总是不听规矩**。

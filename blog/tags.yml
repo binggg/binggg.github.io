@@ -22,3 +22,58 @@ cloudbase:
   label: 全栈
   permalink: /fullstack
   description: 全栈开发
+
+image-generation:
+  label: Image Generation
+  permalink: /image-generation
+  description: AI 图片生成与风格化
+
+prompt-engineering:
+  label: Prompt Engineering
+  permalink: /prompt-engineering
+  description: AI 提示词工程
+
+agent:
+  label: Agent
+  permalink: /agent
+  description: AI 智能体与自动化工作流
+
+skills:
+  label: Skills
+  permalink: /skills
+  description: AI 智能体技能与能力
+
+claude-code:
+  label: Claude Code
+  permalink: /claude-code
+  description: Claude Code 机制与工作流
+
+github:
+  label: GitHub
+  permalink: /github
+  description: GitHub 与 CLI 工作流
+
+oauth:
+  label: OAuth
+  permalink: /oauth
+  description: OAuth 认证协议
+
+device-flow:
+  label: Device Flow
+  permalink: /device-flow
+  description: OAuth 设备授权流程（RFC 8628）
+
+cli:
+  label: CLI
+  permalink: /cli
+  description: 命令行工具
+
+rfc:
+  label: RFC
+  permalink: /rfc
+  description: 互联网 RFC 标准与协议
+
+ai-programming:
+  label: AI 编程
+  permalink: /ai-programming
+  description: AI 辅助编程

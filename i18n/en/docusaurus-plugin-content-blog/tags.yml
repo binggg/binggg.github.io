@@ -17,3 +17,58 @@ open-source:
   label: Open Source
   permalink: /open-source
   description: Open source projects
+
+agent:
+  label: Agent
+  permalink: /agent
+  description: AI agents and autonomous workflows
+
+ai-programming:
+  label: AI Programming
+  permalink: /ai-programming
+  description: AI-assisted programming and coding
+
+claude-code:
+  label: Claude Code
+  permalink: /claude-code
+  description: Claude Code mechanisms and workflows
+
+cli:
+  label: CLI
+  permalink: /cli
+  description: Command-line tools and interfaces
+
+device-flow:
+  label: Device Flow
+  permalink: /device-flow
+  description: OAuth Device Authorization Flow (RFC 8628)
+
+github:
+  label: GitHub
+  permalink: /github
+  description: GitHub and CLI workflows
+
+image-generation:
+  label: Image Generation
+  permalink: /image-generation
+  description: AI image generation and style techniques
+
+oauth:
+  label: OAuth
+  permalink: /oauth
+  description: OAuth authentication protocols
+
+prompt-engineering:
+  label: Prompt Engineering
+  permalink: /prompt-engineering
+  description: Crafting effective prompts for AI models
+
+rfc:
+  label: RFC
+  permalink: /rfc
+  description: Internet RFC standards and protocols
+
+skills:
+  label: Skills
+  permalink: /skills
+  description: AI agent Skills and capabilities

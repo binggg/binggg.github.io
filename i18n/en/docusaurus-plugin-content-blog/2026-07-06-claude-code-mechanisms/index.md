@@ -2,7 +2,7 @@
 slug: claude-code-five-mechanisms
 title: "Hands-free coding: the logic behind Claude Code's five 'let-go' mechanisms"
 description: "From /goal to Workflows — five mechanisms that solve one problem: how to make AI run continuously, decide autonomously, and collaborate in parallel under a turn-based model."
-tags: [Claude Code, AI Programming, Agent]
+tags: [claude-code, ai-programming, agent]
 date: 2026-07-06
 authors: [booker]
 image: https://binggg.github.io/og/en/claude-code-five-mechanisms.png

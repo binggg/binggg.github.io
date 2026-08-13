@@ -2,7 +2,7 @@
 slug: claude-code-five-mechanisms
 title: 解放双手——Claude Code 五种"放手"机制的底层逻辑
 description: 从 /goal 到 Workflows，五个机制解决同一个问题：怎么让 AI 在回合制下做到"持续运行、自主决策、并行协作"。
-tags: [Claude Code, AI 编程, Agent]
+tags: [claude-code, ai-programming, agent]
 date: 2026-07-06
 authors: [booker]
 image: /og/claude-code-five-mechanisms.png

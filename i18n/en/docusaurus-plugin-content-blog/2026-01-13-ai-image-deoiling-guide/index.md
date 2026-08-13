@@ -4,7 +4,7 @@ image: https://binggg.github.io/og/en/ai-image-deoiling-guide.png
 description: 'After spending months generating AI images, the biggest problem wasn''t the models — it was that every image screamed "made by AI." Here are 3 proven style recipes that fix it.'
 date: 2026-01-13
 authors: [booker]
-tags: [AI, image-generation, prompt-engineering]
+tags: [ai, image-generation, prompt-engineering]
 ---
 
 When I first started using AI image generation, I didn't pay much attention to style. Whatever Midjourney defaulted to, I used: rich lighting, flawless detail, vibrant colors. The result? Images that looked technically impressive but felt... wrong. They screamed "made by AI."

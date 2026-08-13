@@ -77,3 +77,13 @@ ai-programming:
   label: AI 编程
   permalink: /ai-programming
   description: AI 辅助编程
+
+deepseek:
+  label: DeepSeek
+  permalink: /deepseek
+  description: DeepSeek 模型与开源项目
+
+harness:
+  label: Harness
+  permalink: /harness
+  description: Agent 运行时（Harness）

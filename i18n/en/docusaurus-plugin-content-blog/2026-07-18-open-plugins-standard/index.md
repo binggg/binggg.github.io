@@ -1,7 +1,7 @@
 ---
 title: "Open Plugins: The Plugin Standard for AI Coding Tools"
 description: An open standard maintained by Vercel Labs — one plugin, seven tools, write once run everywhere. From protocol specs to CloudBase AI Toolkit migration, explained in full.
-tags: [ai, 开源, 全栈, cloudbase]
+tags: [ai, open-source, fullstack, cloudbase]
 authors: booker
 date: 2026-07-18
 image: https://binggg.github.io/og/en/open-plugins-standard.png

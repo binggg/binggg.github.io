@@ -1,0 +1,19 @@
+ai:
+  label: AI
+  permalink: /ai
+  description: AI related
+
+cloudbase:
+  label: CloudBase
+  permalink: /cloudbase
+  description: Tencent CloudBase
+
+fullstack:
+  label: Full Stack
+  permalink: /fullstack
+  description: Full-stack development
+
+open-source:
+  label: Open Source
+  permalink: /open-source
+  description: Open source projects

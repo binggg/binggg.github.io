@@ -1,7 +1,7 @@
 ---
 slug: deepseek-harness-pragmatic
-title: "Same Model, Different Harness, Worlds Apart: DeepSeek Open-Sourced a Runtime Where Even the Agent Loop Is a Plugin"
-description: The model only predicts the next step; the harness decides what it can see, which tools it can call, how context is organized, and how to retry on failure. DeepSeek Harness (dsh) turns that usually-fixed layer — tools, context, loop, sandbox, logging, UI — into replaceable plugins, with a traceable event stream and a Code Mode that runs five round trips in one program. Step by step, mechanisms first, cold water at the end.
+title: "Same Model, Different Harness, Worlds Apart: I Read DeepSeek Harness's Source. Here's What's Actually New."
+description: "The model is the soul; the harness is the body. I read DeepSeek Harness (dsh)'s source and official docs to unpack its three real design decisions: even the agent loop is a plugin, PTC redefines the tool surface the model sees, and model-visible must equal logged. Plus cold water and an honest account of my failed first run."
 tags: [ai, agent, deepseek, harness, open-source]
 authors: booker
 date: 2026-08-13
@@ -9,16 +9,16 @@ image: https://binggg.github.io/og/en/deepseek-harness-pragmatic.png
 lang: en
 ---
 
-> The model thinks. The layer around it decides what it can accomplish.
+> The model is the soul. The harness is the body.
 
 ![Agent = Model + Harness](./img/01-definition.png)
 *The model thinks. The harness does.*
 
 Hi, I'm Booker.
 
-Today I'm taking apart something DeepSeek open-sourced yesterday (2026-08-13): **DeepSeek Harness**, the CLI is `dsh`.
+Today I'm taking apart DeepSeek Harness (dsh), open-sourced by DeepSeek yesterday (2026-08-13).
 
-No hype, no jargon dumps. Step by step. By the end you'll understand what "Agent performance = model + the layer around it" actually means, and why dsh is worth a look.
+This is not a secondhand recap. I read the source and the official docs. I'll walk through its three real design decisions, pour some cold water, and honestly tell you my first run failed.
 
 {/* truncate */}
 
@@ -34,7 +34,7 @@ Three scenarios. You've probably hit at least one.
 
 This article is about those three questions.
 
-DeepSeek's answer for the runtime they open-sourced fits in three words: **everything is a plugin.**
+DeepSeek's answer for dsh fits in three words: **everything is a plugin.** But "everything is a plugin" is easy to misunderstand. Read on.
 
 ## A model doesn't do things. It generates text.
 
@@ -54,11 +54,11 @@ Something outside the model has to wrap those real actions into a form the model
 
 **That layer is the Harness.**
 
+The official site puts it better than I can:
+
+> "The model is the soul of the agent. The Harness gives the agent the ability to understand its environment, use tools, and keep working in real scenarios."
+
 Here's the non-obvious part: most people don't know this layer exists. We say "switch models, switch agents." But the same model inside a different harness can perform dramatically differently — how tools are exposed, how context is managed, how the loop runs — all of that is harness territory.
-
-InfoQ put it well yesterday:
-
-> "The model only predicts the next step; the Harness decides what the model can see, which tools it can call, how context is organized, and how to retry when something goes wrong."
 
 ## The moment things get complex, this layer has a lot to manage
 
@@ -87,82 +87,107 @@ Here are the three pains everyone hits with Claude Code, Codex, or Cursor:
 
 These aren't DeepSeek's inventions. They're industry-wide. dsh's value is that it has *buildable* mechanism answers to all three.
 
-## Why now: models are converging, the harness is the differentiator
+## Design decision #1: even "how the loop turns" is a plugin
 
-Let me be clear: this isn't a DeepSeek ad. Whether dsh is worth looking at has nothing to do with how strong the model is. It's about the layer around it.
+Let me correct my own earlier understanding first: a lot of people (including me, initially) read "everything is a plugin" as "you can add tools and skills." No. dsh's plugin system goes much deeper.
 
-Why now? Because models are converging.
+Reading the source, I found this in `packages/core/agent-loop`'s README — the key to understanding dsh:
 
-Base capabilities — reasoning, coding, long context — are leveling out fast. The marginal gain of "a stronger model" keeps shrinking.
+> "This is the only package in the harness that contains concrete loop logic. Everything else is an abstract service or a plugin against extension points — new behavior goes into plugins, not here."
 
-So where's the remaining leverage? **The harness layer.**
+Translation: **even "how the agent loop turns" is itself just a concrete plugin (agent-loop), not framework core.** Model adapters, tool registry, session log, sandbox, UI, scheduling — all plugins in dsh, mounted on a plugin tree by Cordis.
 
-Same model, different tool exposure, different context management, different loop strategy, different retry policy. Tune that layer and you get more control than waiting for the next model release.
-
-Dumb analogy: the model is the engine, the harness is the car. Chassis tuning, steering feel, brake logic — all car. Put the same engine in a grocery-getter and a sports car, and the driving experience is night and day.
-
-![Same engine, different chassis](./img/03-engine-car.png)
-*Same model, different harness, wildly different results*
-
-So for developers: stop staring at model releases. Look at the layer you're actually using. Is it fixed? Can you change it? Can you trace it when it fails?
-
-## Even "how the loop turns" is a plugin
-
-The least intuitive thing about dsh: its plugin system isn't "you can add tools." It's that **model, tools, context, loop, sandbox, storage, UI — all of them are plugins.**
-
-How? Cordis, a plugin framework, assembles the whole runtime from three config layers: `bundle → profile → patch`.
+How is it assembled? Three config layers: `bundle → profile → patch`.
 
 ![bundle → profile → patch assembly](./img/04-assembly.png)
 *A stack of config, assembled into a running Agent*
+
+- **bundle**: a distribution unit (npm package); each bundle declares which config rows it contributes
+- **profile**: a named composition that lists which bundles to stack (`web` and `headless` ship as templates)
+- **patch**: your overlay layer, replacing a config row wholesale by id
 
 Want to change "retry after failure"? Don't touch source. Mount a patch that replaces that config entry. Want a different context-compaction strategy? Same thing.
 
 And it's not a hacky "anything can mount." Cordis has a formal theory (spatiotemporal composability). The core guarantee: **when a plugin unloads, its side effects roll back completely, as if it was never installed.** Without that guarantee, plugin systems are toys. With it, deep replacement is real engineering.
 
-## Traceability: no more guessing where it died
+`dsh --profile web --dump-config` prints the actual plugin tree your machine boots — every row is replaceable.
 
-dsh solves the black-box problem by logging everything the model sees into one append-only event stream.
+## Design decision #2: PTC isn't "saving round trips," it's "redefining the tool surface the model sees"
+
+This is the part I think is most interesting — and the part most write-ups get shallow.
+
+Let me say where my own initial understanding was wrong: I thought PTC (programmatic tool calling) was "let the model write a program instead of making many tool calls." Right direction, but shallow.
+
+Here's the truth from the source:
+
+**In PTC mode (officially called "PTC 模式" — PTC Mode, not "Code Mode"), the tool surface the model sees changes entirely.**
+
+The tool registry stays, but the presentation layer (tool-presentation) switches to `code`:
+
+- The model **sees only** `run_code` plus a generated TypeScript SDK
+- The model **can only directly call** `run_code`. If it calls any other tool directly, that call resolves to `UNKNOWN_TOOL` at execution-creation time — before approval and guards, because "nothing should observe or approve a call that can only fail"
+- The error message even points the way: "only `run_code` is callable directly — call `<name>` from inside a `run_code` program instead"
+
+Underneath is a design invariant called **announced surface = callable surface**. What the model sees must be exactly what the model can call.
+
+![PTC comparison](./img/06-ptc.png)
+*Traditional: 5 round trips. PTC: 1 program*
+
+So what does "5 round trips becomes 1" actually mean? From the `code` preset's config comment:
+
+> "the model writes a TypeScript program against a generated SDK and `run_code` executes it, so a sequence that would be five round trips becomes one."
+
+Three design points that matter:
+
+1. **The SDK is deterministic.** Every visible tool has exact parameter and output types (`ToolArgsMap`/`ToolOutputMap`). The model-written program never "guesses" a tool signature.
+2. **Intermediate values stay in the execution environment.** Binding call results, logs, and intermediate computation live only in the worker thread. **Only the program's final logs and return value re-enter model context.** That's how context is saved.
+3. **Tool calls inside the program still go through the full pipeline.** Sandbox, approval, timeout, logging — nothing is skipped. It's not "bypassing," it's "compressing round trips."
+
+I tried to run it (more on that below), but even just reading this mechanism was worth it.
+
+## Design decision #3: everything the model sees gets logged
+
+How does dsh solve the black-box problem? Its approach is plain but hard:
+
+**Anything that reaches a model request must be reconstructable from the log.**
 
 ![Unified event stream](./img/05-eventstream.png)
 *What the model sees = what's logged. Reconstructable, replayable, forkable*
 
-Its hard invariant: **"model-visible = logged."** Anything that reaches a model request must be reconstructable from the log.
+A session is an append-only `SessionEvent` stream — the **single source of truth** for the whole interaction history. The model's message history isn't stored separately; it's *derived* from the log.
 
-Long task died? Open the Trajectory view. See every step, and what context the model had at each one. Fork a line and rerun. Replay for postmortem.
+What gets logged? System prompts, chain of thought, tool calls and results, sub-agent scheduling, every context injection. The official name for this invariant: **model-visible ⟺ logged**.
 
-There's a hidden bonus for tinkerers: you can run the *same task trajectory* against different loop strategies or tool implementations and compare. That was basically impossible before.
+Long task died? Open the Trajectory view, see every step by source, and what context the model had at each one. Fork a line and rerun. Replay for postmortem.
 
-## Code Mode: five round trips becomes one program
+Hidden bonus for tinkerers: run the *same task trajectory* against different loop strategies or tool implementations and compare. That was basically impossible before.
 
-This is the mechanism I most wanted to try: **PTC (programmatic tool calling)**, which dsh ships as Code Mode.
+One more detail: secrets never enter the log. Credentials go through a separate credentials seam; the log only holds references (environment variable names), never values.
 
-The traditional way, a five-step task looks like: model says "call tool A" → wait → "call tool B" → wait… Five round trips, and every intermediate result sits in context.
+## Four modes = four plugin combinations
 
-![PTC comparison](./img/06-ptc.png)
-*Traditional: 5 round trips. Code Mode: 1 program*
-
-Code Mode is different: the model writes a TypeScript program — with loops, conditionals, concurrency — then one `run_code` executes the whole thing in a worker thread. Intermediate results **never enter the model's context.**
-
-From the official comments: 5 round trips become 1.
-
-The more steps, the bigger the intermediate data, the bigger the win. Context is a finite budget. What you don't spend, you get back as capability.
-
-## Multi-agent and ecosystem compatibility
-
-dsh ships four presets. They're four plugin combinations, not four separate systems:
+dsh's official four modes — the names are easy to get wrong, so I verified them in the source `preset.yml`:
 
 ![Four modes](./img/07-modes.png)
-*Standard / Code Mode / Minimal / Creator — four plugin combos*
+*Standard / PTC / Minimal / Creator — four plugin combos*
 
-- **Standard**: the usual agent — tool calls + loop.
-- **Code Mode**: PTC, programmatic tool calls.
-- **Minimal**: smallest toolset, built for running benchmarks.
-- **Creator**: the agent can inspect the runtime and try installing plugins — the harness config itself becomes something the agent can operate on.
+| Mode | Key | What it is |
+|---|---|---|
+| **Standard** | standard | Full-featured coding agent: file editing, Shell, file & web search, Skills, planning, goals, subagents, workflows |
+| **PTC** | code | Everything in Standard, but tools are presented via a Code Mode SDK (the thing from the last section) |
+| **Minimal** | minimal | Exactly two tools: persistent bash + str_replace_editor. Official note: "for model benchmarking in minimal environments" |
+| **Creator** | cordis | Everything in Standard, plus runtime inspection, plugin experimentation, and preset-creation guidance |
 
-For multi-agent: subagents, forks, and workflows are all plugins. The practical part is ecosystem compatibility: dsh consumes MCP, serves ACP, and bridges Claude Code and Codex Hooks — **your existing hook scripts don't get rewritten.**
+Two observations:
+
+**Minimal mode's existence shows DeepSeek itself cares about benchmarks.** Yet BENCHMARK.md only explains *how* to run them — no published results. I'll come back to that contrast.
+
+**Creator mode is the most imaginative.** It ships a `tool-cordis` plugin: the agent can inspect its own runtime plugin tree and mount/unmount model-written plugins. In other words: **the harness config itself becomes something the agent can operate on.** "An agent reshaping its own harness" is one step away.
 
 ![Three plugs, one socket](./img/08-plug-socket.png)
 *MCP / ACP / Hooks — all plug into dsh*
+
+Multi-agent and ecosystem: subagents, forks, and workflows are all plugins; dsh consumes MCP, serves ACP, and bridges Claude Code and Codex Hooks — your existing hook scripts don't get rewritten.
 
 ## What's actually new
 
@@ -176,11 +201,27 @@ I put dsh against three mainstream targets: Claude Code, Codex CLI, and OpenHand
 The differences that matter:
 
 - **Plugin depth**: Claude Code has Hooks and MCP, Codex has AGENTS.md, OpenHands has skills. But **none of them make the agent loop itself a replaceable plugin.** dsh is the first.
-- **Sandbox**: Claude Code and Codex lean on permission prompts; OpenHands uses Docker. dsh ships native isolation on three platforms (Landlock on Linux, Seatbelt on macOS, ACL on Windows), plus a remote-execution seam.
-- **Traceability**: everyone logs. dsh makes "model-visible = logged" a runtime invariant — enforced at the engine level, not as product-layer design.
-- **Open-source**: Claude Code is closed. Codex is open. dsh is MIT — and hit 15k+ stars the day it launched.
+- **Sandbox**: Claude Code and Codex lean on permission prompts; OpenHands uses Docker. dsh ships native isolation on three platforms (Landlock/bwrap on Linux, Seatbelt on macOS, ACL on Windows), with three permission levels (read-only / workspace-write / danger-full-access). And "partial enforcement is reported honestly" — platforms that can't do it fully say `partial`, no pretending.
+- **Traceability**: everyone logs. dsh makes "model-visible = logged" an engine-level invariant, not product-layer design.
+- **Open-source**: Claude Code is closed. Codex is open. dsh is MIT — and hit 17.8k+ stars the day it launched.
 
 One line: **on "taking the agent apart," dsh goes further than anyone.**
+
+## Strategy: what is DeepSeek actually doing
+
+Technical depth isn't the whole story. Look at the people.
+
+The dsh team lead is **崔添翼 (@tianyi)**, formerly 9 years at Jane Street in quantitative trading, co-founder of TSY Capital. The media read (36Kr): "DeepSeek is using the rigor of building trading systems to build the agent execution layer."
+
+That background isn't gossip. It explains a lot of dsh's design:
+
+- The obsession with **traceability** (a trading system can never afford to be unable to say which trade went wrong)
+- The insistence on **fail-loud, no silent degradation** (missing provider, unknown event type — all loud rejects)
+- The harsh **engineering gates** (more on this below)
+
+Timing matters too: dsh launched the same day DeepSeek released **V4-Pro**. A "model + Harness" combo on the same day is a clear signal — **DeepSeek isn't content to sell model APIs. It's competing for the agent execution layer.**
+
+The open question (InfoQ's): will dsh become DeepSeek's own coding product, or the common under-layer of many agent products? Too early to say.
 
 ## Cold water
 
@@ -191,24 +232,38 @@ Praise done. A few honest warnings. I don't like hype.
 
 **"Anything can be swapped" doesn't automatically mean better results.** Value comes from the quality of default plugins, stable composition patterns, credible benchmarks, and third-party ecosystem. Plugins buy you room to differentiate; they don't deliver it.
 
-**No multi-agent paradigm breakthrough.** It's hierarchical Supervisor–Worker — parent decomposes, child executes. New enough, but it's not Swarm (autonomous discovery, negotiation, competition, dynamic takeover). Calling it a "revolutionary multi-agent architecture" oversells it.
+**No multi-agent paradigm breakthrough.** It's hierarchical Supervisor–Worker — parent decomposes, child executes. New enough, but it's not Swarm (autonomous discovery, negotiation, competition, dynamic takeover). InfoQ's line is fair: "calling it a revolutionary multi-agent architecture oversells it."
 
-**No public benchmarks.** I checked BENCHMARK.md myself. It explains *how* to run benchmarks. It publishes zero results. Treat the claims accordingly.
+**No public benchmarks.** I checked BENCHMARK.md myself. It explains *how* to run benchmarks. It publishes zero results. And it built a Minimal mode specifically for benchmarking, yet publishes no numbers — deliberate or not ready, worth watching.
 
 **Breaking changes are explicit.** It's v0.1. The README literally says *THERE WILL BE COMPATIBILITY-BREAKING CHANGES*. Early adopters, your migration cost won't be trivial.
 
 **Plugins have a price.** Interface stability, dependency management, version compat, performance overhead, debugging complexity. The deeper you carve, the harder these get.
 
+## My first run (the honest version)
+
+I wanted to write "it works, it's great." Honest version: it didn't run.
+
+`npx @deepseek-ai/dsh@0.1.0-rc.6 web` installed fine (100+ packages), but the `dsh` command didn't land in PATH. Calling `bin.js` directly hit `ERR_MODULE_NOT_FOUND` (a js-yaml ESM resolution issue). That's the real rc.6 install experience.
+
+That *is* the preview reality: the README explicitly warns of breaking changes, and this is exactly the kind of thing I hit. No sugarcoating — v0.1's install experience is rough. To get it running you'd build from source (`pnpm install && pnpm run build`), which needs a chunk of dependencies and disk I didn't have on this machine.
+
+This is also why 17.8k stars don't make me drop my guard — **hype is hype, engineering maturity is another thing.**
+
 ## Close
 
 One sentence for the whole article: **Agent performance = model + the layer around it, and that layer is usually ignored.**
 
-DeepSeek open-sourced dsh — turning a normally-fixed layer into replaceable plugins, with a traceable event stream and a Code Mode that runs five round trips in one program. Its thinking is worth a look, even if all you're doing is finding an agent in your own toolchain that you can *change* and *trace*.
+dsh offers three answers worth stealing:
+
+1. **Even the loop is a plugin** — change retry policy without waiting for upstream
+2. **PTC redefines the tool surface the model sees** — announced surface = callable surface; intermediate values never enter context
+3. **Model-visible = logged** — when it dies, you stop guessing
+
+It's not mature yet, but the thinking is worth a look — even if all you're doing is finding an agent in your own toolchain that you can *change* and *trace*.
 
 Which of the three pains is your current framework hitting? I'd love to hear.
 
-Want to try taking the layer apart yourself? `npx @deepseek-ai/dsh web` gets you running (needs Node.js).
-
-🥚 Easter egg: I'm already digging through its source for the next post — how "unload rolls back side effects" actually works. Stay tuned.
+🥚 Easter egg: while reading the source I found its engineering gates are brutal — per-file 100% line coverage, doc drift blocks CI, cross-file clone detection. Next post can explore where the confidence to keep breaking compatibility at v0.1 comes from. Stay tuned.
 
 — Booker

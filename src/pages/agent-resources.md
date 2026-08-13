@@ -14,10 +14,10 @@ hide_table_of_contents: true
 |---|---|---|
 | `llms.txt` | [`/llms.txt`](/llms.txt) | 内容索引，包含所有文章的标题、描述和链接。Agent 发现入口。 |
 | `llms-full.txt` | [`/llms-full.txt`](/llms-full.txt) | 全部博客文章的完整正文聚合。Agent 一次 fetch 获得全部上下文。 |
-| `sitemap.xml` | [`/sitemap.xml`](/sitemap.xml) | 标准站点地图，含 `lastmod` 时间戳，帮助 Agent 判断内容新鲜度。 |
+| `sitemap.xml` | [`https://binggg.github.io/sitemap.xml`](https://binggg.github.io/sitemap.xml) | 标准站点地图，含 `lastmod` 时间戳，帮助 Agent 判断内容新鲜度。 |
 | `robots.txt` | [`/robots.txt`](/robots.txt) | 允许所有 crawler（含 AI agent）抓取。 |
-| RSS Feed | [`/blog/rss.xml`](/blog/rss.xml) | 标准 RSS 订阅源。 |
-| Atom Feed | [`/blog/atom.xml`](/blog/atom.xml) | 标准 Atom 订阅源。 |
+| RSS Feed | [`https://binggg.github.io/blog/rss.xml`](https://binggg.github.io/blog/rss.xml) | 标准 RSS 订阅源。 |
+| Atom Feed | [`https://binggg.github.io/blog/atom.xml`](https://binggg.github.io/blog/atom.xml) | 标准 Atom 订阅源。 |
 
 ## 使用方式
 

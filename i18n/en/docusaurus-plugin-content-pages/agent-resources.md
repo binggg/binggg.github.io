@@ -14,10 +14,10 @@ This blog provides the following machine-readable resources so AI coding assista
 |---|---|---|
 | `llms.txt` | [`/llms.txt`](/llms.txt) | Content index with titles, descriptions, and links for all articles. Agent discovery entry point. |
 | `llms-full.txt` | [`/llms-full.txt`](/llms-full.txt) | Full content of every blog post aggregated. Agent fetches once for complete context. |
-| `sitemap.xml` | [`/sitemap.xml`](/sitemap.xml) | Standard sitemap with `lastmod` timestamps — helps agents assess content freshness. |
+| `sitemap.xml` | [`https://binggg.github.io/sitemap.xml`](https://binggg.github.io/sitemap.xml) | Standard sitemap with `lastmod` timestamps — helps agents assess content freshness. |
 | `robots.txt` | [`/robots.txt`](/robots.txt) | All crawlers (including AI agents) explicitly allowed. |
-| RSS Feed | [`/blog/rss.xml`](/blog/rss.xml) | Standard RSS feed. |
-| Atom Feed | [`/blog/atom.xml`](/blog/atom.xml) | Standard Atom feed. |
+| RSS Feed | [`https://binggg.github.io/blog/rss.xml`](https://binggg.github.io/blog/rss.xml) | Standard RSS feed. |
+| Atom Feed | [`https://binggg.github.io/blog/atom.xml`](https://binggg.github.io/blog/atom.xml) | Standard Atom feed. |
 
 ## How to Use
 

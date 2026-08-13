@@ -24,7 +24,7 @@
 
 ## AI 编程不靠运气，Kiro Spec 工作流复刻全攻略
 
-*Published: 2025-07-21 | Full article: https://binggg.github.io/blog/2025-07-21-kiro-spec-workflow*
+*Published: 2025-07-21 | Full article: https://binggg.github.io/blog/kiro-spec-workflow*
 
 最近研究 Kiro 的推文又爆了，很多朋友私信问细节，所以再来整理一篇文章，系统分享下具体内容和实操方法。
 
@@ -345,7 +345,7 @@ Spec 工作流让 AI 编程不再是"碰运气"，而是"有章可循"。人类�
 
 ## 为什么你的 AI 编程总是返工？SBE 方法论给出了答案
 
-*Published: 2025-08-05 | Full article: https://binggg.github.io/blog/2025-08-05-sbe-methodology*
+*Published: 2025-08-05 | Full article: https://binggg.github.io/blog/sbe-methodology*
 
 最近我的[《Kiro Spec 工作流复刻全攻略》](/blog/kiro-spec-workflow)爆了，很多朋友私信问我：**"为什么 Spec 模式这么有效？背后有什么理论支撑吗？"**
 
@@ -554,7 +554,7 @@ SBE 方法论为 AI 编程提供了一套经过验证的理论基础和实践框
 
 ## AI 编程，怎么从玩具到产品？
 
-*Published: 2025-11-27 | Full article: https://binggg.github.io/blog/2025-11-27-ai-toy-to-product*
+*Published: 2025-11-27 | Full article: https://binggg.github.io/blog/ai-toy-to-product*
 
 最近帮朋友看了几个用 AI 做的项目，发现一个有意思的现象：
 
@@ -805,7 +805,7 @@ AI 是工具，但工具需要正确的使用方式。
 
 ## Vibe Coding 不是迷思：非技术人员也能用 AI 做出真正可用的应用
 
-*Published: 2026-01-09 | Full article: https://binggg.github.io/blog/2026-01-09-vibe-coding*
+*Published: 2026-01-09 | Full article: https://binggg.github.io/blog/vibe-coding-non-technical*
 
 **你是否遇到过这样的困扰：用 AI 生成应用时，代码出错了却不知道问什么问题？AI 给了 N 个解决方案，但不知道哪个是对的？**
 
@@ -1027,7 +1027,7 @@ MCP（Model Context Protocol）让 AI 可以直接调用云服务。你只需要
 
 ## 在远程服务器配置 GitHub CLI 时，我差不多把 Device Flow 协议拆了一遍
 
-*Published: 2026-02-26 | Full article: https://binggg.github.io/blog/2026-02-26-github-device-flow*
+*Published: 2026-02-26 | Full article: https://binggg.github.io/blog/github-device-flow-deep-dive*
 
 前阵子在一台 TencentOS 服务器上配 GitHub CLI，遇到一个经典场景：
 
@@ -1324,7 +1324,7 @@ echo "✅ Done! Logged in as $(gh api user --jq '.login')"
 
 ## 半年涨了 7 倍、连非程序员都在用的 Codex，从零到上线一个多人对战游戏
 
-*Published: 2026-06-28 | Full article: https://binggg.github.io/blog/2026-06-28-codex-cloudbase*
+*Published: 2026-06-28 | Full article: https://binggg.github.io/blog/codex-getting-started-cloudbase*
 
 > 这篇文章帮你搞懂四件事：① Codex 是什么、能干什么 → ② 五分钟上手做个能玩的小游戏 → ③ 基本用法和核心功能 → ④ 接低成本的国产开源模型，把做好的应用发布上线，让别人能访问。
 >
@@ -1472,7 +1472,7 @@ Codex 这半年证明的事：**AI 工具拼的早就不是"能不能答题"，�
 
 ## 解放双手——Claude Code 五种"放手"机制的底层逻辑
 
-*Published: 2026-07-06 | Full article: https://binggg.github.io/blog/2026-07-06-claude-code-mechanisms*
+*Published: 2026-07-06 | Full article: https://binggg.github.io/blog/claude-code-five-mechanisms*
 
 用过 Claude Code 做复杂任务的，八成遇到过这种事——
 
@@ -1833,7 +1833,7 @@ allowedTools: [Read, Write, Edit, Bash, Glob, Grep]
 
 ## Open Plugins：AI 编程助手的插件标准
 
-*Published: 2026-07-18 | Full article: https://binggg.github.io/blog/2026-07-18-open-plugins-standard*
+*Published: 2026-07-18 | Full article: https://binggg.github.io/blog/open-plugins-standard*
 
 > 一个插件，七种工具，通用协议
 

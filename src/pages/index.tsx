@@ -79,7 +79,7 @@ export default function Home(): ReactNode {
           <div className="md:col-span-8">
             <Reveal>
               <Link
-                to="/blog/2026/07/18/open-plugins-standard"
+                to="/blog/open-plugins-standard"
                 className="writing-card"
               >
                 <article>

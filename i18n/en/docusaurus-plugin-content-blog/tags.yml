@@ -72,3 +72,13 @@ skills:
   label: Skills
   permalink: /skills
   description: AI agent Skills and capabilities
+
+deepseek:
+  label: DeepSeek
+  permalink: /deepseek
+  description: DeepSeek models and open source projects
+
+harness:
+  label: Harness
+  permalink: /harness
+  description: Agent runtime (Harness)

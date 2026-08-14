@@ -92,6 +92,38 @@ const config: Config = {
             from: '/blog/2026/07/18/open-plugins-standard',
             to: '/blog/open-plugins-standard',
           },
+          {
+            from: '/blog/2025/08/05/sbe-methodology',
+            to: '/blog/sbe-methodology',
+          },
+          {
+            from: '/blog/2025/11/27/ai-toy-to-product',
+            to: '/blog/ai-toy-to-product',
+          },
+          {
+            from: '/blog/2026/01/09/vibe-coding',
+            to: '/blog/vibe-coding-non-technical',
+          },
+          {
+            from: '/blog/2026/02/26/github-device-flow',
+            to: '/blog/github-device-flow-deep-dive',
+          },
+          {
+            from: '/blog/2026/06/26/miniprogram-ai-cloudbase-getting-started',
+            to: '/blog/miniprogram-ai-cloudbase-getting-started',
+          },
+          {
+            from: '/blog/2026/06/28/codex-cloudbase',
+            to: '/blog/codex-getting-started-cloudbase',
+          },
+          {
+            from: '/blog/2026/07/06/claude-code-mechanisms',
+            to: '/blog/claude-code-five-mechanisms',
+          },
+          {
+            from: '/blog/2026/07/07/ai-miniprogram-dev-guide',
+            to: '/blog/ai-miniprogram-dev-guide',
+          },
         ],
       },
     ],

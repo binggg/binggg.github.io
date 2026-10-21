@@ -18,6 +18,11 @@ for blog_path in "$BLOG_DIR"/*/; do
   index="${blog_path}index.md"
   [ -f "$index" ] || continue
 
+  # 草稿（draft: true）不发布到站点，不需要英文翻译
+  if head -20 "$index" | grep -qE "^draft: *true"; then
+    continue
+  fi
+
   # 检查中文博客是否有对应的英文目录
   if [ ! -d "$I18N_DIR/$slug" ]; then
     title=$(head -20 "$index" | grep "^title:" | sed 's/^title: *//; s/"//g' || echo "$slug")

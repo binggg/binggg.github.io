@@ -26,15 +26,15 @@ This is not a secondhand recap. I read the source and the official docs. I'll wa
 
 Three scenarios. You've probably hit at least one.
 
-**First.** You ran a long agent task. It failed after hours. Can you tell which tool call it died on? Can you reconstruct what context the model was actually seeing?
+First. You ran a long agent task. It failed after hours. Can you tell which tool call it died on? Can you reconstruct what context the model was actually seeing?
 
-**Second.** You wanted to add a rule: "after a tool call fails, retry once." Can you add it? Or do you have to fork the framework?
+Second. You wanted to add a rule: "after a tool call fails, retry once." Can you add it? Or do you have to fork the framework?
 
-**Third.** You wanted three agents working together: one researching, one writing code, one reviewing. They come from different ecosystems — one speaks MCP, one speaks ACP, one speaks Hooks. Can you wire them together?
+Third. You wanted three agents working together: one researching, one writing code, one reviewing. They come from different ecosystems — one speaks MCP, one speaks ACP, one speaks Hooks. Can you wire them together?
 
 This article is about those three questions.
 
-DeepSeek's answer for dsh fits in three words: **everything is a plugin.** But "everything is a plugin" is easy to misunderstand. Read on.
+DeepSeek's answer for dsh fits in three words: everything is a plugin. But "everything is a plugin" is easy to misunderstand. Read on.
 
 ## A model doesn't do things. It generates text.
 
@@ -46,13 +46,13 @@ The trouble starts when you ask it to *do* something.
 
 Say: "fix the code in this project." To fix code, it needs to read files, find the error, edit it, run tests. The model can do none of that.
 
-A model does exactly one thing: **predict the next token.** What it generates isn't "the act of fixing code" — it's text describing how to fix it.
+A model does exactly one thing: predict the next token. What it generates isn't "the act of fixing code" — it's text describing how to fix it.
 
 So who actually reads files and runs commands?
 
 Something outside the model has to wrap those real actions into a form the model can "call." The model says "read src/main.ts"; this layer reads it and feeds the content back.
 
-**That layer is the Harness.**
+That layer is the Harness.
 
 The official site puts it better than I can:
 
@@ -79,11 +79,11 @@ Every one of these needs someone to make decisions for the model. Those decision
 
 Here are the three pains everyone hits with Claude Code, Codex, or Cursor:
 
-**Pain 1: The agent is a black box.** Long tasks die, and you can't tell where — or reconstruct what context the model was seeing.
+Pain 1: The agent is a black box. Long tasks die, and you can't tell where — or reconstruct what context the model was seeing.
 
-**Pain 2: The framework is a fixed shell.** Want to change "retry behavior" or "how the loop turns"? You can't. Fork the source or wait for the next release.
+Pain 2: The framework is a fixed shell. Want to change "retry behavior" or "how the loop turns"? You can't. Fork the source or wait for the next release.
 
-**Pain 3: Multi-agent doesn't fit together.** MCP here, ACP there, Hooks somewhere else. No unified orchestration. You build your own wheels.
+Pain 3: Multi-agent doesn't fit together. MCP here, ACP there, Hooks somewhere else. No unified orchestration. You build your own wheels.
 
 These aren't DeepSeek's inventions. They're industry-wide. dsh's value is that it has *buildable* mechanism answers to all three.
 
@@ -95,7 +95,7 @@ Reading the source, I found this in `packages/core/agent-loop`'s README — the 
 
 > "This is the only package in the harness that contains concrete loop logic. Everything else is an abstract service or a plugin against extension points — new behavior goes into plugins, not here."
 
-Translation: **even "how the agent loop turns" is itself just a concrete plugin (agent-loop), not framework core.** Model adapters, tool registry, session log, sandbox, UI, scheduling — all plugins in dsh, mounted on a plugin tree by Cordis.
+Translation: even "how the agent loop turns" is itself just a concrete plugin (agent-loop), not framework core. Model adapters, tool registry, session log, sandbox, UI, scheduling — all plugins in dsh, mounted on a plugin tree by Cordis.
 
 How is it assembled? Three config layers: `bundle → profile → patch`.
 
@@ -108,7 +108,7 @@ How is it assembled? Three config layers: `bundle → profile → patch`.
 
 Want to change "retry after failure"? Don't touch source. Mount a patch that replaces that config entry. Want a different context-compaction strategy? Same thing.
 
-And it's not a hacky "anything can mount." Cordis has a formal theory (spatiotemporal composability). The core guarantee: **when a plugin unloads, its side effects roll back completely, as if it was never installed.** Without that guarantee, plugin systems are toys. With it, deep replacement is real engineering.
+And it's not a hacky "anything can mount." Cordis has a formal theory (spatiotemporal composability). The core guarantee: when a plugin unloads, its side effects roll back completely, as if it was never installed. Without that guarantee, plugin systems are toys. With it, deep replacement is real engineering.
 
 `dsh --profile web --dump-config` prints the actual plugin tree your machine boots — every row is replaceable.
 
@@ -120,7 +120,7 @@ Let me say where my own initial understanding was wrong: I thought PTC (programm
 
 Here's the truth from the source:
 
-**In PTC mode (officially called "PTC 模式" — PTC Mode, not "Code Mode"), the tool surface the model sees changes entirely.**
+In PTC mode (officially called "PTC 模式" — PTC Mode, not "Code Mode"), the tool surface the model sees changes entirely.
 
 The tool registry stays, but the presentation layer (tool-presentation) switches to `code`:
 
@@ -139,9 +139,9 @@ So what does "5 round trips becomes 1" actually mean? From the `code` preset's c
 
 Three design points that matter:
 
-1. **The SDK is deterministic.** Every visible tool has exact parameter and output types (`ToolArgsMap`/`ToolOutputMap`). The model-written program never "guesses" a tool signature.
-2. **Intermediate values stay in the execution environment.** Binding call results, logs, and intermediate computation live only in the worker thread. **Only the program's final logs and return value re-enter model context.** That's how context is saved.
-3. **Tool calls inside the program still go through the full pipeline.** Sandbox, approval, timeout, logging — nothing is skipped. It's not "bypassing," it's "compressing round trips."
+1. The SDK is deterministic. Every visible tool has exact parameter and output types (`ToolArgsMap`/`ToolOutputMap`). The model-written program never "guesses" a tool signature.
+2. Intermediate values stay in the execution environment. Binding call results, logs, and intermediate computation live only in the worker thread. Only the program's final logs and return value re-enter model context. That's how context is saved.
+3. Tool calls inside the program still go through the full pipeline. Sandbox, approval, timeout, logging — nothing is skipped. It's not "bypassing," it's "compressing round trips."
 
 I tried to run it (more on that below), but even just reading this mechanism was worth it.
 
@@ -149,7 +149,7 @@ I tried to run it (more on that below), but even just reading this mechanism was
 
 How does dsh solve the black-box problem? Its approach is plain but hard:
 
-**Anything that reaches a model request must be reconstructable from the log.**
+Anything that reaches a model request must be reconstructable from the log.
 
 ![Unified event stream](./img/05-eventstream.png)
 *What the model sees = what's logged. Reconstructable, replayable, forkable*
@@ -180,9 +180,9 @@ dsh's official four modes — the names are easy to get wrong, so I verified the
 
 Two observations:
 
-**Minimal mode's existence shows DeepSeek itself cares about benchmarks.** Yet BENCHMARK.md only explains *how* to run them — no published results. I'll come back to that contrast.
+Minimal mode's existence shows DeepSeek itself cares about benchmarks. Yet BENCHMARK.md only explains *how* to run them — no published results. I'll come back to that contrast.
 
-**Creator mode is the most imaginative.** It ships a `tool-cordis` plugin: the agent can inspect its own runtime plugin tree and mount/unmount model-written plugins. In other words: **the harness config itself becomes something the agent can operate on.** "An agent reshaping its own harness" is one step away.
+Creator mode is the most imaginative. It ships a `tool-cordis` plugin: the agent can inspect its own runtime plugin tree and mount/unmount model-written plugins. In other words: the harness config itself becomes something the agent can operate on. "An agent reshaping its own harness" is one step away.
 
 ![Three plugs, one socket](./img/08-plug-socket.png)
 *MCP / ACP / Hooks — all plug into dsh*
@@ -200,12 +200,12 @@ I put dsh against three mainstream targets: Claude Code, Codex CLI, and OpenHand
 
 The differences that matter:
 
-- **Plugin depth**: Claude Code has Hooks and MCP, Codex has AGENTS.md, OpenHands has skills. But **none of them make the agent loop itself a replaceable plugin.** dsh is the first.
+- **Plugin depth**: Claude Code has Hooks and MCP, Codex has AGENTS.md, OpenHands has skills. But none of them make the agent loop itself a replaceable plugin. dsh is the first.
 - **Sandbox**: Claude Code and Codex lean on permission prompts; OpenHands uses Docker. dsh ships native isolation on three platforms (Landlock/bwrap on Linux, Seatbelt on macOS, ACL on Windows), with three permission levels (read-only / workspace-write / danger-full-access). And "partial enforcement is reported honestly" — platforms that can't do it fully say `partial`, no pretending.
 - **Traceability**: everyone logs. dsh makes "model-visible = logged" an engine-level invariant, not product-layer design.
 - **Open-source**: Claude Code is closed. Codex is open. dsh is MIT — and hit 17.8k+ stars the day it launched.
 
-One line: **on "taking the agent apart," dsh goes further than anyone.**
+One line: on "taking the agent apart," dsh goes further than anyone.
 
 ## Strategy: what is DeepSeek actually doing
 
@@ -219,7 +219,7 @@ That background isn't gossip. It explains a lot of dsh's design:
 - The insistence on **fail-loud, no silent degradation** (missing provider, unknown event type — all loud rejects)
 - The harsh **engineering gates** (more on this below)
 
-Timing matters too: dsh launched the same day DeepSeek released **V4-Pro**. A "model + Harness" combo on the same day is a clear signal — **DeepSeek isn't content to sell model APIs. It's competing for the agent execution layer.**
+Timing matters too: dsh launched the same day DeepSeek released **V4-Pro**. A "model + Harness" combo on the same day is a clear signal — DeepSeek isn't content to sell model APIs. It's competing for the agent execution layer.
 
 The open question (InfoQ's): will dsh become DeepSeek's own coding product, or the common under-layer of many agent products? Too early to say.
 
@@ -230,15 +230,15 @@ Praise done. A few honest warnings. I don't like hype.
 ![Cold water](./img/10-cooling.png)
 *Stay level-headed*
 
-**"Anything can be swapped" doesn't automatically mean better results.** Value comes from the quality of default plugins, stable composition patterns, credible benchmarks, and third-party ecosystem. Plugins buy you room to differentiate; they don't deliver it.
+"Anything can be swapped" doesn't automatically mean better results. Value comes from the quality of default plugins, stable composition patterns, credible benchmarks, and third-party ecosystem. Plugins buy you room to differentiate; they don't deliver it.
 
-**No multi-agent paradigm breakthrough.** It's hierarchical Supervisor–Worker — parent decomposes, child executes. New enough, but it's not Swarm (autonomous discovery, negotiation, competition, dynamic takeover). InfoQ's line is fair: "calling it a revolutionary multi-agent architecture oversells it."
+No multi-agent paradigm breakthrough. It's hierarchical Supervisor–Worker — parent decomposes, child executes. New enough, but it's not Swarm (autonomous discovery, negotiation, competition, dynamic takeover). InfoQ's line is fair: "calling it a revolutionary multi-agent architecture oversells it."
 
-**No public benchmarks.** I checked BENCHMARK.md myself. It explains *how* to run benchmarks. It publishes zero results. And it built a Minimal mode specifically for benchmarking, yet publishes no numbers — deliberate or not ready, worth watching.
+No public benchmarks. I checked BENCHMARK.md myself. It explains *how* to run benchmarks. It publishes zero results. And it built a Minimal mode specifically for benchmarking, yet publishes no numbers — deliberate or not ready, worth watching.
 
-**Breaking changes are explicit.** It's v0.1. The README literally says *THERE WILL BE COMPATIBILITY-BREAKING CHANGES*. Early adopters, your migration cost won't be trivial.
+Breaking changes are explicit. It's v0.1. The README literally says *THERE WILL BE COMPATIBILITY-BREAKING CHANGES*. Early adopters, your migration cost won't be trivial.
 
-**Plugins have a price.** Interface stability, dependency management, version compat, performance overhead, debugging complexity. The deeper you carve, the harder these get.
+Plugins have a price. Interface stability, dependency management, version compat, performance overhead, debugging complexity. The deeper you carve, the harder these get.
 
 ## My first run (the honest version)
 
@@ -248,11 +248,11 @@ I wanted to write "it works, it's great." Honest version: it didn't run.
 
 That *is* the preview reality: the README explicitly warns of breaking changes, and this is exactly the kind of thing I hit. No sugarcoating — v0.1's install experience is rough. To get it running you'd build from source (`pnpm install && pnpm run build`), which needs a chunk of dependencies and disk I didn't have on this machine.
 
-This is also why 17.8k stars don't make me drop my guard — **hype is hype, engineering maturity is another thing.**
+This is also why 17.8k stars don't make me drop my guard — hype is hype, engineering maturity is another thing.
 
 ## Close
 
-One sentence for the whole article: **Agent performance = model + the layer around it, and that layer is usually ignored.**
+One sentence for the whole article: Agent performance = model + the layer around it, and that layer is usually ignored.
 
 dsh offers three answers worth stealing:
 
